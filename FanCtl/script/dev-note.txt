@@ -1,0 +1,7 @@
+###############
+Running the Jar
+###############
+$ scala -cp FanCtl-1.0-SNAPSHOT-jar-with-dependencies.jar org.hsmak.controller.FanCtl_i8kfan -d=t
+
+# Since there is a Main-Class entry in the Manifest file:
+$ scala -cp -jar FanCtl-1.0-SNAPSHOT-jar-with-dependencies.jar  -d=t
