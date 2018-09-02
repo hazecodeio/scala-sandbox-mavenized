@@ -9,16 +9,91 @@ import scala.io.StdIn
   */
 object App extends App {
   println("Hello World!")
+  val doubleExplicit: Double = 400
+  println(doubleExplicit.getClass)
+  val doubleCoerced = 400: Double // coercing
+  println(doubleCoerced.getClass)
+
+
+  lazy val a = {
+    println("wwwww"); 5
+  } //instantiated when it's first called hence lazy val. This is only for val not var
+  println(a)
+
+  lazy val a1 = 10 + b1 // without lazy this won't be possible
+  lazy val b1 = 5
+  println(s"a1 + b1 = ${a1}")
+
+  //bending var/val to a free text
+  val `This is a val` = 123 // the backticks also allow to use keywords as var/val such as `import`
+  println(`This is a val`)
+
+  //the use of OPCHAR by appending '_' right before the OPCHAR such as '?' '!' etc
+  val hola_? = 5555 // without the '_', it's a compile error
+
+  //functional loop
+  val result = (1 to 5).reverse.mkString(", ")
+  println(result)
+  val steppingBy2 = (1 to 10 by 2).mkString(", ")
+  println(steppingBy2)
+
+
+  val xs = List(1,2,3,4,5)
+  var resultL = List[Int]()
+  for(a <- xs){
+    resultL = resultL :+ (a + 1)//append to list. note List must be var for append to work
+  }
+  println(resultL)
 
   /*
     notice how the for loop is used here to do formatting/filtering
+    notice the {} which can be replaced by () with a little modification (Maybe??)
    */
-  var even = for {i <- 1 to 20
+  val even = for {i <- 1 to 20
                   if (i % 2) == 0
-  } yield i
+  } yield i // yield to a collection. This is hoe to makwe a Functional for loop. Notice even is a val not var
 
   for (i <- even)
     println(i)
+  //print the functional way
+  println("use ForEach:")
+  even.foreach(println)//inferred lamda expression
+  even.foreach(a => println(a))//expanded lamda expression
+
+  println(
+    """Hey this is amultiline string
+      |this is a 2nd line
+    """.stripMargin)
+
+  println(
+    """This si another multiline string
+      @margin is not | but @
+    """.stripMargin('@'))
+
+
+  //RegEx
+  val message = "we are meetin on June 13th of this year, and having lunch at 12:30PM"
+  val regex = """(\s|[0-9])?[0-9]:[0-5][0-9]\s*(AM|PM)""".r
+  println("Found RegEx: " + regex.findAllMatchIn(message).toList)
+
+  //String formatting
+  val str = String.format("This is a %s", "Test1")// Java and C way. Not Functional!!
+  val str2 = "This is a %s".format("Test2")// Scala way, the functional way!!
+  println(str)
+  println(str2)
+  import java.time._
+  println(LocalDate.now.plusDays(2))
+
+  //S Interpolation Vs F interpolation
+  val q = 50.126456
+  println(s"This an S Interpolation: ${q}")
+  println(f"This an F Interpolation: ${q}%1.2f")//notice the floating format "${val}%..."
+  //also you can mix up multil-line string with the above interpolations
+  println(
+    s"""kjjgf
+       |sdfgsdfg ${q}
+     """.stripMargin)
+
   ///////////////////
 
   /*
