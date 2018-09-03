@@ -15,10 +15,11 @@ object App extends App {
   println(doubleCoerced.getClass)
 
 
-  lazy val a = {
-    println("wwwww"); 5
+  lazy val n = {
+    println("wwwww");
+    5
   } //instantiated when it's first called hence lazy val. This is only for val not var
-  println(a)
+  println(n)
 
   lazy val a1 = 10 + b1 // without lazy this won't be possible
   lazy val b1 = 5
@@ -38,10 +39,10 @@ object App extends App {
   println(steppingBy2)
 
 
-  val xs = List(1,2,3,4,5)
+  val xs = List(1, 2, 3, 4, 5)
   var resultL = List[Int]()
-  for(a <- xs){
-    resultL = resultL :+ (a + 1)//append to list. note List must be var for append to work
+  for (a <- xs) {
+    resultL = resultL :+ (a + 1) //append to list. note List must be var for append to work
   }
   println(resultL)
 
@@ -57,8 +58,8 @@ object App extends App {
     println(i)
   //print the functional way
   println("use ForEach:")
-  even.foreach(println)//inferred lamda expression
-  even.foreach(a => println(a))//expanded lamda expression
+  even.foreach(println) //inferred lamda expression
+  even.foreach(a => println(a)) //expanded lamda expression
 
   println(
     """Hey this is amultiline string
@@ -76,23 +77,99 @@ object App extends App {
   val regex = """(\s|[0-9])?[0-9]:[0-5][0-9]\s*(AM|PM)""".r
   println("Found RegEx: " + regex.findAllMatchIn(message).toList)
 
+
   //String formatting
-  val str = String.format("This is a %s", "Test1")// Java and C way. Not Functional!!
-  val str2 = "This is a %s".format("Test2")// Scala way, the functional way!!
+  val str = String.format("This is a %s", "Test1")
+  // Java and C way. Not Functional!!
+  val str2 = "This is a %s".format("Test2") // Scala way, the functional way!!
   println(str)
   println(str2)
+
   import java.time._
+
   println(LocalDate.now.plusDays(2))
+
 
   //S Interpolation Vs F interpolation
   val q = 50.126456
   println(s"This an S Interpolation: ${q}")
-  println(f"This an F Interpolation: ${q}%1.2f")//notice the floating format "${val}%..."
+  println(f"This an F Interpolation: ${q}%1.2f") //notice the floating format "${val}%..."
   //also you can mix up multil-line string with the above interpolations
   println(
     s"""kjjgf
        |sdfgsdfg ${q}
      """.stripMargin)
+
+
+  //Different Types returned by a method/function
+  def add(x: Int, y: Int) = { // Remember that 'Any' is the the parent of AnyRef and AnyVal. Therefore, the return common type for both here is 'Any'
+    if (x > 10) (x + y).toString //Return String!!
+    else
+      x + y // return Int!!
+  }
+
+
+  //Recursion
+  def factorial_n(n: Int): Int = if (n == 0 || n == 1) 1 else n * factorial_n(n - 1)
+
+  println(factorial_n(5))
+  println(factorial_n(100))
+
+  import scala.annotation.tailrec
+
+  //  @tailrec//an annotation to check if it's Optimized Recursion at compile time
+  // this is unoptimized recursion because of the n * fac(n-1)
+  def factorialWithBigInt(n: BigInt): BigInt = if (n == 0 || n == 1) 1 else n * factorialWithBigInt(n - 1)
+
+  println(factorialWithBigInt(5))
+  println(factorialWithBigInt(10))
+  println(factorialWithBigInt(1000))
+  println
+
+  //optimized recursion
+
+  //this is an optomized recursion. accumulate the values ina val
+  @tailrec
+  def factorialWithBigInt_Optim(n: BigInt, acc: BigInt): BigInt = if (n == 0 || n == 1) acc else factorialWithBigInt_Optim(n - 1, n * acc)
+
+  println(factorialWithBigInt_Optim(10000, 1)) //stack overvlow. you can either use optimized recursion or increase the stack size at the startup
+
+
+  //have another fucntion that calls the above with the accumulator
+  def factorialWithBigInt_Optim_WithHiddenAccum(n: BigInt) = factorialWithBigInt_Optim(n, 1)
+
+  println(App.factorialWithBigInt_Optim_WithHiddenAccum(10000))
+
+
+  //Methods Inside Methods
+
+  def factorial(n: BigInt): BigInt = {
+
+    @tailrec //keeping the optimized version
+    def fact(n: BigInt, accum: BigInt): BigInt = if (n == 0 || n == 1) accum else fact(n - 1, n * accum)
+
+    fact(n, 1)
+  }
+
+  println(factorial(10000))
+
+  //IsInstanceOf and AsInstanceOf <- they're function under 'Any'
+
+  //IsInstanceOf is equivalent to Java's instanceof
+  println(2.isInstanceOf[Int])
+
+  //AsinstanceOf is to down cast
+  val ss: Any = "ha ha ha"
+  val casted: String = ss.asInstanceOf[String]
+  println(casted)
+
+
+  //parametrized types on methods. Similar to Java's generics
+
+  def parameterizedFunction[T](param:T) = param//param is of the type being passed during invocation
+  println(parameterizedFunction[Boolean](true))//brackets might be unnecessary if compiler can infer types
+  println(parameterizedFunction(true))
+
 
   ///////////////////
 
