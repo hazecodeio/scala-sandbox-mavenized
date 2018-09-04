@@ -72,13 +72,13 @@ object App extends App {
     """.stripMargin('@'))
 
 
-  //RegEx
+  //################################### RegEx ###################################
   val message = "we are meetin on June 13th of this year, and having lunch at 12:30PM"
   val regex = """(\s|[0-9])?[0-9]:[0-5][0-9]\s*(AM|PM)""".r
   println("Found RegEx: " + regex.findAllMatchIn(message).toList)
 
 
-  //String formatting
+  //################################### String formatting ###################################
   val str = String.format("This is a %s", "Test1")
   // Java and C way. Not Functional!!
   val str2 = "This is a %s".format("Test2") // Scala way, the functional way!!
@@ -90,7 +90,7 @@ object App extends App {
   println(LocalDate.now.plusDays(2))
 
 
-  //S Interpolation Vs F interpolation
+  //################################### S Interpolation Vs F interpolation ###################################
   val q = 50.126456
   println(s"This an S Interpolation: ${q}")
   println(f"This an F Interpolation: ${q}%1.2f") //notice the floating format "${val}%..."
@@ -109,7 +109,8 @@ object App extends App {
   }
 
 
-  //Recursion
+  //################################### Recursion ###################################
+
   def factorial_n(n: Int): Int = if (n == 0 || n == 1) 1 else n * factorial_n(n - 1)
 
   println(factorial_n(5))
@@ -126,7 +127,7 @@ object App extends App {
   println(factorialWithBigInt(1000))
   println
 
-  //optimized recursion
+  //################################### Optimized Recursion  ###################################
 
   //this is an optomized recursion. accumulate the values ina val
   @tailrec
@@ -141,7 +142,7 @@ object App extends App {
   println(App.factorialWithBigInt_Optim_WithHiddenAccum(10000))
 
 
-  //Methods Inside Methods
+  //################################### Methods Inside Methods ###################################
 
   def factorial(n: BigInt): BigInt = {
 
@@ -158,6 +159,7 @@ object App extends App {
   //IsInstanceOf is equivalent to Java's instanceof
   println(2.isInstanceOf[Int])
 
+
   //AsinstanceOf is to down cast
   val ss: Any = "ha ha ha"
   val casted: String = ss.asInstanceOf[String]
@@ -166,11 +168,75 @@ object App extends App {
 
   //parametrized types on methods. Similar to Java's generics
 
-  def parameterizedFunction[T](param:T) = param//param is of the type being passed during invocation
-  println(parameterizedFunction[Boolean](true))//brackets might be unnecessary if compiler can infer types
+  def parameterizedFunction[T](param: T) = param //param is of the type being passed during invocation
+  println(parameterizedFunction[Boolean](true)) //brackets might be unnecessary if compiler can infer types
   println(parameterizedFunction(true))
 
 
+  //################################### Classes and Constructors ###################################
+
+  /**
+    *
+    * @param firstName //val will create an accessor method firstName()
+    * @param lastName  //var will create both accessor & mutator methods lastName() & lastName(String). Precisely, "lastName_=" run javap to see lastName_$eq
+    */
+  class Employee(val firstName: String, var lastName: String)
+
+
+  import scala.beans.BeanProperty
+
+  /**
+    * Notice @BeanProperty: this will generate the Java style getters/setters; beside the scala style
+    * run 'javap -p EmployeeJavaStyle'
+    *
+    * @param firstName
+    * @param lastName
+    */
+  class EmployeeJavaStyle(@BeanProperty val firstName: String, @BeanProperty var lastName: String)
+
+  /**
+    * overloading constructor using 'this' in a block
+    * link: https://www.safaribooksonline.com/videos/learning-path-scala/9781491970850/9781491970850-video256883
+    *
+    * @param firstName
+    * @param lastName
+    * @param age
+    */
+  class EmployeeOverload(val firstName: String, var lastName: String, val age: Int) {
+    def this(firstname: String, lastName: String) = this(firstname, lastName, -1)
+
+    require(firstName.nonEmpty, "First name can't be empty!") // this will throw an exception if first name is empty
+
+    if (age <= 0)
+      throw new IllegalArgumentException("Age can't be negative!")
+
+
+    //all the above lines/spave is part of the constructor!
+
+    //################################### Methods in a class ###################################
+
+
+    /**
+      * create a new object by cloning this current object using the supplied default values or any explicitly passed is param
+      *
+      * @param firstName
+      * @param lastName
+      * @param age
+      * @return
+      */
+    def copy(firstName: String = this.firstName,
+             lastName: String = this.lastName,
+             age: Int = this.age) = new EmployeeOverload(firstName, lastName, age)
+  }
+
+  //################################### Exception handling ###################################
+  try {
+    new EmployeeOverload("", "", -1)
+  } catch {
+    case iae: IllegalArgumentException => println(iae.getMessage) //use Pattern matching for exception. here we're matching on the exception type
+  } finally { //optional just as in Java
+    println("continuing without issues")
+  }
   ///////////////////
 
   /*
@@ -181,7 +247,145 @@ object App extends App {
     println("i: " + i)
     println("j: " + j)
   }
-  /////////////////////////////
+
+
+  //################################### Subclassing and Inheritance, overriding methods ###################################
+
+  /**
+    * case classes will automatically add: toString(), equals(), hashCode(), copy(), apply() so no need to use 'new' keyword
+    * 'val' is the default to constructor params
+    * if you don't like what case provides you can always override
+    * used in pattern matching
+    * it makes the following possiple: val Department(n) = dept// param already assigned in dept will be extracted and assigned to 'n'
+    * and so on
+    *
+    * however, case classes can't be extended/subclassed, maybe because the copy() will always return an instance of the superclass; which violate Liskov Substitution principle
+    *
+    * @param name
+    */
+  case class Department(val name: String)
+
+  class Manager(firstName: String,
+                lastName: String,
+                val department: Department) extends EmployeeOverload(firstName, lastName) {
+
+    //override with keeping default values
+    override def copy(firstName: String = this.firstName,
+                      lastName: String = this.lastName,
+                      age: Int = this.age) = new Manager(firstName, lastName, new Department("temp"))
+
+    //overloading: this will not work because it uses default parameters <- an issue in Scala!!
+    //link showing explanation response by Martin: https://stackoverflow.com/questions/4652095/why-does-the-scala-compiler-disallow-overloaded-methods-with-default-arguments
+    /*def copy(firstName: String = this.firstName,
+             lastName: String = this.lastName,
+             age: Int = this.age,
+             department: Department = this.department) = new Manager(firstName, lastName, department)*/
+
+    //after removing the default arguments
+    def copy(firstName: String,
+             lastName: String,
+             age: Int,
+             department: Department) = new Manager(firstName, lastName, department)
+
+    // using the 'String.equals()' .. However, Scala's '==' is actually a value equality rather than reference equality!!
+    /*override def equals(obj: Any): Boolean = {
+      //Notice the 'Any' instead of Object in Java
+      if (!obj.isInstanceOf[Manager]) false
+      else {
+        val other = obj.asInstanceOf[Manager]
+
+        //this is a boolean expression if you look carefully, and it's the return value
+        other.firstName.equals(this.firstName) &&
+          other.lastName.equals(this.lastName) &&
+          other.age.equals(this.age)
+      }
+    }*/
+
+    //Using '==' instead of '.equals()'
+    //Scala's '==' is actually a value equality rather than reference equality!!
+    // the operator 'eq' is used for reference equality
+    /*
+    scala> val str1 = new String("a")
+    str1: String = a
+
+    scala> val str2 = new String("a")
+    str2: String = a
+
+    scala> str1 eq str2
+    res5: Boolean = false
+
+    scala> str1 equals str2
+    res6: Boolean = true
+
+    scala> str1 == str2
+    res7: Boolean = true
+
+     */
+    override def equals(obj: Any): Boolean = {
+      //Notice the 'Any' instead of Object in Java
+      if (!obj.isInstanceOf[Manager]) false
+      else {
+        val other = obj.asInstanceOf[Manager]
+
+        //this is a boolean expression if you look carefully, and it's the return value
+        other.firstName == this.firstName &&
+          other.lastName == this.lastName &&
+          other.age == this.age
+      }
+    }
+
+    /**
+      * overriding hashCode()
+      *
+      * @return
+      */
+    override def hashCode(): Int = {
+      //generated by IntelliJ
+      /*val state = Seq(department)
+      state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)*/
+
+      var result = 19 //var will be used only within this methos so there will be no side effect
+      result = 31 * result + firstName.hashCode
+      result = 31 * result + lastName.hashCode
+      result = 31 * result + age.hashCode
+      result
+
+    }
+  }
+
+  // remember: inheritance inherits both State & Behaviour from the parent (to doscuss further later on private access)
+  // val is simply to add an accessor
+  // same Java's polymorphism rules apply such object type, reference type, variable type, Is-A relationship etc
+
+
+  //################################### Abstract Classes ###################################
+
+  abstract class Person {
+    //abstract methods.. compared to Java we only add 'abstract' to the class. abstract methods don't make use of this keyword
+    def firstName: String
+
+    def lastName: String
+
+    def t(): Unit = {
+
+    }
+  }
+
+  case class ConcPer(firstName: String, lastName: String) extends Person
+
+  //this would compile because case classes already add accessor for the params. I.e. the params are 'val'
+  class AnotherConc(val firstName: String, val lastName: String) extends Person
+
+  // Notice the 'val', again this is to accessor methods, hence compiler will automatically add the implementation. if param names were different this wouldn't compile!
+
+
+  //################################### Parametrized Classes ###################################
+  //TBC
+
+  //################################### Parametrized Methods in their Classes ###################################
+  //TBC
+
+  /////////////////////////////////////////////////////////////////////////////////
 
   /*
     defining a function inside a function
