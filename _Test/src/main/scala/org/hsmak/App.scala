@@ -400,7 +400,7 @@ object App extends App {
 
   case class Couple[A, B](first: A, second: B) {
     //    def swap(): Couple[B, A] = new Couple[B, A](second, first)
-    def swap() = new Couple[B, A](second, first)// return type will be inferred
+    def swap() = new Couple[B, A](second, first) // return type will be inferred
   }
 
   println(Couple(10, "Scala"))
@@ -412,6 +412,7 @@ object App extends App {
   Couple("Hello", Couple(3, 22.2))
 
   //################################### Parametrized Methods in their Classes ###################################
+  // covered already
 
 
   /////////////////////////////////////////////////////////////////////////////////
@@ -431,6 +432,71 @@ object App extends App {
 
   Console println "\nPrimes:"
   printPrimes
+
+}
+
+//################################### Right Associative Colons ###################################
+
+object rightAssociativeColon extends App {
+
+  class Foo(x: Int) {
+    def ~:(y: Int) = x + y
+  }
+
+  val foo = new Foo(10)
+  println(foo.~:(5))
+  println(5 ~: foo) //colon is right associative
+}
+
+//################################### Scala Option ###################################
+object Options extends App {
+  val middleName = Some("Antony") // Some is an object that has the method apply() -> Some.apply(..)
+  val middleName2: Option[String] = middleName
+  val middleName3: Some[String] = middleName
+
+  val noMiddleName = None
+  val noMiddleName2: Option[String] = noMiddleName
+  val noMiddleName3: Option[Nothing] = noMiddleName
+  // Nothing is the subtype of every class
+  val noMiddleName4: None.type = noMiddleName
+
+  class Employee(val firstName: String, val middleName: Option[String], val lastName: String) {
+
+    /*
+      use Ancillary constructors to hide the Option param from end user. if you wish you may make the main constructor private so users isn'y aware of Option at all
+     */
+    def this(firstName: String, middleName: String, lastName: String) = this(firstName, Option(middleName), lastName)
+
+    def this(firstName: String, lastName: String) = this(firstName, None, lastName)
+
+    def this() = this("Unknown", "Unknown")
+  }
+
+  val husAk = new Employee("Hus", Some("W"), "AK")
+  val antony = new Employee("Antony", None, "Last")
+
+  val husAk2 = new Employee("Hus", "W", "AK")
+  val antony2 = new Employee("Antony", "Last")
+  val unknown = new Employee
+
+  // retrieve values from Option using get/getOrElse
+
+  println(middleName.getOrElse("Unknown"))
+  println(noMiddleName.getOrElse("Unknown"))
+  println(husAk2.middleName.getOrElse("Unknown2"))
+  println(unknown.middleName.getOrElse("Unknown2"))
+
+  def peelMiddleName(x: Option[String]): String = {
+    x match {
+      case Some(name) => name
+      case None => "Unknown"
+
+    }
+  }
+
+  println("Invoking Peel method")
+  println(peelMiddleName(husAk2.middleName))
+  println(peelMiddleName(unknown.middleName))
 
 }
 
