@@ -230,8 +230,8 @@ println
 
 /**
   * also called partially applied function. is this doable in Java8? yes:
-  *     https://dzone.com/articles/partially-applied-functions-in-java
-  *     https://www.pgrs.net/2015/04/23/partial-function-application-in-java-8/
+  * https://dzone.com/articles/partially-applied-functions-in-java
+  * https://www.pgrs.net/2015/04/23/partial-function-application-in-java-8/
   *
   * What are the applications of it?
   */
@@ -273,12 +273,13 @@ object ConvMethToFun {
   //partially applied functions for two params
   val f3 = x.gym _ // Now the underscore '_' is expecting two params: 'f3:(Int, Int) => Int'
   println(z.jam(f3))
-  println(z.jam(x.gym _))//without calling the val f3
-  println(z.jam(x.gym))// no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+  println(z.jam(x.gym _)) //without calling the val f3
+  println(z.jam(x.gym)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
 
   //clear application of the above concept
   def calculateProductPrice(discount: Double, productPrice: Double): Double = (1 - discount / 100) * productPrice
-  val discount_30 = calculateProductPrice(30, _:Double)
+
+  val discount_30 = calculateProductPrice(30, _: Double)
   println(discount_30(100))
 
 }
@@ -288,13 +289,15 @@ println
 
 //################################### Closure ###################################
 
-object MyClosue{
-  class Foo(x:Int){
+object MyClosue {
+
+  class Foo(x: Int) {
     def bar(y: Int => Int) = y(x)
   }
 
-  var m = 200// var for closure isn't recommended because there will be different behaviour
-  val f = (x:Int) => x + m // this is where the closure effect takes place
+  var m = 200
+  // var for closure isn't recommended because there will be different behaviour
+  val f = (x: Int) => x + m // this is where the closure effect takes place
   val foo = new Foo(100)
   println(foo.bar(f))
   m = 300 // changing m will result in different behavior when calling the method.
@@ -306,3 +309,160 @@ println
 
 //################################### Functions with Functions, AKA Higher Order Functions ###################################
 
+object FuncWithFunc {
+
+  val f_Explicit: (Int, Int => Int) => Int = (x: Int, y: Int => Int) => y(x) // Notice the colon ':' <- again this is to be explicit with the type
+  val f = (x: Int, y: Int => Int) => y(x) // y is of type function that expects an Int and return an Int
+  println(f(3, (m: Int) => m + 1)) // the 2nd param is a lamda expression which is an implementation of the function y. Here m is x which is the input and that is 3
+  println(f(3, m => m + 1)) // by inference type will be inferred
+  println(f(3, _ + 1)) // a placeholder will do just fine as well
+  println(f(3, 1 + _)) // by commutative property of teh addition process
+
+  import scala.language.postfixOps
+  // turn on the postfixOps flag to turn off the warning
+  println(f(3, 1 +)) // if the '_' i sthe last param we can take it away
+
+
+  // return a function from a function
+  val g = (x: Int) => (y: Int) => x + y // this introduces Currying. this is also a closure; a function is being returned but is closing around the x
+  println(g(4)(5)) // currying!!
+  println(g.apply(4).apply(5)) // this is what it really is
+
+}
+
+FuncWithFunc
+println
+
+//################################### Currying ###################################
+
+object MyCurrying {
+  /**
+    * Currying: named after Haskell Curry. Haskel lang was named after his first name and Currying concept was named after his last name!
+    * Currying breaks the function into parts so we can feed it in parts. I.e. a sequence of functions returning functions
+    * g -> returns a function/lambda expression
+    * currying three param function '(Int, Int, Int)' will convert it to 'Int => (Int => (Int => Int))'
+    * again don't confuse methods with functions
+    */
+  val g = (x: Int) => (y: Int) => x + y
+  println(g(2)(5))
+  val g3 = (x: Int) => ((y: Int) => (z: Int) => x + y + z) // returns a function that returns another function
+  println(g3(2)(3)(5))
+  val q = g _
+
+  val f = (x: Int, y: Int) => x + y
+  //multiple-param function. signature from the REPL: '(Int, Int) => Int'
+  val fc = f.curried
+  // convert a regular function into a curried one. f will become: val f = (x:Int) => ((y:Int) => x + y). Signature: 'Int => (Int => Int)'
+  val uncurFC = Function.uncurried(fc)
+  // uncurrying a curried function
+
+
+  //remember: '_' converts a method into a function
+  def foo(x: Int, y: Int, z: Int) = x + y + z // a method not a function
+  val fo = foo _ // REPL: (Int, Int, Int) => Int <- converting to a regular function with 3 params
+  val fo2 = foo(2, _: Int, _: Int) //we have to specify all params if not curried. This is the Partially Applied Function
+
+  //Curried Method: well you reall have to convert it to a function first using '_'
+  val curriedFoo = (foo _).curried // 1st convert method to a function then convert it to a curried one. Now this similiar to the following.
+
+
+  def bar(x: Int)(y: Int)(z: Int) = x + y + z
+
+  // a curried method (still not a function too!). used by implicit params a lot
+  val br = bar _ // REPL: Int => (Int => (Int => Int)) <- fully curried function!
+  val br2 = bar(2) _ // partially applied function!
+  println(br2(3)(10)) //br2.apply(3).apply(10)
+
+  def baz(x: Int, y: Int)(z: Int) = x + y + z
+
+  val bz = baz _ // REPL: (Int, Int) => Int => Int
+  val bz2 = baz(2, _: Int) _
+  println(bz2(3)(3))
+
+
+}
+
+MyCurrying
+println
+
+
+//################################### Functions: By-Name Parameters //###################################
+
+//It's a regular method with two params
+object ByNameParameters {
+  def byValue(x: Int)(y: Int) = {
+    println("By Value: ")
+    x + y
+  }
+
+  //The 2nd param is a regular lambda expression
+  def byFunction(x: Int)(y: () => Int) = {
+    println("By Function: ")
+    x + y()
+  }
+
+  // ByName param. Notice there is no () in the lambda expression
+  def byName(x: Int)(y: => Int) = {
+    println("By Name: ")
+    x + y
+  }
+
+  val a = byValue(3) {
+    //Eager evaluation
+    println("In call")
+    19
+  }
+
+  val b = byFunction(3)(() => {
+    //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
+    println("In call")
+    19
+  })
+
+  /**
+    * It's as same as ByFunction
+    * It just provides easiness beside the laziness
+    *
+    * Can be called by black directly since no need to prepend the '() =>'
+    * Good to catch exceptions and clean up resource as in try/catch blocks below.
+    * Other benefits?
+    */
+  val c = byName(3) {
+    //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
+    println("In call")
+    19
+  }
+
+  /**
+    * real world example for ByName params
+    * Notice there is no 'f:()' instead it is 'f:'
+    *
+    * @param f
+    * @return
+    */
+  def divideSafely(f: => Int): Option[Int] = {
+    try {
+      Some(f)
+    } catch {
+      case ae: ArithmeticException => None
+    }
+  }
+
+  val d = divideSafely {
+    val x = 10
+    val y = 5
+    x / y
+  }
+  println(d)
+
+  val e = divideSafely {
+    val x = 100
+    val y = 0
+    x / y
+  }
+  println(e)
+
+}
+
+ByNameParameters
+println
