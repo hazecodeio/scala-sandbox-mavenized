@@ -252,7 +252,7 @@ object App extends App {
   //################################### Subclassing and Inheritance, overriding methods ###################################
 
   /**
-    * case classes will automatically add: toString(), equals(), hashCode(), copy(), apply() so no need to use 'new' keyword
+    * case classes will automatically add: toString(), equals(), hashCode(), copy(), apply() so no need to use 'new' keyword, CompanionObject?
     * 'val' is the default to constructor params
     * if you don't like what case provides you can always override
     * used in pattern matching

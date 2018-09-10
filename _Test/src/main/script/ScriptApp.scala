@@ -466,3 +466,208 @@ object ByNameParameters {
 
 ByNameParameters
 println
+
+//################################### Collections ###################################
+
+////////////////// List
+
+object MyList {
+  val l = List(1, 2, 3, 4)
+  // using the CompanionObject
+  val l2 = List.apply(1, 2, 3, 4)
+  // using the CompanionObject.apply()
+  val lColon = 1 :: 2 :: 3 :: 4 :: Nil
+
+  println(l.head)
+  println(l.tail)
+  println(l.init)
+  println(l.last)
+
+  println(l.max)
+  println(l.min)
+  println(l.isEmpty)
+  println(l.nonEmpty)
+  println(l(3))
+  println(l.apply(3))
+  println(l.updated(0, 32))
+  println(l.mkString(","))
+  println(l.mkString("**"))
+  println(l.mkString("[", "**", "]")) // bound the list by []
+}
+
+MyList
+println
+
+////////////////// Set
+
+object MySet {
+  val s = Set(1, 2, 3, 4)
+  // using the CompanionObject
+  val sA = Set.apply(1, 2, 3, 4)
+  // using the CompanionObject.apply()
+  val s2 = Set(1, 2, 3, 4, 4, 1, 6, 7)
+  val s3 = Set(4, 5, 6, 7)
+
+  println(s diff s2)
+  println(s diff s3)
+  println(s union s2)
+  println(s union s3)
+  println(s intersect s2)
+  println(s intersect s2)
+
+  /**
+    *
+    * ++/-- for collection operation
+    * +/- one item operation
+    *
+    */
+  println(s ++ s2)
+  println(s ++ List(3, 4, 5, 6, 7))
+  println(s + 10)
+
+  println(s -- s2)
+  println(s -- List(3, 4, 5, 6, 7))
+  println(s - 1)
+
+  println(s(3)) //check if the element 3 exists
+  println(s.apply(3))
+  println(s.contains(3))
+}
+
+MySet
+println
+
+////////////////// Map
+
+object MyMap {
+  val m = Map((1, "One"), (2, "Two")) //key/value tuples
+
+  val t: (Int, String) = (3, "Three")
+  val t2: (Int, String) = 3 -> "Three" // the arrow will be converted into a tuple
+  println(t2)
+
+  val m2 = Map(1 -> "One", 2 -> "Two") //key/value tuples
+  println(m2)
+  println(m2.get(1)) //return the Option Some("One")
+  //  println(m2.apply(10))//will return it directly but what if it wasn't there -> exception "NoSuchElementException"
+  println(m2.get(10)) // return None
+
+  println(m2.toList)
+  println(m2.keys) //return a Set
+  println(m2.keySet) //return a Set
+  println(m2.values) // return MapLike
+  println(m2.values.toSet) // return MapLike
+  println(m2.values.toList) // return MapLike
+
+
+  ///////////Strings and Pool
+  val str = new String("hello")
+  val strP1 = "hello" // will be stored in the string Pool
+  val strP2 = "hello" // will be stored in the string Pool
+
+  println(str == strP1) //true
+  println(str eq strP1) //false
+
+  println(strP1 == strP2) //true
+  println(strP1 eq strP2) //true
+
+  /////////////// Symbols: they have a pool of their own
+
+  val co = Symbol("Co")
+  val co2 = 'Co
+
+  println(co == co2) //true
+  println(co eq co2) //true
+
+  ////////////////////// Map with Symbols
+
+  val elements: Map[Symbol, String] = Map('Co -> "Cobalt", 'H -> "Helium", 'Pb -> "Lead")
+  println(elements.get('H))
+  println(elements get 'H)
+}
+
+MyMap
+println
+
+//######################################## Arrays and Repeated params ################################
+
+/**
+  * unlike othjer collections, Arrays are:
+  *   Mutable.... WARNING!
+  * converted into primitive aarays by the JVM under the hood
+  */
+object MyArray {
+  val a: Array[Int] = Array(1, 2, 3)
+
+  //same list operations can be done on arrays
+  println(a.head)
+  println(a.tail)
+  println(a.init)
+  println(a.last)
+  println(a.max)
+  println(a.min)
+  println(a(2))
+  println(a.isEmpty)
+  println(a.nonEmpty)
+
+  def repeatedParamMethod(x: Int, y: String, z: Any*) = {
+    println(z) //z is object of type WrappedArray
+    "%d %ss give you  %s".format(x, y, z.mkString(", "))
+  }
+
+  println(repeatedParamMethod(3, "egg", "a delicious sandwich", "protein", " high cholesterol"))
+  println(repeatedParamMethod(3, "egg", List("a delicious sandwich", "protein", " high cholesterol")))
+  println(repeatedParamMethod(3, "egg", List("a delicious sandwich", "protein", " high cholesterol"): _*)) //':_*' in front of any collection will break it apart so it will fit in 'z:Any*'. this is a syntactic sugar fo rthe repeated param
+
+}
+
+MyArray
+println
+
+//######################################## Ranges ################################
+
+object MyRange {
+  var r = 1 to 10 // include the 10
+  var r2 = 1 until 10 // excluded the 10
+
+  // Ranges are collections too so same operation of List can be applied on them too
+  println(r)
+  println(r2)
+  println(r.head)
+  println(r.tail)
+  println(r.last)
+  println(r.init)
+  println(r.isEmpty)
+  println(r.nonEmpty)
+  println(r.mkString(", "))
+
+  val r3 = 2 to 10 by 2
+  println(r3)
+
+  val r4 = 10 to 2 by -2
+  println(r4)
+
+  val r5 = 'a' to 'z'
+  println(r5)
+  println(r5.toList)
+
+  val r55 = ('a' to 'z') ++ ('A' to 'Z') // use ++ to concatenate multiple Ranges
+  println(r55)
+
+  val r6 = Range(1, 10) //exclusive ==> until
+  println(r6)
+
+  val r7 = Range(1, 10, 2) //exclusive with stepping
+  println(r7)
+
+  val r8 = Range.inclusive(1, 10) //inclusive ==> to
+  println(r8)
+
+  for (i <- 1 to 10) println(i + 1)
+  println("----------")
+  for (i <- 2 to 10 by 2) println(i + 1)
+
+}
+
+MyRange
+println
