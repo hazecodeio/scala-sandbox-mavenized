@@ -12,5 +12,5 @@ object App {
     println("concat arguments = " + foo(args))
     println(MyJava.callJavaMethod())
   }
-
 }
+
