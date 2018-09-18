@@ -7,7 +7,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>00_HelloWorld</module>
+        <module>00_Basics</module>
         <module>ControlStructures</module>
         <module>Functions</module>
         <module>Recursion</module>
@@ -130,4 +130,23 @@
             </plugin>
         </plugins>
     </build>-->
+
+    <build>
+        <plugins>
+            <plugin>
+                <!-- see http://davidb.github.com/scala-maven-plugin -->
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.4.2</version>
+                <executions>
+                    <execution>
+                        <configuration>
+                            <recompileMode>incremental</recompileMode>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>

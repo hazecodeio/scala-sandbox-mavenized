@@ -5,3 +5,7 @@ public class MyJava {
         return "This String is returned by a Java method!";
     }
 }
+
+class t{
+
+}
