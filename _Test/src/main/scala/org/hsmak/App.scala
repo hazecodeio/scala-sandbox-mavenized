@@ -10,19 +10,7 @@ import scala.io.StdIn
 object App extends App {
 
 
-  //functional loop
-  val result = (1 to 5).reverse.mkString(", ")
-  println(result)
-  val steppingBy2 = (1 to 10 by 2).mkString(", ")
-  println(steppingBy2)
 
-
-  val xs = List(1, 2, 3, 4, 5)
-  var resultL = List[Int]()
-  for (a <- xs) {
-    resultL = resultL :+ (a + 1) //append to list. note List must be var for append to work
-  }
-  println(resultL)
 
   /*
     notice how the for loop is used here to do formatting/filtering
