@@ -27,44 +27,16 @@ object App extends App {
   even.foreach(println) //inferred lamda expression
   even.foreach(a => println(a)) //expanded lamda expression
 
-  println(
-    """Hey this is amultiline string
-      |this is a 2nd line
-    """.stripMargin)
-
-  println(
-    """This si another multiline string
-      @margin is not | but @
-    """.stripMargin('@'))
 
 
-  //################################### RegEx ###################################
-  val message = "we are meetin on June 13th of this year, and having lunch at 12:30PM"
-  val regex = """(\s|[0-9])?[0-9]:[0-5][0-9]\s*(AM|PM)""".r
-  println("Found RegEx: " + regex.findAllMatchIn(message).toList)
 
 
-  //################################### String formatting ###################################
-  val str = String.format("This is a %s", "Test1")
-  // Java and C way. Not Functional!!
-  val str2 = "This is a %s".format("Test2") // Scala way, the functional way!!
-  println(str)
-  println(str2)
+
 
   import java.time._
 
   println(LocalDate.now.plusDays(2))
 
-
-  //################################### S Interpolation Vs F interpolation ###################################
-  val q = 50.126456
-  println(s"This an S Interpolation: ${q}")
-  println(f"This an F Interpolation: ${q}%1.2f") //notice the floating format "${val}%..."
-  //also you can mix up multil-line string with the above interpolations
-  println(
-    s"""kjjgf
-       |sdfgsdfg ${q}
-     """.stripMargin)
 
 
   //Different Types returned by a method/function
@@ -479,26 +451,7 @@ object doWhileReadFromConsole extends App {
   printf("You guess a number %d", 15)
 }
 
-object InterpolationWithPrintandStyling extends App {
-  val name = "Husain"
-  val age = 32
-  val weight = 155.5
 
-  println(s"$name")
-  println(f"I am ${age + 1} and weigh $weight%.2f")
-
-  printf("'%5s'\n", 5)
-  printf("'%-5d'\n", 5)
-  printf("'%05d'\n", 5)
-
-  //right justification
-  printf("'%20s'\n", "name Husain")
-  printf("'%20s'\n", "age 30")
-
-  // left justification
-  printf("'%-20s'\n", "name Husain")
-  printf("'%-20s'\n", "age 30")
-}
 
 object DefFunctions extends App {
   var sum = getSum()
