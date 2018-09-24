@@ -10,8 +10,6 @@ import scala.io.StdIn
 object App extends App {
 
 
-
-
   /*
     notice how the for loop is used here to do formatting/filtering
     notice the {} which can be replaced by () with a little modification (Maybe??)
@@ -28,69 +26,10 @@ object App extends App {
   even.foreach(a => println(a)) //expanded lamda expression
 
 
-
-
-
-
-
   import java.time._
 
   println(LocalDate.now.plusDays(2))
 
-
-
-  //Different Types returned by a method/function
-  def add(x: Int, y: Int) = { // Remember that 'Any' is the the parent of AnyRef and AnyVal. Therefore, the return common type for both here is 'Any'
-    if (x > 10) (x + y).toString //Return String!!
-    else
-      x + y // return Int!!
-  }
-
-
-  //################################### Recursion ###################################
-
-  def factorial_n(n: Int): Int = if (n == 0 || n == 1) 1 else n * factorial_n(n - 1)
-
-  println(factorial_n(5))
-  println(factorial_n(100))
-
-  import scala.annotation.tailrec
-
-  //  @tailrec//an annotation to check if it's Optimized Recursion at compile time
-  // this is unoptimized recursion because of the n * fac(n-1)
-  def factorialWithBigInt(n: BigInt): BigInt = if (n == 0 || n == 1) 1 else n * factorialWithBigInt(n - 1)
-
-  println(factorialWithBigInt(5))
-  println(factorialWithBigInt(10))
-  println(factorialWithBigInt(1000))
-  println
-
-  //################################### Optimized Recursion  ###################################
-
-  //this is an optomized recursion. accumulate the values ina val
-  @tailrec
-  def factorialWithBigInt_Optim(n: BigInt, acc: BigInt): BigInt = if (n == 0 || n == 1) acc else factorialWithBigInt_Optim(n - 1, n * acc)
-
-  println(factorialWithBigInt_Optim(10000, 1)) //stack overvlow. you can either use optimized recursion or increase the stack size at the startup
-
-
-  //have another fucntion that calls the above with the accumulator
-  def factorialWithBigInt_Optim_WithHiddenAccum(n: BigInt) = factorialWithBigInt_Optim(n, 1)
-
-  println(App.factorialWithBigInt_Optim_WithHiddenAccum(10000))
-
-
-  //################################### Methods Inside Methods ###################################
-
-  def factorial(n: BigInt): BigInt = {
-
-    @tailrec //keeping the optimized version
-    def fact(n: BigInt, accum: BigInt): BigInt = if (n == 0 || n == 1) accum else fact(n - 1, n * accum)
-
-    fact(n, 1)
-  }
-
-  println(factorial(10000))
 
   //IsInstanceOf and AsInstanceOf <- they're function under 'Any'
 
@@ -109,7 +48,6 @@ object App extends App {
   def parameterizedFunction[T](param: T) = param //param is of the type being passed during invocation
   println(parameterizedFunction[Boolean](true)) //brackets might be unnecessary if compiler can infer types
   println(parameterizedFunction(true))
-
 
   //################################### Classes and Constructors ###################################
 
@@ -450,7 +388,6 @@ object doWhileReadFromConsole extends App {
 
   printf("You guess a number %d", 15)
 }
-
 
 
 object DefFunctions extends App {
