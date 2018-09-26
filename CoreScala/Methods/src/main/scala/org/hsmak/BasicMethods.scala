@@ -91,7 +91,7 @@ object BasicMethods extends App {
     fact(n, 1)
   }
 
-  println(factorial(10000))
+  //  println(factorial(10000))
 
 
   println("################################### bending method names to your will ###################################")
@@ -101,8 +101,29 @@ object BasicMethods extends App {
   println(`summation of`(4, 5))
 
   println("---------- a method that takes no param --------------")
-  def willYouPrintMe_? = true// use '_' to use OpChar. It looks like a val but it's really a method.
+
+  def willYouPrintMe_? = true // use '_' to use OpChar. It looks like a val but it's really a method.
   println(willYouPrintMe_?)
+
+  println("----------------------- Named Arguments ------------------------")
+
+  def processNumber(b: Boolean, x: Int, y: Int) = if (b) x else y
+
+  println(processNumber(true, 10, 2))
+  println(processNumber(x = 10, y = 2, b = true)) //named arguments
+
+  println("----------------------- Default Arguments ------------------------")
+
+  def add(x: Int, y: Int = 10) = x + y // default value works if it's the last argument only!!
+
+  println(add(3, 4))
+  println(add(30))
+
+  println("--------------------- Default and Named Argumnets together -------------------")
+
+  def processNumberWithDefaultArgument(b: Boolean = true, x: Int, y: Int) = if (b) x else y
+//  println(processNumberWithDefaultArgument(10, 4))//It won't work because default value works if it's the last argument only!!
+  println(processNumberWithDefaultArgument(x = 10, y = 4))// solution is to use named argument as well
 
 }
 

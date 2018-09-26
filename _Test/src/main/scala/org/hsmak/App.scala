@@ -31,16 +31,6 @@ object App extends App {
   println(LocalDate.now.plusDays(2))
 
 
-  //IsInstanceOf and AsInstanceOf <- they're function under 'Any'
-
-  //IsInstanceOf is equivalent to Java's instanceof
-  println(2.isInstanceOf[Int])
-
-
-  //AsinstanceOf is to down cast
-  val ss: Any = "ha ha ha"
-  val casted: String = ss.asInstanceOf[String]
-  println(casted)
 
 
   //parametrized types on methods. Similar to Java's generics

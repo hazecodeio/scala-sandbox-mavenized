@@ -1,5 +1,10 @@
 package org.hsmak
 
+/**
+  * Any
+  *     AnyVal
+  *     AnyRef
+  */
 object Types extends App {
 
   println("------------------- ConvertingBetweenNumericTypes -------------------")
