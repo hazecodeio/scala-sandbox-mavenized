@@ -125,5 +125,24 @@ object BasicMethods extends App {
 //  println(processNumberWithDefaultArgument(10, 4))//It won't work because default value works if it's the last argument only!!
   println(processNumberWithDefaultArgument(x = 10, y = 4))// solution is to use named argument as well
 
+  /////////////////////////////////////////////////////////////////////////////////
+
+  println("---------------------------- a method inside a method --------------------------")
+  /*
+    defining a method inside a method
+   */
+  def printPrimes() {
+    val primeList = List(1, 2, 3, 5, 7, 11)
+    for (i <- primeList) {
+      if (i == 11)
+        return
+      if (i != 1)
+        println(i)
+    }
+  }
+
+  Console println "\nPrimes:"
+  printPrimes
+
 }
 

@@ -12,11 +12,10 @@
         <module>Functions</module>
         <module>Recursion</module>
         <module>Collections</module>
-        <module>ClassesAndCases</module>
+        <module>Abstraction</module>
         <module>Operators</module>
         <module>Traits</module>
         <module>Packages</module>
-        <module>Inheritance</module>
         <module>ForComprehensions</module>
         <module>Exceptions</module>
         <module>TypeParametrization</module>

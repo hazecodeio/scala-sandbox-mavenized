@@ -92,6 +92,22 @@ object ControlStructures extends App {
   ForLoop
   println
 
+  println("--------------------- nested loop --------------------")
+
+  object NestedLoop {
+    /*
+    equivalent to nested loop
+    useful in multi dimentional matrices
+   */
+    for (i <- 1 to 5; j <- 6 to 10) {
+      println("i: " + i)
+      println("j: " + j)
+    }
+  }
+
+  NestedLoop
+  println()
+
   println("----------------- Looping the Functional Way---------------------")
 
   object FunctionalLooping {
