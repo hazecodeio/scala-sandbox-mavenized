@@ -38,11 +38,12 @@ object App extends App {
 
 object rightAssociativeColon extends App {
 
+  val foo = new Foo(10)
+
   class Foo(x: Int) {
     def ~:(y: Int) = x + y
   }
 
-  val foo = new Foo(10)
   println(foo.~:(5))
   println(5 ~: foo) //colon is right associative
 }
@@ -58,6 +59,26 @@ object Options extends App {
   val noMiddleName3: Option[Nothing] = noMiddleName
   // Nothing is the subtype of every class
   val noMiddleName4: None.type = noMiddleName
+  val husAk = new Employee("Hus", Some("W"), "AK")
+  val antony = new Employee("Antony", None, "Last")
+  val husAk2 = new Employee("Hus", "W", "AK")
+  val antony2 = new Employee("Antony", "Last")
+  val unknown = new Employee
+
+  def peelMiddleName(x: Option[String]): String = {
+    x match {
+      case Some(name) => name
+      case None => "Unknown"
+
+    }
+  }
+
+  // retrieve values from Option using get/getOrElse
+
+  println(middleName.getOrElse("Unknown"))
+  println(noMiddleName.getOrElse("Unknown"))
+  println(husAk2.middleName.getOrElse("Unknown2"))
+  println(unknown.middleName.getOrElse("Unknown2"))
 
   class Employee(val firstName: String, val middleName: Option[String], val lastName: String) {
 
@@ -69,28 +90,6 @@ object Options extends App {
     def this(firstName: String, lastName: String) = this(firstName, None, lastName)
 
     def this() = this("Unknown", "Unknown")
-  }
-
-  val husAk = new Employee("Hus", Some("W"), "AK")
-  val antony = new Employee("Antony", None, "Last")
-
-  val husAk2 = new Employee("Hus", "W", "AK")
-  val antony2 = new Employee("Antony", "Last")
-  val unknown = new Employee
-
-  // retrieve values from Option using get/getOrElse
-
-  println(middleName.getOrElse("Unknown"))
-  println(noMiddleName.getOrElse("Unknown"))
-  println(husAk2.middleName.getOrElse("Unknown2"))
-  println(unknown.middleName.getOrElse("Unknown2"))
-
-  def peelMiddleName(x: Option[String]): String = {
-    x match {
-      case Some(name) => name
-      case None => "Unknown"
-
-    }
   }
 
   println("Invoking Peel method")

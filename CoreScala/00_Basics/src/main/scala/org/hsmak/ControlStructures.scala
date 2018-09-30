@@ -66,7 +66,8 @@ object ControlStructures extends App {
     val xs = List(1, 2, 3, 4, 5)
 
     //imperative way
-
+    val result = for (i <- xs;
+                      j = i * 2) yield (j)
     var prependedList = List[Int]()
     var appendedList = List[Int]()
     for (i <- xs) {
@@ -78,10 +79,7 @@ object ControlStructures extends App {
 
     // The Functional Way
 
-    val result = for (i <- xs;
-                      j = i * 2) yield (j)
     println(result)
-
     var resultL = List[Int]()
     for (a <- xs) {
       resultL = resultL :+ (a + 1) //append to list. note List must be var for append to work

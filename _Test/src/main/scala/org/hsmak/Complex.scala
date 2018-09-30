@@ -7,12 +7,12 @@ package org.hsmak
  */
 class Complex(real: Double, imaginary: Double) {
 
+  override def toString() =
+    "" + re + (if (im < 0) "" else " + ") + im + "i"
+
   def re = real //sama as -> def re() = real
 
   def im = imaginary //sama as -> def im() = imaginary
-
-  override def toString() =
-    "" + re + (if (im < 0) "" else " + ") + im + "i"
 }
 
 object ComplexNumbers {

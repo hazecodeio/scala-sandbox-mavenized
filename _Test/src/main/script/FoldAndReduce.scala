@@ -118,17 +118,18 @@ object RandomAPIMethods {
   println((1 to 100).drop(80)) //drop the first 80 items
   println((1 to 100).dropWhile(x => x % 80 != 0)) // drop as long it satisfies the predicate. Once true stop dropping and take the rest of the collection
 
-  println(List.fill(10) {// we can use a block since the 2nd param is a param by name 'def fill[A](n: Int)(elem: => A)'
+  println(List.fill(10) {
+    // we can use a block since the 2nd param is a param by name 'def fill[A](n: Int)(elem: => A)'
     val x = 10
     val y = 20
     x + y + 19
   })
 
   val groceries = List("Apple", "Milk", "Naan", "Eggs", "Oranges")
-  println(groceries zip (1 to 100))//assign indeces to each item
-  println(groceries zipWithIndex)// however it starts with zero
+  println(groceries zip (1 to 100)) //assign indeces to each item
+  println(groceries zipWithIndex) // however it starts with zero
   //let's add one to each index and swap
-  println(groceries.zipWithIndex.map(t => (t._1, t._2 + 1)).map(t => t.swap))//swap method is only part of Tuple2
+  println(groceries.zipWithIndex.map(t => (t._1, t._2 + 1)).map(t => t.swap)) //swap method is only part of Tuple2
   //let's convert each tuple to a String
   println(groceries.zipWithIndex.map(t => (t._1, t._2 + 1)).map(t => t.swap).map(t => s"${t._1}. ${t._2}"))
   //let's convert the list to a consolidated string with each item on its own line i.e. new line

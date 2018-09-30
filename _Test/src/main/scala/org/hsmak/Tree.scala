@@ -13,7 +13,6 @@ package org.hsmak
  */
 
 
-
 abstract class Tree
 
 case class Sum(l: Tree, r: Tree) extends Tree
@@ -23,8 +22,7 @@ case class Var(n: String) extends Tree
 case class Const(v: Int) extends Tree
 
 
-
-class TestTree{
+class TestTree {
 
   //the type Environment can be used as an alias of the type of functions from String to Int
   type Environment = String => Int
@@ -63,8 +61,7 @@ class TestTree{
 }
 
 
-
-object test extends App{
+object test extends App {
   val t = new TestTree
   t.testApp
 }

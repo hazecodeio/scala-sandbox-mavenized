@@ -3,6 +3,7 @@ package org.hsmak
 /*
  * Multiple classes can be imported from the same package by enclosing them in curly braces as on the first line.
  */
+
 import java.text.DateFormat
 import java.util.{Date, Locale}
 
@@ -10,6 +11,7 @@ import java.util.{Date, Locale}
  * when importing all the names of a package or class, one uses the underscore character (_) instead of the asterisk (*)
  * the asterisk is a valid Scala identifier (e.g. method name)
  */
+
 import java.text.DateFormat._
 
 /**

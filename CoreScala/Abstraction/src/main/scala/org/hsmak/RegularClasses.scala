@@ -5,6 +5,8 @@ object RegularClasses extends App {
   object ClassSimple {
     println("################################### Classes and Constructors ###################################")
 
+    val employee = new Employee("MyFirstName", "MyLastName")
+
     /**
       *
       * @param firstName //val will create an accessor method firstName()
@@ -12,7 +14,6 @@ object RegularClasses extends App {
       */
     class Employee(val firstName: String, var lastName: String)
 
-    val employee = new Employee("MyFirstName", "MyLastName")
     println(employee) //print address location for toString isn't overloaded
     println(employee.firstName) //getter the ScalaStyle way
     println(employee.lastName)
@@ -80,7 +81,6 @@ object RegularClasses extends App {
     } finally { //optional just as in Java
       println("continuing without issues")
     }
-
 
 
   }

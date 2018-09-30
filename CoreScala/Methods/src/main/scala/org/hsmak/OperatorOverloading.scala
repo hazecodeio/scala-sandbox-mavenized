@@ -7,6 +7,7 @@ object OperatorOverloading extends App {
   println(this.+(3, 4)) // I had to use "this"
 
   def ~~+:> = true
+
   println(this.~~+:>)
 
 }

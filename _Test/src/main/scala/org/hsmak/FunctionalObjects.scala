@@ -25,17 +25,14 @@ object FunctionalObjects {
     println(twoThirds + oneHalf * twoThirds) // precedence is behaving as expected, that is, * is performed 1st then add => twoThirds + (oneHalf * twoThirds)
     println(twoThirds * 2)
 
-    implicit def intToRational(x: Int) = new Rational(x)// This defines a conversion method from Int to Rational. This needs to be in scope of the object or the interpreter
-    println(2*twoThirds)//the implicit function made it possible to do * operation on Int type
+    implicit def intToRational(x: Int) = new Rational(x) // This defines a conversion method from Int to Rational. This needs to be in scope of the object or the interpreter
+    println(2 * twoThirds) //the implicit function made it possible to do * operation on Int type
 
   }
 
   class Rational(n: Int, d: Int) {
     //precondition. this will throw IllegalArgumentException if not met
     require(d != 0)
-
-    // find the gcd to simplify the rational expression. Expresssion will be simplified once object is created
-    private val g = gcd(n.abs, d.abs)
 
     /*
      * if class parameters are val, you won't be able to use them in methods as in "add()" below;
@@ -45,18 +42,10 @@ object FunctionalObjects {
     val numer = n / g
     // divide by gcd to simplify
     val denom = d / g // divide by gcd to simplify
+    // find the gcd to simplify the rational expression. Expresssion will be simplified once object is created
+    private val g = gcd(n.abs, d.abs)
 
     def this(n: Int) = this(n, 1) // auxiliary constructor for cases such as 5/1
-
-    def add(that: Rational): Rational =
-      new Rational(
-        this.numer * that.denom + that.numer * this.denom,
-        this.denom * that.denom)
-
-    def multiply(i: Int) = new Rational(this.numer * i, this.denom)
-
-    def multiply(that: Rational) =
-      new Rational(this.numer * that.numer, this.denom * that.denom)
 
     def /(that: Rational): Rational =
       new Rational(numer * that.denom, denom * that.numer)
@@ -64,18 +53,28 @@ object FunctionalObjects {
     def /(i: Int): Rational =
       new Rational(numer, denom * i)
 
-
     def +(that: Rational) = add(that)
+
+    def add(that: Rational): Rational =
+      new Rational(
+        this.numer * that.denom + that.numer * this.denom,
+        this.denom * that.denom)
 
     def *(that: Rational) = multiply(that)
 
+    def multiply(that: Rational) =
+      new Rational(this.numer * that.numer, this.denom * that.denom)
+
     def *(i: Int) = multiply(i)
 
-    def lessThan(that: Rational) = this.numer * that.denom < that.numer * this.denom
+    def multiply(i: Int) = new Rational(this.numer * i, this.denom)
 
     def max(that: Rational) =
       if (this.lessThan(that)) that else this
 
+    def lessThan(that: Rational) = this.numer * that.denom < that.numer * this.denom
+
+    override def toString = s"Rational = $numer/$denom"
 
     /**
       * GCD Greatest Common Factor
@@ -86,8 +85,6 @@ object FunctionalObjects {
       */
     private def gcd(a: Int, b: Int): Int =
       if (b == 0) a else gcd(b, a % b)
-
-    override def toString = s"Rational = $numer/$denom"
   }
 
 }

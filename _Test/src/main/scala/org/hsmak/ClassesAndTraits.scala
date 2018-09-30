@@ -65,20 +65,6 @@ object ClassesConcrete {
 
   }
 
-  /*
-   * create an object that holds IDs
-   * this is similar to Static fields
-   * In Scala, all objects are singleton
-   */
-  object Person {
-    private var idNumber: Int = 0
-
-    private def newIdNum(): Int = {
-      idNumber += 1
-      idNumber
-    }
-  }
-
   class Student(name: String, age: Int, school: String) extends Person {
     def this(name: String, age: Int) {
       this(name, age, "no school")
@@ -95,13 +81,27 @@ object ClassesConcrete {
     override def toString: String = s"Student($id, $name, $age, $school)"
   }
 
+  /*
+   * create an object that holds IDs
+   * this is similar to Static fields
+   * In Scala, all objects are singleton
+   */
+  object Person {
+    private var idNumber: Int = 0
+
+    private def newIdNum(): Int = {
+      idNumber += 1
+      idNumber
+    }
+  }
+
 }
 
 
 /**
   * Abstract Class
   */
-object ClassesAbstract{
+object ClassesAbstract {
 
   def main(args: Array[String]) {
     var w = new Wolf("Fang")
@@ -158,5 +158,6 @@ object ClassesWithTraits {
     override def hitByBulletProof = "The bullet bounces off of %s".format(this.name)
 
   }
+
 }
 

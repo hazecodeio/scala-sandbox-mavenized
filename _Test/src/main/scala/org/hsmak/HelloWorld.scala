@@ -11,6 +11,6 @@ object HelloWorld01 {
   }
 }
 
-object HelloWorld02 extends App{
-    println("Hello, World 02!!")
+object HelloWorld02 extends App {
+  println("Hello, World 02!!")
 }

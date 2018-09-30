@@ -1,5 +1,27 @@
 import org.hsmak.Complex
 
+//Testing import statement in a script file
+val c = new Complex(1.2, 3.4)
+val t = (1, "Hus", 400.0)
+//types are inferred, so these are the expansion
+val t2: (Int, String, Double) = t //notice the parens
+
+println(Husain.firstName)
+println(Husain.lastName)
+println(Husain.title)
+val t3: Tuple3[Int, String, Double] = t // just as previously shown
+println("imaginary part: " + c.im)
+println(c)
+
+
+//################################### Companion Objects ###################################
+
+//################################### Tuples (not part of collection in Scala) ###################################
+
+class Employee(val firstName: String, val lastName: String, val title: String)
+
+println(t._1, t._2, t._3) //starting from base one! up to 22!
+
 /**
   * To run a scala script from Intellij
   *   - Link: https://www.youtube.com/watch?v=phjxbbLk4WM
@@ -13,41 +35,16 @@ object MyObject {
   def foo(x: Int, y: Int) = x + y
 }
 
-
-class Employee(val firstName: String, val lastName: String, val title: String)
-
 object Husain extends Employee("Huss", "AK", "Developer")
-
-println(Husain.firstName)
-println(Husain.lastName)
-println(Husain.title)
-
-
-//Testing import statement in a script file
-val c = new Complex(1.2, 3.4)
-println("imaginary part: " + c.im)
-println(c)
-
-
-
-//################################### Companion Objects ###################################
-
-//################################### Tuples (not part of collection in Scala) ###################################
-
-val t = (1, "Hus", 400.0)
-println(t._1, t._2, t._3) //starting from base one! up to 22!
-
-//types are inferred, so these are the expansion
-val t2: (Int, String, Double) = t //notice the parens
-val t3: Tuple3[Int, String, Double] = t // just as previously shown
 
 object MyTuple {
 
+  val u = ("4", Department("QA")) // check scala api for tuples: https://www.scala-lang.org/api/current/scala/Tuple2.html
+  val u2 = u.swap // only Tuple2. it doesn't make sense to have this method for tuple size > 2
+  println(u)
+
   case class Department(name: String)
 
-  val u = ("4", Department("QA")) // check scala api for tuples: https://www.scala-lang.org/api/current/scala/Tuple2.html
-  println(u)
-  val u2 = u.swap // only Tuple2. it doesn't make sense to have this method for tuple size > 2
   println(u2)
   println(u) // because scala is immutable by nature the original will stay the same
 }
@@ -237,14 +234,9 @@ println
   */
 object ConvMethToFun {
 
-  class Foo(x: Int) {
-    def bar(y: Int) = x + y
-
-    def gym(z: Int, a: Int) = x + z + a
-  }
-
   val x = new Foo(10)
   val f = x.bar _ // the underscore '_' is a placeholder. and that's how to convert a method (of an object) into a function
+  val z = new Baz(20)
   /**
     * In console:
     * scala> val f = x.bar _
@@ -253,6 +245,29 @@ object ConvMethToFun {
 
   println(f.apply(20))
   println(f(20))
+  // more than a param
+  val f2 = x.gym(40, _: Int) // so this is now a function 'f: Int => Int'
+  //partially applied functions for two params
+  val f3 = x.gym _ // Now the underscore '_' is expecting two params: 'f3:(Int, Int) => Int'
+  // passing the partially applied function
+  println(z.qux(f)) // from above: 'val f = x.bar _'
+  println(z.qux(x.bar _)) // without calling the val f
+  println(z.qux(x.bar)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+  val discount_30 = calculateProductPrice(30, _: Double)
+  println(z.qux(f2)) // because f2 is still expecting one param of type Int it matches the lambda param of qux
+
+  //clear application of the above concept
+  def calculateProductPrice(discount: Double, productPrice: Double): Double = (1 - discount / 100) * productPrice
+
+  println(z.jam(f3))
+  println(z.jam(x.gym _)) //without calling the val f3
+  println(z.jam(x.gym)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+
+  class Foo(x: Int) {
+    def bar(y: Int) = x + y
+
+    def gym(z: Int, a: Int) = x + z + a
+  }
 
   class Baz(z: Int) {
     //a function is a param. aka a lambda param
@@ -260,26 +275,6 @@ object ConvMethToFun {
     def jam(f: (Int, Int) => Int) = f(z, 10)
   }
 
-  val z = new Baz(20)
-  // passing the partially applied function
-  println(z.qux(f)) // from above: 'val f = x.bar _'
-  println(z.qux(x.bar _)) // without calling the val f
-  println(z.qux(x.bar)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
-
-  // more than a param
-  val f2 = x.gym(40, _: Int) // so this is now a function 'f: Int => Int'
-  println(z.qux(f2)) // because f2 is still expecting one param of type Int it matches the lambda param of qux
-
-  //partially applied functions for two params
-  val f3 = x.gym _ // Now the underscore '_' is expecting two params: 'f3:(Int, Int) => Int'
-  println(z.jam(f3))
-  println(z.jam(x.gym _)) //without calling the val f3
-  println(z.jam(x.gym)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
-
-  //clear application of the above concept
-  def calculateProductPrice(discount: Double, productPrice: Double): Double = (1 - discount / 100) * productPrice
-
-  val discount_30 = calculateProductPrice(30, _: Double)
   println(discount_30(100))
 
 }
@@ -291,14 +286,15 @@ println
 
 object MyClosue {
 
+  // var for closure isn't recommended because there will be different behaviour
+  val f = (x: Int) => x + m // this is where the closure effect takes place
+  val foo = new Foo(100)
+  var m = 200
+
   class Foo(x: Int) {
     def bar(y: Int => Int) = y(x)
   }
 
-  var m = 200
-  // var for closure isn't recommended because there will be different behaviour
-  val f = (x: Int) => x + m // this is where the closure effect takes place
-  val foo = new Foo(100)
   println(foo.bar(f))
   m = 300 // changing m will result in different behavior when calling the method.
   println(foo.bar(f))
@@ -355,28 +351,24 @@ object MyCurrying {
   // convert a regular function into a curried one. f will become: val f = (x:Int) => ((y:Int) => x + y). Signature: 'Int => (Int => Int)'
   val uncurFC = Function.uncurried(fc)
   // uncurrying a curried function
-
-
-  //remember: '_' converts a method into a function
-  def foo(x: Int, y: Int, z: Int) = x + y + z // a method not a function
   val fo = foo _ // REPL: (Int, Int, Int) => Int <- converting to a regular function with 3 params
   val fo2 = foo(2, _: Int, _: Int) //we have to specify all params if not curried. This is the Partially Applied Function
-
   //Curried Method: well you reall have to convert it to a function first using '_'
   val curriedFoo = (foo _).curried // 1st convert method to a function then convert it to a curried one. Now this similiar to the following.
-
-
-  def bar(x: Int)(y: Int)(z: Int) = x + y + z
-
   // a curried method (still not a function too!). used by implicit params a lot
   val br = bar _ // REPL: Int => (Int => (Int => Int)) <- fully curried function!
   val br2 = bar(2) _ // partially applied function!
+  val bz = baz _ // REPL: (Int, Int) => Int => Int
+  val bz2 = baz(2, _: Int) _
   println(br2(3)(10)) //br2.apply(3).apply(10)
+
+  //remember: '_' converts a method into a function
+  def foo(x: Int, y: Int, z: Int) = x + y + z // a method not a function
+
+  def bar(x: Int)(y: Int)(z: Int) = x + y + z
 
   def baz(x: Int, y: Int)(z: Int) = x + y + z
 
-  val bz = baz _ // REPL: (Int, Int) => Int => Int
-  val bz2 = baz(2, _: Int) _
   println(bz2(3)(3))
 
 
@@ -390,6 +382,40 @@ println
 
 //It's a regular method with two params
 object ByNameParameters {
+  val a = byValue(3) {
+    //Eager evaluation
+    println("In call")
+    19
+  }
+  val b = byFunction(3)(() => {
+    //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
+    println("In call")
+    19
+  })
+  /**
+    * It's as same as ByFunction
+    * It just provides easiness beside the laziness
+    *
+    * Can be called by black directly since no need to prepend the '() =>'
+    * Good to catch exceptions and clean up resource as in try/catch blocks below.
+    * Other benefits?
+    */
+  val c = byName(3) {
+    //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
+    println("In call")
+    19
+  }
+  val d = divideSafely {
+    val x = 10
+    val y = 5
+    x / y
+  }
+  val e = divideSafely {
+    val x = 100
+    val y = 0
+    x / y
+  }
+
   def byValue(x: Int)(y: Int) = {
     println("By Value: ")
     x + y
@@ -407,31 +433,7 @@ object ByNameParameters {
     x + y
   }
 
-  val a = byValue(3) {
-    //Eager evaluation
-    println("In call")
-    19
-  }
-
-  val b = byFunction(3)(() => {
-    //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
-    println("In call")
-    19
-  })
-
-  /**
-    * It's as same as ByFunction
-    * It just provides easiness beside the laziness
-    *
-    * Can be called by black directly since no need to prepend the '() =>'
-    * Good to catch exceptions and clean up resource as in try/catch blocks below.
-    * Other benefits?
-    */
-  val c = byName(3) {
-    //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
-    println("In call")
-    19
-  }
+  println(d)
 
   /**
     * real world example for ByName params
@@ -448,18 +450,6 @@ object ByNameParameters {
     }
   }
 
-  val d = divideSafely {
-    val x = 10
-    val y = 5
-    x / y
-  }
-  println(d)
-
-  val e = divideSafely {
-    val x = 100
-    val y = 0
-    x / y
-  }
   println(e)
 
 }
@@ -627,8 +617,8 @@ println
 //######################################## Ranges ################################
 
 object MyRange {
-  var r = 1 to 10 // include the 10
-  var r2 = 1 until 10 // excluded the 10
+  val r3 = 2 to 10 by 2
+  val r4 = 10 to 2 by -2
 
   // Ranges are collections too so same operation of List can be applied on them too
   println(r)
@@ -640,27 +630,20 @@ object MyRange {
   println(r.isEmpty)
   println(r.nonEmpty)
   println(r.mkString(", "))
-
-  val r3 = 2 to 10 by 2
-  println(r3)
-
-  val r4 = 10 to 2 by -2
-  println(r4)
-
   val r5 = 'a' to 'z'
+  println(r3)
+  val r55 = ('a' to 'z') ++ ('A' to 'Z') // use ++ to concatenate multiple Ranges
+  println(r4)
+  val r6 = Range(1, 10) //exclusive ==> until
   println(r5)
   println(r5.toList)
-
-  val r55 = ('a' to 'z') ++ ('A' to 'Z') // use ++ to concatenate multiple Ranges
-  println(r55)
-
-  val r6 = Range(1, 10) //exclusive ==> until
-  println(r6)
-
   val r7 = Range(1, 10, 2) //exclusive with stepping
-  println(r7)
-
+  println(r55)
   val r8 = Range.inclusive(1, 10) //inclusive ==> to
+  println(r6)
+  var r = 1 to 10 // include the 10
+  println(r7)
+  var r2 = 1 until 10 // excluded the 10
   println(r8)
 
   for (i <- 1 to 10) println(i + 1)
@@ -734,17 +717,15 @@ object MyFilter {
   println(a.filter(_ % 2 == 0)) //Filter out even numbers
   println(a.filterNot(_ % 2 == 0)) //the opposite of Filter
   println(a.exists(_ % 2 == 0)) // 'exists()' takes a function while 'contain()' checks for an element
-
-  def filterVowels(s: String) = s.toLowerCase.filter(c => Set('a', 'e', 'i', 'o', 'u').contains(c))
+  val s = Set("Brown", "Red", "Purple", "Green", "Yellow")
 
   println(filterVowels("Orange"))
-
-  val s = Set("Brown", "Red", "Purple", "Green", "Yellow")
+  val m = Map(1 -> "One", 2 -> "Two", 3 -> "Three", 4 -> "Four")
   //filter out the words that contain at least 1 vowel
   println(s.filter(x => filterVowels(x).size > 1))
 
+  def filterVowels(s: String) = s.toLowerCase.filter(c => Set('a', 'e', 'i', 'o', 'u').contains(c))
 
-  val m = Map(1 -> "One", 2 -> "Two", 3 -> "Three", 4 -> "Four")
   println(m.filterKeys(_ % 2 == 0))
 
   println(Some(5).filter(_ % 2 == 0)) // return None

@@ -4,6 +4,68 @@ import scala.annotation.tailrec
 
 object BasicMethods extends App {
 
+  def factorial(n: BigInt): BigInt = {
+
+    @tailrec //keeping the optimized version
+    def fact(n: BigInt, accum: BigInt): BigInt = if (n == 0 || n == 1) accum else fact(n - 1, n * accum)
+
+    fact(n, 1)
+  }
+
+  BasicMethod
+  println
+
+  def `summation of`(x: Int, y: Int) = x + y
+
+  MethodWithInference
+  println
+
+  println("--------------- SideEffect -----------------")
+
+  def willYouPrintMe_? = true // use '_' to use OpChar. It looks like a val but it's really a method.
+
+  WithSideEffect
+  println
+
+  println("################################### Methods Inside Methods ###################################")
+
+  def processNumber(b: Boolean, x: Int, y: Int) = if (b) x else y
+
+  //  println(factorial(10000))
+
+
+  println("################################### bending method names to your will ###################################")
+
+  def add(x: Int, y: Int = 10) = x + y // default value works if it's the last argument only!!
+
+  println(`summation of`(4, 5))
+
+  println("---------- a method that takes no param --------------")
+
+  def processNumberWithDefaultArgument(b: Boolean = true, x: Int, y: Int) = if (b) x else y
+
+  println(willYouPrintMe_?)
+
+  println("----------------------- Named Arguments ------------------------")
+
+  /*
+    defining a method inside a method
+   */
+  def printPrimes() {
+    val primeList = List(1, 2, 3, 5, 7, 11)
+    for (i <- primeList) {
+      if (i == 11)
+        return
+      if (i != 1)
+        println(i)
+    }
+  }
+
+  println(processNumber(true, 10, 2))
+  println(processNumber(x = 10, y = 2, b = true)) //named arguments
+
+  println("----------------------- Default Arguments ------------------------")
+
   object BasicMethod {
     /**
       * '=' sign is very importatn. it states the method will return something
@@ -37,8 +99,10 @@ object BasicMethods extends App {
     println(addUnit(1, 5))
   }
 
-  BasicMethod
-  println
+  println(add(3, 4))
+  println(add(30))
+
+  println("--------------------- Default and Named Argumnets together -------------------")
 
   object MethodWithInference {
 
@@ -63,10 +127,12 @@ object BasicMethods extends App {
     println(numberStatusWithoutBraces(10))
   }
 
-  MethodWithInference
-  println
+  //  println(processNumberWithDefaultArgument(10, 4))//It won't work because default value works if it's the last argument only!!
+  println(processNumberWithDefaultArgument(x = 10, y = 4)) // solution is to use named argument as well
 
-  println("--------------- SideEffect -----------------")
+  /////////////////////////////////////////////////////////////////////////////////
+
+  println("---------------------------- a method inside a method --------------------------")
 
   object WithSideEffect {
     var a = 0
@@ -76,69 +142,6 @@ object BasicMethods extends App {
     }
 
     println(a)
-  }
-
-  WithSideEffect
-  println
-
-  println("################################### Methods Inside Methods ###################################")
-
-  def factorial(n: BigInt): BigInt = {
-
-    @tailrec //keeping the optimized version
-    def fact(n: BigInt, accum: BigInt): BigInt = if (n == 0 || n == 1) accum else fact(n - 1, n * accum)
-
-    fact(n, 1)
-  }
-
-  //  println(factorial(10000))
-
-
-  println("################################### bending method names to your will ###################################")
-
-  def `summation of`(x: Int, y: Int) = x + y
-
-  println(`summation of`(4, 5))
-
-  println("---------- a method that takes no param --------------")
-
-  def willYouPrintMe_? = true // use '_' to use OpChar. It looks like a val but it's really a method.
-  println(willYouPrintMe_?)
-
-  println("----------------------- Named Arguments ------------------------")
-
-  def processNumber(b: Boolean, x: Int, y: Int) = if (b) x else y
-
-  println(processNumber(true, 10, 2))
-  println(processNumber(x = 10, y = 2, b = true)) //named arguments
-
-  println("----------------------- Default Arguments ------------------------")
-
-  def add(x: Int, y: Int = 10) = x + y // default value works if it's the last argument only!!
-
-  println(add(3, 4))
-  println(add(30))
-
-  println("--------------------- Default and Named Argumnets together -------------------")
-
-  def processNumberWithDefaultArgument(b: Boolean = true, x: Int, y: Int) = if (b) x else y
-//  println(processNumberWithDefaultArgument(10, 4))//It won't work because default value works if it's the last argument only!!
-  println(processNumberWithDefaultArgument(x = 10, y = 4))// solution is to use named argument as well
-
-  /////////////////////////////////////////////////////////////////////////////////
-
-  println("---------------------------- a method inside a method --------------------------")
-  /*
-    defining a method inside a method
-   */
-  def printPrimes() {
-    val primeList = List(1, 2, 3, 5, 7, 11)
-    for (i <- primeList) {
-      if (i == 11)
-        return
-      if (i != 1)
-        println(i)
-    }
   }
 
   Console println "\nPrimes:"

@@ -1,6 +1,10 @@
 package org.hsmak
 
 object TimerAnonymous {
+  def main(args: Array[String]) {
+    oncePerSecond(() => println("time flies like an arrow..."))
+  }
+
   /*
    * from Java 8 perspective, callback is of type lambda expression that takes no-arg and returns void
    *
@@ -11,9 +15,5 @@ object TimerAnonymous {
       callback();
       Thread sleep 1000
     }
-  }
-
-  def main(args: Array[String]) {
-    oncePerSecond(() => println("time flies like an arrow..."))
   }
 }

@@ -26,10 +26,10 @@ object StringFormatting extends App {
   /**
     * notice the
     *
-    *     %1 %2 %3 for ordering
+    * %1 %2 %3 for ordering
     *
-    *     $s for String format
-    *     %t for Time format
+    * $s for String format
+    * %t for Time format
     *
     * general Format: %{position}${format}
     */

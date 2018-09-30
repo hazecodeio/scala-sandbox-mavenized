@@ -4,9 +4,9 @@ import java.net.URL
 
 import org.springframework.core.io.ClassPathResource
 import play.api.libs.json._
+import scalaj.http._
 
 import scala.xml.{PrettyPrinter, XML}
-import scalaj.http._
 
 /**
   * Created by hsmak on 3/28/17.
