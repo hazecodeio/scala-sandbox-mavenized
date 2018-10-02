@@ -1,20 +1,24 @@
 package org.hsmak
 
-object RegularClasses extends App {
+object ClassesFundamentals extends App {
 
   object ClassSimple {
     println("################################### Classes and Constructors ###################################")
-
-    val employee = new Employee("MyFirstName", "MyLastName")
 
     /**
       *
       * @param firstName //val will create an accessor method firstName()
       * @param lastName  //var will create both accessor & mutator methods lastName() & lastName(String). Precisely, "lastName_=" run javap to see lastName_$eq
       */
-    class Employee(val firstName: String, var lastName: String)
+    class Employee(val firstName: String, //val will generate only getter
+                   var lastName: String)
 
-    println(employee) //print address location for toString isn't overloaded
+    //var will generate both setters/getters
+
+    val employee = new Employee("MyFirstName", "MyLastName")
+
+
+    println(employee) //print address location for toString() isn't overloaded
     println(employee.firstName) //getter the ScalaStyle way
     println(employee.lastName)
     employee.lastName = "ModifiedMyLastName"
@@ -25,9 +29,9 @@ object RegularClasses extends App {
   println
 
 
-  println("################################### Overloading Constructor ###################################")
+  println("################################### Overloading Constructor using 'keyword this' ###################################")
 
-  object ClassOverloading {
+  object ConstructorOverloadingUsingKeywordThis {
 
     /**
       * overloading constructor using 'this' in a block
@@ -38,7 +42,11 @@ object RegularClasses extends App {
       * @param lastName
       * @param age
       */
-    class Employee(val firstName: String, var lastName: String, val age: Int) {
+    class Employee(val firstName: String,
+                   var lastName: String,
+                   val age: Int) {
+
+      //loaded constructor comes here
 
       /**
         * Overloaded constructor
@@ -48,17 +56,6 @@ object RegularClasses extends App {
         * @return
         */
       def this(firstname: String, lastName: String) = this(firstname, lastName, -1)
-
-      require(firstName.nonEmpty, "First name can't be empty!") // this will throw an exception if first name is empty
-
-      if (age <= 0)
-        throw new IllegalArgumentException("Age can't be negative!")
-
-
-      //all the above lines/spave is part of the constructor!
-
-      println("################################### Methods in a class ###################################")
-
 
       /**
         * create a new object by cloning this current object using the supplied default values or any explicitly passed is param
@@ -73,19 +70,35 @@ object RegularClasses extends App {
                age: Int = this.age) = new Employee(firstName, lastName, age)
     }
 
-    println("################################### Exception handling ###################################")
-    try {
-      new Employee("", "", -1)
-    } catch {
-      case iae: IllegalArgumentException => println(iae.getMessage) //use Pattern matching for exception. here we're matching on the exception type
-    } finally { //optional just as in Java
-      println("continuing without issues")
-    }
-
-
   }
 
-  ClassOverloading
+  ConstructorOverloadingUsingKeywordThis
+  println
+
+  println("########################## ConstructorWithNamedArgument #################################")
+
+  object ConstructorWithNamedArgument {
+
+    case class Employee(val firstName: String, var lastName: String)
+
+    println(Employee(lastName = "llll", firstName = "ffff"))
+  }
+
+  ConstructorWithNamedArgument
+  println
+
+
+  println("########################## ConstructorWithDefaultArgument #################################")
+
+  object ConstructorWithDefaultArgument {
+
+    case class Employee(val firstName: String, var lastName: String, age:Int = 30)//supllying default value
+
+
+    println(Employee(lastName = "llll", firstName = "ffff"))// this actually calls the constructor with the age argument
+  }
+
+  ConstructorWithDefaultArgument
   println
 
 }
