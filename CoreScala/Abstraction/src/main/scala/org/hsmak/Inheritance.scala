@@ -1,5 +1,7 @@
 package org.hsmak
 
+import scala.beans.BeanProperty
+
 
 object Inheritance extends App {
 
@@ -18,17 +20,22 @@ object Inheritance extends App {
       def lastName: String
 
       //some random concrete methods
-      def t(): Unit = {
-
+      def randomConcreteMethod(): Unit = {
+        println("Random Concrete Method")
       }
     }
 
     case class ConcretePerson(firstName: String, lastName: String) extends Person
 
-    //this would compile because case classes already add accessor for the params. I.e. the params are 'val'
+    // this would compile because case classes already add accessor for the params. I.e. the params are 'val'
+    // Notice the 'val', again this is to accessor methods, hence compiler will automatically add the implementation.
+    // if param names were different this wouldn't compile!
     class AnotherConcretePerson(val firstName: String, val lastName: String) extends Person
 
-    // Notice the 'val', again this is to accessor methods, hence compiler will automatically add the implementation. if param names were different this wouldn't compile!
+    class AnotherConcretePersonJavaStyle(val firstName: String, @BeanProperty val lastName: String) extends Person
+
+    println(new AnotherConcretePerson("hhhhh", "lllll").lastName)
+    println(new AnotherConcretePersonJavaStyle("hhhhh", "lllll").getLastName)
   }
 
   AbstractClass
@@ -38,24 +45,7 @@ object Inheritance extends App {
 
     class Employee(val firstName: String, var lastName: String, val age: Int) {
 
-      /**
-        * Overloaded constructor
-        *
-        * @param firstname
-        * @param lastName
-        * @return
-        */
-      def this(firstname: String, lastName: String) = this(firstname, lastName, -1)
-
-      require(firstName.nonEmpty, "First name can't be empty!") // this will throw an exception if first name is empty
-
-      if (age <= 0)
-        throw new IllegalArgumentException("Age can't be negative!")
-
-
-      //all the above lines/spave is part of the constructor!
-
-      println("################################### Methods in a class ###################################")
+      def this(firstName: String, lastName: String) = this(firstName, lastName, -1)
 
 
       /**
@@ -97,8 +87,9 @@ object Inheritance extends App {
                         lastName: String = this.lastName,
                         age: Int = this.age) = new Manager(firstName, lastName, new Department("temp"))
 
-      //overloading: this will not work because it uses default parameters <- an issue in Scala!!
-      //link showing explanation response by Martin: https://stackoverflow.com/questions/4652095/why-does-the-scala-compiler-disallow-overloaded-methods-with-default-arguments
+      // overloading: this will not work because it uses default parameters <- an issue in Scala!!
+      // link showing explanation response by Martin:
+      // https://stackoverflow.com/questions/4652095/why-does-the-scala-compiler-disallow-overloaded-methods-with-default-arguments
       /*def copy(firstName: String = this.firstName,
                lastName: String = this.lastName,
                age: Int = this.age,

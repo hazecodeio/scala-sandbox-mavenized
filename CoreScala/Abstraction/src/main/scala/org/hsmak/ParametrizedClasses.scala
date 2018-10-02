@@ -29,6 +29,7 @@ object ParametrizedClasses extends App {
   println(new Couple(10, "Scala").toString)
   println(Couple[Int, String](10, "Scala"))
 
+  println("--------------------- Swapping Method -----------------------")
   case class Couple[A, B](first: A, second: B) {
     //    def swap(): Couple[B, A] = new Couple[B, A](second, first)
     def swap() = new Couple[B, A](second, first) // return type will be inferred
