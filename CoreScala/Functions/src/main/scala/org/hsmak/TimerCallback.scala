@@ -7,7 +7,7 @@ package org.hsmak
  *
  * the type Unit is similar to void in C/C++
  */
-object Timer {
+object TimerCallback {
   def main(args: Array[String]) {
     oncePerSecond(timeFlies)
   }
@@ -23,4 +23,3 @@ object Timer {
     println("time flies like an arrow...")
   }
 }
-

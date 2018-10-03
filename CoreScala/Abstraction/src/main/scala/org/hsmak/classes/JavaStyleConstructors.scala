@@ -1,6 +1,6 @@
-package org.hsmak
+package org.hsmak.classes
 
-object JavaStyleConstructs extends App {
+object JavaStyleConstructors extends App {
 
   import scala.beans.BeanProperty
 

@@ -1,6 +1,4 @@
-package org.hsmak
-
-;
+package org.hsmak.classes
 
 object ParametrizedClasses extends App {
 

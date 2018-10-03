@@ -1,5 +1,4 @@
-package org.hsmak
-
+package org.hsmak.classes
 
 object Constructors extends App {
 
@@ -106,5 +105,3 @@ object Constructors extends App {
   println
 
 }
-
-

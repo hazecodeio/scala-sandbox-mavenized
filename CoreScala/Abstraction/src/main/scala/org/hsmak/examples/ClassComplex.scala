@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.examples
 
 /*
  * This Complex class takes two arguments, which are the real and imaginary part of the complex.

@@ -262,8 +262,11 @@ object Exceptions extends App {
   def divideNum(num1: Int, num2: Int) = try {
 
     num1 / num2
+
   } catch {
+
     case ex: ArithmeticException => "Can't divde by zero" // Exceptions are of type Nothing!
+
   } finally {
     //clean up code
   }

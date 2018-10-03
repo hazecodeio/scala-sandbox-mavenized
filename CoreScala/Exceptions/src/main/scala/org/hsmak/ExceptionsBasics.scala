@@ -1,6 +1,6 @@
 package org.hsmak
 
-object Exceptions extends App {
+object ExceptionsBasics extends App {
 
   object ThrowingException {
 

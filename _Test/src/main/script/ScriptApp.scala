@@ -1,24 +1,16 @@
-import org.hsmak.Complex
+
+//################################### Tuples (not part of collection in Scala) ###################################
 
 //Testing import statement in a script file
-val c = new Complex(1.2, 3.4)
+
 val t = (1, "Hus", 400.0)
 //types are inferred, so these are the expansion
 val t2: (Int, String, Double) = t //notice the parens
 
-println(Husain.firstName)
-println(Husain.lastName)
-println(Husain.title)
 val t3: Tuple3[Int, String, Double] = t // just as previously shown
-println("imaginary part: " + c.im)
-println(c)
 
 
-//################################### Companion Objects ###################################
 
-//################################### Tuples (not part of collection in Scala) ###################################
-
-class Employee(val firstName: String, val lastName: String, val title: String)
 
 println(t._1, t._2, t._3) //starting from base one! up to 22!
 
@@ -27,15 +19,7 @@ println(t._1, t._2, t._3) //starting from base one! up to 22!
   *   - Link: https://www.youtube.com/watch?v=phjxbbLk4WM
   */
 
-//################################### Singleton Objects ###################################
 
-// Diff between Classes & Objects: https://www.safaribooksonline.com/videos/learning-path-scala/9781491970850/9781491970850-video256895
-
-object MyObject {
-  def foo(x: Int, y: Int) = x + y
-}
-
-object Husain extends Employee("Huss", "AK", "Developer")
 
 object MyTuple {
 
@@ -550,16 +534,7 @@ object MyMap {
   println(m2.values.toList) // return MapLike
 
 
-  ///////////Strings and Pool
-  val str = new String("hello")
-  val strP1 = "hello" // will be stored in the string Pool
-  val strP2 = "hello" // will be stored in the string Pool
 
-  println(str == strP1) //true
-  println(str eq strP1) //false
-
-  println(strP1 == strP2) //true
-  println(strP1 eq strP2) //true
 
   /////////////// Symbols: they have a pool of their own
 

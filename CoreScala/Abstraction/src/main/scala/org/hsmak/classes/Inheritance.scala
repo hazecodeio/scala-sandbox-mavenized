@@ -1,7 +1,6 @@
-package org.hsmak
+package org.hsmak.classes
 
 import scala.beans.BeanProperty
-
 
 object Inheritance extends App {
 

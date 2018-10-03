@@ -14,11 +14,25 @@ object Strings extends App {
   val str: java.lang.String = "Scala"
 
   val unpooledStr = new String("Scala") //will fail the equality test because this is a reference to another object
-  println(unpooledStr == str)
+  println(unpooledStr == strObj)
 
   val d = "\t\n\r" //tab, newline, carriage return
 
-  val e = "\u03BB" //unit code dor lambda
-  println(e)
+  val lambda = "\u03BB" //unit code dor lambda
+  println(lambda)
+
+  println("------------------ Strings and Pool ------------------------")
+
+  val strObj = new String("hello")
+  val strP1 = "hello" // will be stored in the string Pool
+  val strP2 = "hello" // it's already in the pool so no new object will be created
+
+  println("------------------ Equality: Object vs Reference ------------------------")
+
+  println(strObj == strP1) //true
+  println(strObj eq strP1) //false -> different reference
+
+  println(strP1 == strP2) //true
+  println(strP1 eq strP2) //true -> same reference
 
 }

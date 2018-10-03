@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.classes
 
 object OverridingObjectMethods extends App {
 

@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.examples
 
 /**
   * Created by hsmak on 3/5/17.
@@ -98,66 +98,5 @@ object ClassesConcrete {
 }
 
 
-/**
-  * Abstract Class
-  */
-object ClassesAbstract {
 
-  def main(args: Array[String]) {
-    var w = new Wolf("Fang")
-    println(w.move)
-  }
-
-  abstract class Mammal(val name: String) {
-    //an abstract field that is not initialized to any value
-    var moveSpeed: Double
-
-    //abstract method that has no body
-    def move: String
-  }
-
-  class Wolf(name: String) extends Mammal(name) {
-    override var moveSpeed: Double = 35.0
-
-    override def move = s"This walf '$name' runs at speed '$moveSpeed'"
-  }
-
-}
-
-
-/**
-  * Traits
-  */
-object ClassesWithTraits {
-
-  def main(args: Array[String]) {
-    var superman = new SuperHero("Superman")
-    println(superman.fly)
-    println(superman.hitByBulletProof)
-    println(superman.richochet(2500))
-  }
-
-
-  trait Flyable {
-    def fly: String
-  }
-
-  trait BulletProof {
-    //abstract method
-    def hitByBulletProof: String
-
-    //traits can have concrete method implementations
-    def richochet(startSpeed: Double): String = {
-      "the bullet richochets at a speed of %.1f ft/sec".format(startSpeed * 0.75)
-    }
-  }
-
-  class SuperHero(name: String) extends Flyable with BulletProof {
-    override def fly = "%s fly through the air".format(this.name)
-
-    override def hitByBulletProof = "The bullet bounces off of %s".format(this.name)
-
-  }
-
-}
 

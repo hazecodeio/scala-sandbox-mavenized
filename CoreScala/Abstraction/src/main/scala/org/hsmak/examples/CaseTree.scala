@@ -1,5 +1,4 @@
-package org.hsmak
-
+package org.hsmak.examples
 
 /*
  * The fact that classes Sum, Var and Const are declared as case classes means that they differ from standard classes in several respects:

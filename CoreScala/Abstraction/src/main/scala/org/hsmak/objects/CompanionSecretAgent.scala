@@ -1,5 +1,4 @@
-package org.hsmak
-
+package org.hsmak.objects
 
 class SecretAgent(val name: String) {
 
@@ -13,10 +12,10 @@ class SecretAgent(val name: String) {
 
 /**
   * Companion Object
-  *     - shared amongst all instances -> analogus to static
+  *     - shared amongst all instances -> analogous to static
   *     - can't have a main method/runner
   *     - can access private members of the class
-  *     - used as Factory Method to create instances and avoid code smells in the constructor e.g. creating an automatice HireDate in the constructor which is not Unit Testable
+  *     - used as Factory Method to create instances and avoid code smells in the constructor e.g. creating an automatic HireDate in the constructor which is not Unit Testable
   * Sol: Have the companionObject create that for you and keep the constructor clean
   */
 object SecretAgent {
@@ -30,10 +29,15 @@ object SecretAgent {
   }
 }
 
+
+
+
 /**
   * main runner
   */
 object Runner extends App {
+
+  println("------------------- SecretAgent ------------------------")
   val bond = new SecretAgent("James Bond")
   val felix = new SecretAgent("Felix Leitner")
 
@@ -41,6 +45,9 @@ object Runner extends App {
   felix.shoot(300)
   println(SecretAgent.bullets)
   //  println(new p().t)
+
+
+  println("------------------- HireDate for Person ------------------------")
   Person
   println(Person.create.hireDate)
 
@@ -57,14 +64,14 @@ import java.time._
 class Person(val hireDate: LocalDateTime) {
   def this() = this(null)
 
-  private def privatInfo = 1
+  private def privateInfo = 1
 }
 
 /**
   * CompanionObject accessing private member of the class
   */
 object Person {
-  println(new Person().privatInfo) //accessing private member
+  println(new Person().privateInfo) //accessing private member
 
   def create = new Person(LocalDateTime.now())
 }
