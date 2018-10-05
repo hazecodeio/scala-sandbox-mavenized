@@ -1,5 +1,8 @@
 package org.hsmak
 
+/**
+  * Java8 Functions have a major impact on how Scala implements its functions
+  */
 object FunctionsFundamentals extends App {
 
   //################################### Higher Order Functions ###################################
@@ -151,29 +154,80 @@ object FunctionsFundamentals extends App {
 
   FunctionImplicit_03
 
-  println("---------------------- RecapFunctions -----------------------")
-  object RecapFunctions{
+  println("---------------------- RecapFunctions_0: zero param and one return type -----------------------")
+
+  object RecapFunctions_0 {
+
+    //This is how it will be wherever you code
     val f0_1 = () => 1
-    val f0_2: () => Int = () => 2
+
+    // ValName:(Type) = Lambda <- which equivalent to implementing a trait that has one method
+    val f0_2: (() => Int) = () => 2
+
+    // Similar to creating an anonymous class by implementing an interface; in this case it's a Trait that has one method 'apply()'
     val f0_3: () => Int = new Function0[Int] {
       override def apply(): Int = 3
     }
-
+    //same as the previous one but with specifying the trait type instead of the lambda type
     val f0_4: Function0[Int] = new Function0[Int] {
       override def apply(): Int = 4
     }
+
     List(f0_1, f0_2, f0_3, f0_4).foreach(println)
     List(f0_1.apply(), f0_2.apply(), f0_3.apply(), f0_4.apply()).foreach(println)
     List(f0_1(), f0_2(), f0_3(), f0_4()).foreach(println)
   }
-  RecapFunctions
+
+  RecapFunctions_0
   println
+
+  println("---------------------- RecapFunctions_1: zero param and one return type -----------------------")
+
+  object RecapFunctions_1 {
+
+    //This is how it will be wherever you code
+    val f1_1 = (x: Int) => x + 1
+
+    // ValName:(Type) = Lambda <- which equivalent to implementing a trait that has one method
+    val f1_2: (Int => Int) = (x: Int) => x + 1
+
+    // Similar to creating an anonymous class by implementing an interface; in this case it's a Trait that has one method 'apply()'
+    val f1_3: (Int => Int) = new Function1[Int, Int] {
+      override def apply(x: Int) = x + 1
+    }
+
+    //same as the previous one but with specifying the trait type instead of the lambda type
+    val f1_4: Function1[Int, Int] = new Function1[Int, Int] {
+      override def apply(x: Int) = x + 1
+    }
+
+    List(f1_1, f1_2, f1_3, f1_4) foreach println
+    List(f1_1.apply(1), f1_2.apply(2), f1_3.apply(3), f1_4.apply(4)) foreach println
+    List(f1_1(1), f1_2(2), f1_3(3), f1_4(4)) foreach println
+
+  }
+
+  RecapFunctions_1
+  println
+
+  println("-----------------------NoMoreThanFunc22 ------------------------")
+
+  object NoMoreThanFunc22 {
+    val funct22: (Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int, Int) => String
+    = (x1: Int, x2: Int, x3: Int, x4: Int, x5: Int, x6: Int, x7: Int, x8: Int, x9: Int, x10: Int, x11: Int, x12: Int, x13: Int, x14: Int, x15: Int, x16: Int, x17: Int, x18: Int, x19: Int, x20: Int, x21: Int, x22: Int) => "no more than 22 param"
+
+    println(funct22(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 28, 29, 20, 21, 22))
+  }
+
+  NoMoreThanFunc22
+  println
+
   /**
     * Tuples as a return type is the key to make a function return multiple values
     * Anyway, you can also think of it as an object wrapper
     */
 
-  println("--------------------- FunctionWithMultipleReturnValues -------------------------")
+  println("--------------------- FunctionWithMultipleReturnValues using Tuples -------------------------")
 
   object FunctionWithMultipleReturnValues {
 
@@ -183,9 +237,11 @@ object FunctionsFundamentals extends App {
     //we can remove the val type due to type inference
     val f1 = (x: String) => (x, x.size)
     println(f1("hh1"))
+
   }
 
   FunctionWithMultipleReturnValues
   println
+
 
 }

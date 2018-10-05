@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.examples
 
 /*
  * Perhaps more surprising for the Java programmer, functions are also objects in Scala.

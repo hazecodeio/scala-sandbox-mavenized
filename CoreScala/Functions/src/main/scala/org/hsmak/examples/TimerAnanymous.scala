@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.examples
 
 object TimerAnonymous {
   def main(args: Array[String]) {
