@@ -4,10 +4,10 @@ import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn
 
 /**
-  * Hello world!
-  *
+  * To run a scala script from Intellij
+  *   - Link: https://www.youtube.com/watch?v=phjxbbLk4WM
   */
-object App extends App {
+object AppRunner extends App {
 
 
   /*

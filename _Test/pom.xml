@@ -14,7 +14,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
 
-        <main.class>org.hsmak.App</main.class>
+        <main.class>org.hsmak.AppRunner</main.class>
 
         <!--Scala Version-->
         <scala.major-version>2.12</scala.major-version>
