@@ -4,7 +4,7 @@ package org.hsmak
   * general formula 2^(n-1)   <----> (2^(n-1)) -1
   * where n is the # of bits
   */
-object PrimitiveTypes extends App {
+object TypesOfPrimitives extends App {
 
   println("-------------- Byte is 8 bits --------------")
 
