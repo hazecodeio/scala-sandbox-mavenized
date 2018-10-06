@@ -9,15 +9,44 @@ package org.hsmak
   */
 object ConvertingMethodsToFunctions extends App {
 
+  /**
+    * Class Foo has methods whose params are regular vals; i.e. not Lambdas
+    */
   class Foo(x: Int) {
+    /**
+      *
+      * @param y <- regular val; not lambda
+      */
     def bar(y: Int) = x + y
 
+    /**
+      *
+      * @param z <- regular val; not lambda
+      * @param a <- regular val; not lambda
+      */
     def gym(z: Int, a: Int) = x + z + a
   }
 
+  /**
+    * Class Baz has methods whose params are Lambdas
+    * functions are expected to be passed
+    *     - strategy design pattern,
+    *     - behavior parametrization
+    */
   class Baz(z: Int) {
-    //a function is a param. aka a lambda param
+
+    /**
+      * a function is a param. aka a lambda param
+      *
+      * @param f <- a lambda with one param
+      */
     def qux(f: Int => Int) = f(z) // call the function on the z value. So it's like we are performing a separate/outside process within the class itself
+
+    /**
+      *
+      * @param f a lambda with two params
+      * @return
+      */
     def jam(f: (Int, Int) => Int) = f(z, 10)
   }
 
@@ -44,32 +73,45 @@ object ConvertingMethodsToFunctions extends App {
     println("------------------------ Method Foo.gym(z: Int, a: Int)) to a function ------------------------")
 
     // more than a param
-    val f2 = x.gym(40, _: Int) // so this is now a function 'f: Int => Int'
+    val f2 = x.gym(40, _: Int) // so this is now a function 'f2: Int => Int'
 
     //partially applied functions for two params
     val f3 = x.gym _ // Now the underscore '_' is expecting two params: 'f3:(Int, Int) => Int'
 
     // passing the partially applied function
     println("z.qux(f) ", z.qux(f)) // from above: 'val f = x.bar _'
-    println("z.qux(x.bar _) " , z.qux(x.bar _)) // without calling the val f
-    println("z.qux(x.bar) ", z.qux(x.bar)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+    println("z.qux(x.bar _) ", z.qux(x.bar _)) // without calling the val f
 
-    val discount_30 = calculateProductPrice(30, _: Double)
+    // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+    println("z.qux(x.bar) ", z.qux(x.bar))
+
+
     println(z.qux(f2)) // because f2 is still expecting one param of type Int it matches the lambda param of qux
 
-    //clear application of the above concept
-    def calculateProductPrice(discount: Double, productPrice: Double): Double = (1 - discount / 100) * productPrice
 
-    println(z.jam(f3))
-    println(z.jam(x.gym _)) //without calling the val f3
-    println(z.jam(x.gym)) // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+    println(z.jam(f3))// 'f3:(Int, Int) => Int'
+    println(z.jam(x.gym _)) // without calling the val f3
 
+    // no you can't use a method as a function. there is more going on under the hood. Remember this a partially applied function happening midway
+    println(z.jam(x.gym))
 
-    println(discount_30(100))
 
   }
 
   ConvMethToFun
+  println
+
+  println("------------------ CalcProductPrice --------------------------")
+
+  object CalcProductPrice {
+    //clear application of the above concept
+    def calculateProductPrice(discount: Double, productPrice: Double): Double = (1 - discount / 100) * productPrice
+
+    val discount_30 = calculateProductPrice(30, _: Double)
+    println(discount_30(100))
+  }
+
+  CalcProductPrice
   println
 
 }
