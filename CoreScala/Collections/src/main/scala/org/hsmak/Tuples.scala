@@ -38,4 +38,23 @@ object Tuples extends App {
   }
 
   MyTuple
+  println
+
+  println("------------ TheArrow_-> -----------")
+
+  /**
+    * The arrow '->' is part of any object
+    * it will be converted into Tuple2
+    */
+  object TheArrow_-> {
+
+    val t = 1 -> "one"
+    println(t)
+
+    val anotherT = 1 -> "one" -> 200 -> "interesting" // (((1,one),200),interesting)
+    println(anotherT)
+
+  }
+
+  TheArrow_->
 }
