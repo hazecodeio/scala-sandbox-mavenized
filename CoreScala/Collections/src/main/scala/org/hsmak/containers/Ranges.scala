@@ -1,12 +1,11 @@
-package org.hsmak
+package org.hsmak.containers
 
 object Ranges extends App {
 
   object MyRange {
 
 
-
-println("---------Range Operations----------")
+    println("---------Range Operations----------")
     // Ranges are collections too so same operation of List can be applied on them too
     var r = 1 to 10 // include the 10
     println(r)
@@ -42,6 +41,11 @@ println("---------Range Operations----------")
     println(r5.toList)
     println
 
+    println("------ Combining Ranges using (++)  --------")
+    val concatenatedRanges = ('a' to 'z') ++ ('A' to 'Z') ++ (1 to 10)// use ++ to concatenate multiple Ranges
+    println(concatenatedRanges)
+    println
+
     println("------ Range using Factory Method e.g. Rang(1, 10) --------")
     val r6 = Range(1, 10) //exclusive ==> until
     println(r6)
@@ -49,11 +53,6 @@ println("---------Range Operations----------")
 
     val r7 = Range(1, 10, 2) //exclusive with stepping
     println(r7)
-    println
-
-    println("------ Combining Ranges using ++  --------")
-    val r55 = ('a' to 'z') ++ ('A' to 'Z') // use ++ to concatenate multiple Ranges
-    println(r55)
     println
 
     println("------ Inclusive --------")

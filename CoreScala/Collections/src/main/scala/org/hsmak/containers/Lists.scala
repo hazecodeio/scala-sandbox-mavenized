@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.containers
 
 object Lists extends App {
 
