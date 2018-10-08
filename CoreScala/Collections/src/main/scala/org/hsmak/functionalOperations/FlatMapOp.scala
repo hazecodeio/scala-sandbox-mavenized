@@ -7,6 +7,11 @@ object FlatMapOp extends App {
 
   object MyFlatMapOp {
 
+    println("----------------- Intro ----------------")
+    println(List(1, 2, 3).flatMap(x => List(x)))// same as below. List[List] is happening in the lambda body
+    println(List(List(1), List(2), List(3)).flatMap(x => x)) //same as above. List[List] is already being passed from the original List
+    println
+
     val l = List(1, 2, 3, 4, 5)
 
     println("------------FlatMap on List[List] ----------------")
