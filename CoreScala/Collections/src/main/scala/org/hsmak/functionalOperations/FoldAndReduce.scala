@@ -77,15 +77,15 @@ object FoldAndReduce extends App {
 
     println("------------------ operations that use Reduce/Fold Right/Left --------------")
 
-    println((1 to 10).sum)
-    println((1 to 10).product) // isn't this the factorial?
-    println((1 to 10).mkString(",")) // a reduction operation but on a string
+    println("sum: " + (1 to 10).sum)
+    println("product: " + (1 to 10).product) // isn't this the factorial?
+    println("mkString: " + (1 to 10).mkString(",")) // a reduction operation but on a string
 
     println("-----------")
 
     //////////////// using the underscore '_' fo rthe above operations
 
-    println((1 to 10).foldLeft(0)(_ + _)) // first '_' for first param "total" and second '_' for second param "next"
+    println("foldLeft(0)(_ + _): " + (1 to 10).foldLeft(0)(_ + _)) // first '_' for first param "total" and second '_' for second param "next"
 
   }
 
