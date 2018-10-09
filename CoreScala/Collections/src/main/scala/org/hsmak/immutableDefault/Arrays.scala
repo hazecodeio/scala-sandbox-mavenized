@@ -1,10 +1,10 @@
-package org.hsmak.containers
+package org.hsmak.immutableDefault
 
 object Arrays extends App {
 
   /**
     * Unlike other collections, Arrays are:
-    *   - Mutable.... WARNING!
+    *   - Mutable by default.... WARNING!
     *   - converted into primitive Arrays of [] by the JVM under the hood
     */
   object MyArray {
@@ -12,15 +12,19 @@ object Arrays extends App {
 
     println("----------------Arrays operations------------")
     //same list operations can be done on arrays
-    println(a.head)
-    println(a.tail)
-    println(a.init)
-    println(a.last)
-    println(a.max)
-    println(a.min)
-    println(a(2))
-    println(a.isEmpty)
-    println(a.nonEmpty)
+    println("head       : " + a.head)
+    println("tail       : " + a.tail) //will print the reference value
+    println("a.init     : " + a.init) //will print the reference value
+    println("a.last     : " + a.last)
+    println("a.max      : " + a.max)
+    println("a.min      : " + a.min)
+    println("a(2)       : " + a(2))
+    println("a.isEmpty  : " + a.isEmpty)
+    println("a.nonEmpty : " + a.nonEmpty)
+
+    // the only Mutating operation? However, we can't add or remove from the Array. Use the mutable ArrayBuffer if this is desired.
+    a(2) = 300 // updating
+    println("a(2) = 300 : " + a(2)) //retrieving again
 
     println
 
@@ -42,7 +46,7 @@ object Arrays extends App {
     println(repeatedParamMethod(3, "egg", "a delicious sandwich", "protein", " high cholesterol"))
     println
 
-    println("---- passing a list for 'Any*' --")
+    println("---- passing a list for 'Any*' ---")
     val list = List("a delicious sandwich", "protein", " high cholesterol")
 
     //what if we pass a list

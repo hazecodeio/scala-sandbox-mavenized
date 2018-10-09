@@ -1,4 +1,4 @@
-package org.hsmak.containers
+package org.hsmak.immutableDefault
 
 object Lists extends App {
 

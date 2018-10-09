@@ -1,7 +1,12 @@
 package org.hsmak
 
 /**
-  * Created by hsmak on 3/14/17.
+  * In Scala, it's called ControlAbstraction:
+  *     - passing a function as a param; aka method reference
+  *     - Strategy design pattern
+  *     - In Java, this is called BehaviourParameterization
+  *
+  * I would call it: OperationAbstraction compared to DataAbstraction(e.g. inheritance)
   */
 object ControlAbstraction {
 
@@ -10,14 +15,49 @@ object ControlAbstraction {
     filesEnding(".*").map(_.getName).foreach(println)
   }
 
-  def filesEnding(query: String) =
-    filesMatching(_.endsWith(query)) // this is a closure becaus eof the free variable "query"
+  private def filesHere = (new java.io.File(".")).listFiles
 
-  def filesContaining(query: String) =
-    filesMatching(_.contains(query)) // this is a closure because eof the free variable "query"
+  /**
+    * ControlAbstraction:
+    *     - passing a function
+    *     - Strategy design pattern
+    *     - In Java, this is called BehaviourParameterization
+    *     
+    * @param matcher: This is the ControlAbstraction.
+    * @return
+    */
+  private def filesMatching(matcher: String => Boolean) =
+    for (file <- filesHere; if matcher(file.getName))
+      yield file
+
 
   // you can think of the below as anonymous classes or abstract methods implementations
 
+  /**
+    * 'filesEnding' is one behavioral concrete implementation for the ControlAbstraction in 'filesMatching'
+    *
+    * @param query
+    * @return
+    */
+  def filesEnding(query: String) =
+    filesMatching(_.endsWith(query)) // this is a closure becaus eof the free variable "query"
+
+  /**
+    * 'filesContaining' is one behavioral concrete implementation for the ControlAbstraction in 'filesMatching'
+    *
+    * @param query
+    * @return
+    */
+  def filesContaining(query: String) =
+    filesMatching(_.contains(query)) // this is a closure because eof the free variable "query"
+
+
+  /**
+    * 'filesRegex' is one behavioral concrete implementation for the ControlAbstraction in 'filesMatching'
+    *
+    * @param query
+    * @return
+    */
   def filesRegex(query: String) =
     filesMatching(_.matches(query)) // this is a closure because eof the free variable "query"
 
@@ -25,11 +65,7 @@ object ControlAbstraction {
   /*def filesEnding(query: String) =
     filesMatching(s => s.endsWith(query))*/
 
-  private def filesMatching(matcher: String => Boolean) =
-    for (file <- filesHere; if matcher(file.getName))
-      yield file
 
-  private def filesHere = (new java.io.File(".")).listFiles
 
 
 }
