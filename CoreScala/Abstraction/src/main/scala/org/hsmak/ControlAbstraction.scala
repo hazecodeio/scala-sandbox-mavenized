@@ -11,18 +11,22 @@ package org.hsmak
 object ControlAbstraction {
 
   def main(args: Array[String]): Unit = {
+    println("---------------- printing all files ----------------")
+    filesHere.foreach(println)
+    println
 
-    filesEnding(".*").map(_.getName).foreach(println)
+    println("---------------- Filtering ----------------")
+    filesEnding(".md").map(_.getName).foreach(println)
   }
 
-  private def filesHere = (new java.io.File(".")).listFiles
+  private def filesHere = (new java.io.File("./")).listFiles
 
   /**
     * ControlAbstraction:
     *     - passing a function
     *     - Strategy design pattern
     *     - In Java, this is called BehaviourParameterization
-    *     
+    *
     * @param matcher: This is the ControlAbstraction.
     * @return
     */

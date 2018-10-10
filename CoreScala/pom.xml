@@ -8,7 +8,6 @@
 
     <modules>
         <module>00_Basics</module>
-        <module>ControlStructures</module>
         <module>Functions</module>
         <module>Recursion</module>
         <module>Collections</module>
