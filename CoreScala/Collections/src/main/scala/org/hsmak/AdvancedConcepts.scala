@@ -1,8 +1,5 @@
 package org.hsmak
 
-
-//ToDo: namings might be confusing. I need to revise
-
 object AdvancedConcepts extends App {
 
   println("------------ RunIntsOntoFilters: not testable, readable, and composable ----------------")
@@ -123,18 +120,18 @@ object AdvancedConcepts extends App {
     /**
       * pass all filters on each Int
       */
-    println(ints.foldLeft(List[Int]())((acc, n) => {
+    println(ints.foldLeft(List[Int]())((accumulator, nextInt) => {
       //Seed is an empty list to accumulate the Ints that pass the filters
 
-      val booleans: List[Boolean] = filters.map(f => f(n))
+      val booleans: List[Boolean] = filters.map(f => f(nextInt))
 
       //Apply the list of filters on the current Int
       val bool = booleans.reduceLeft((t, n) => t && n) // Anding '&&' the list of boolean values. if one is false it will short-circuit to false
 
       if (bool)
-        n :: acc
+        nextInt :: accumulator
       else
-        acc
+        accumulator
     }))
   }
 
