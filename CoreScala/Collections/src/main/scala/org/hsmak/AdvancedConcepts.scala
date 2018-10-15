@@ -1,13 +1,21 @@
 package org.hsmak
 
+/**
+  * general formula for non-list input:
+  *     - lambdas.foldLeft(seed)((acc, func) => func(acc))// apply func on acc
+  *
+  * general formula for list input:
+  *     - lambdas.foldLeft(seeds)((accs, func) => accs.Process(func))// re-stream accs and apply func on each
+  *
+  */
 object AdvancedConcepts extends App {
 
-  println("------------ RunIntsOntoFilters: not testable, readable, and composable ----------------")
+  println("------------ StreamLambdasOntoInts: not testable, readable, and composable ----------------")
 
   /**
-    *
+    * Streaming Lambdas/functions onto a list of input data
     */
-  object RunIntsOntoFilters {
+  object StreamLambdasOntoInts {
     val ints = List(1, 2, 22, 33, 44, 45, 21, 12, 121, 60, 99, 98, 26)
 
     val filters: List[Int => Boolean] = List(
@@ -29,12 +37,15 @@ object AdvancedConcepts extends App {
     filters.foldLeft(ints)((acc, nxt) => acc.filter(nxt))
   }
 
-  RunIntsOntoFilters
+  StreamLambdasOntoInts
   println
 
-  println("--------------- RunIntsOntoFiltersViaMethodReferences: more testable, readable, and composable --------------")
+  println("--------------- StreamLambdasOntoInts_ViaMethodReferences: more testable, readable, and composable --------------")
 
-  object RunIntsOntoFiltersViaMethodReferences {
+  /**
+    * Streaming Lambdas/functions onto a list of input data
+    */
+  object StreamLambdasOntoInts_ViaMethodReferences {
     val ints = List(1, 2, 22, 33, 44, 45, 21, 12, 121, 60, 99, 98, 26)
 
     println(ints.foldLeft(List[Int]())((acc, n) => n :: acc))
@@ -66,13 +77,16 @@ object AdvancedConcepts extends App {
     filters.foldLeft(ints)((acc, nxt) => acc.filter(nxt))
   }
 
-  RunIntsOntoFiltersViaMethodReferences
+  StreamLambdasOntoInts_ViaMethodReferences
   println
 
 
-  println("--------------- RunIntsOntoFiltersViaPassingFunctions: more testable??, readable, and composable --------------")
+  println("--------------- StreamLambdasOntoInts_ViaPassingFunctions: more testable??, readable, and composable --------------")
 
-  object RunIntsOntoFiltersViaPassingFunctions {
+  /**
+    * Streaming Lambdas/functions onto a list of input data
+    */
+  object StreamLambdasOntoInts_ViaPassingFunctions {
     val ints = List(1, 2, 22, 33, 44, 45, 21, 12, 121, 60, 99, 98, 26)
 
     val isDivisiblBy11 = (x: Int) => (x % 11 == 0)
@@ -99,13 +113,16 @@ object AdvancedConcepts extends App {
     filters.foldLeft(ints)((acc, nxt) => acc.filter(nxt))
   }
 
-  RunIntsOntoFiltersViaPassingFunctions
+  StreamLambdasOntoInts_ViaPassingFunctions
   println
 
 
-  println("--------------- RunFiltersOntoInts: Inefficient but working --------------")
+  println("--------------- StreamIntsOntoLambdas: Inefficient but working --------------")
 
-  object RunFiltersOntoInts {
+  /**
+    * Streaming Lambdas/functions onto a list of input data
+    */
+  object StreamIntsOntoLambdas {
     val ints = List(1, 2, 22, 33, 44, 45, 21, 12, 121, 60, 99, 98, 26)
 
     val isDivisiblBy11 = (x: Int) => (x % 11 == 0)
@@ -118,7 +135,7 @@ object AdvancedConcepts extends App {
     )
 
     /**
-      * pass all filters on each Int
+      * Streaming a list of input data onto lambdas/functions
       */
     println(ints.foldLeft(List[Int]())((accumulator, nextInt) => {
       //Seed is an empty list to accumulate the Ints that pass the filters
@@ -135,7 +152,7 @@ object AdvancedConcepts extends App {
     }))
   }
 
-  RunFiltersOntoInts
+  StreamIntsOntoLambdas
   println
 
 }
