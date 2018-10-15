@@ -13,6 +13,7 @@ object Strings extends App {
 
   val str: java.lang.String = "Scala"
 
+  val strObj = new String("hello")
   val unpooledStr = new String("Scala") //will fail the equality test because this is a reference to another object
   println(unpooledStr == strObj)
 
@@ -23,7 +24,6 @@ object Strings extends App {
 
   println("------------------ Strings and Pool ------------------------")
 
-  val strObj = new String("hello")
   val strP1 = "hello" // will be stored in the string Pool
   val strP2 = "hello" // it's already in the pool so no new object will be created
 

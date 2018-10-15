@@ -95,7 +95,7 @@ object MonadicValidation extends App {
   object FunctionalWay02 {
 
     def validateViaValidators(input: String): Either[List[ValidationError], Email] = {
-      //filter the errors out
+      // filter the errors out
       //      validators.map(_(input)).filter(_.isDefined).map(_.get) match {
       validators.flatMap(_ (input)) match {
         case List() => {
@@ -124,7 +124,7 @@ object MonadicValidation extends App {
 
     def validate(input: Option[String]): Either[ValidationError, Email] = {
       input.map(str => {
-        //what i fthis fails???
+        //what if this fails???
         val splitInput = str.toLowerCase.split("@")
         Email(splitInput(0), splitInput(1))
       }).toRight(ValidationError("Missing ID"))

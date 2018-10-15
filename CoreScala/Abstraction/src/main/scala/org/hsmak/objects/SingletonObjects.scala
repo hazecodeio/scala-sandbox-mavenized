@@ -29,6 +29,7 @@ object SingletonObjects extends App {
       * 'eq' is reference equality
       */
 
+    // this will yield this warning: comparing values of types org.hsmak.objects.SingletonObjects.quickyObject.SingletonObject.type and org.hsmak.objects.SingletonObjects.quickyObject.JustAnObject.type using `==' will always yield false
     println(a1 == j) //false
     println(a1 eq j) //false
 

@@ -10,8 +10,8 @@ object ValsAndVars extends App {
     * var is used with Actors or in a single method where the scope is limited to that method
     */
   object MyVars {
-    val doubleExplicit: Double = 400
-    val doubleCoerced = 400: Double // coercing
+
+    var myVar = 200
     println(s"this is var: $myVar")
 
     myVar = 11 // reassigning since this is allowed for var
@@ -19,7 +19,9 @@ object ValsAndVars extends App {
 
 
     println("----------- Inferred Typing! ----------- ")
-    var myVar = 200
+    val doubleExplicit: Double = 400
+    val doubleCoerced = 400: Double // coercing
+
     println(doubleExplicit.getClass)
 
     println(doubleCoerced.getClass)

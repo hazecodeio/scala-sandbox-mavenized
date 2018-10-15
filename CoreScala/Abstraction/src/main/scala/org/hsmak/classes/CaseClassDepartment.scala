@@ -29,8 +29,8 @@ object CaseClassDepartment extends App {
   println(d1 == d1_another)
 
   val name = d1 match{
-    case Department(n) => n
     case Department("D2") => "This is D2"
+    case Department(n) => n
     case _ => "Unknown"
   }
 
