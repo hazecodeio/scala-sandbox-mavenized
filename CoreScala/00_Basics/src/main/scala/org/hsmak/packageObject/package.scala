@@ -4,6 +4,9 @@ package org.hsmak.packageObject
   * - package object must have the package name it's packaging
   * - Instead do the following
   * - only define type aliases in 'package object'
+  *
+  * Links:
+  *     - https://alvinalexander.com/scala/scala-package-objects-how-to-name-location-cookbook-recipe
   */
 package object model {
 
