@@ -91,4 +91,27 @@ object OptionsOfSomeAndNone extends App {
   EmployeeWithOption
   println
 
+  println("---------------------------------- OrElse_GetOrElse -------------------------------")
+
+  object OrElse_GetOrElse {
+    val myAlly = Some("Ally")
+    val noAlly = None
+    val myFriend = Some("Friend")
+    val noFriend = None
+    val myPet = Some("Pet")
+    val noPet = None
+
+    val someRelationship:Option[String] = noAlly orElse myFriend orElse myPet
+    println(someRelationship)
+
+    val relationship:String = noAlly orElse myFriend orElse myPet getOrElse "myself"
+    println(relationship)
+
+    val nobody:String = noAlly orElse noFriend orElse noPet getOrElse "myself"
+    println(nobody)
+  }
+
+  OrElse_GetOrElse
+  println()
+
 }
