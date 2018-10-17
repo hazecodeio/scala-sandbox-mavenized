@@ -66,7 +66,7 @@ object ControlStructures extends App {
     val xs = List(1, 2, 3, 4, 5)
 
     //imperative way
-    val result = for (i <- xs;
+    val result = for (i <- xs; // notice the semicolon ';' because we are using parens (). no need for ';' if curly braces {} are used
                       j = i * 2) yield (j)
     var prependedList = List[Int]()
     var appendedList = List[Int]()
