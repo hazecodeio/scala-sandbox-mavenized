@@ -3,6 +3,10 @@ package org.hsmak
 //################################### Scala Option ###################################
 
 /**
+  * Finding:
+  *     - Option behave like a collection. therefore Stream operation can be applied on it
+  *     - so you can treat it like a collection but it's not
+  *
   * Option[A]
   * <- Some[A]
   * <- None == Option[Nothing]
@@ -114,4 +118,23 @@ object OptionsOfSomeAndNone extends App {
   OrElse_GetOrElse
   println()
 
+  println("---------------------- OptionOfMultipleElements ------------------------")
+  /**
+    * It's still  one element but it will unfold into a Tuple of these elements
+    * Remember as of Scala 2.12 you can go up to 'Tuple22'
+    */
+  object OptionOfMultipleElements {
+    val o = Some(1, 2, 3)
+
+    // the above would be unfolded into the following; Tuple
+    val o2:Option[Tuple3[Int,Int,Int]] = Some(1, 2, 3)
+
+    println(o2)
+    println(o2.map(x => x._1))
+
+
+  }
+
+  OptionOfMultipleElements
+  println
 }

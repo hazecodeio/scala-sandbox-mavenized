@@ -2,7 +2,7 @@ package org.hsmak
 
 import scala.annotation.tailrec
 
-object Recursion extends App {
+object TailVsNonTailRecursion_Factorial extends App {
 
   println("################################### Recursion ###################################")
 
