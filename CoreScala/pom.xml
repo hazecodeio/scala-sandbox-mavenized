@@ -12,7 +12,6 @@
         <module>Recursion</module>
         <module>Collections</module>
         <module>Abstraction</module>
-        <module>Operators</module>
         <module>Packages</module>
         <module>ForComprehensions</module>
         <module>Exceptions</module>
