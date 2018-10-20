@@ -1,5 +1,9 @@
 package org.hsmak
 
+/**
+  * Exceptions make heavy use of Patter Matches
+  * for more detailed illustration, refer to the PatternMatchers maven module
+  */
 object ExceptionsBasics extends App {
 
   object ThrowingException {

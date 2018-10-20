@@ -59,6 +59,10 @@ object ConvertingMethodsToFunctions extends App {
     val x = new Foo(10)
     val f = x.bar _ // the underscore '_' is a placeholder. and that's how to convert a method (of an object) into a function
 
+    //The above line is expanded to the following under the hood
+    val fExpanded:Function1[Int, Int] = x.bar _
+    println("fExpanded: " + fExpanded(20))
+
     val z = new Baz(20)
     /**
       * In console:

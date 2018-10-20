@@ -96,10 +96,12 @@ object TailVsNonTailRecursion_TreeEntry extends App {
 
     }
 
+
     /**
       * Compare this method to the previous one
       * List is used instead of Seq
       * List notations '+:' are used instead of the '@' operator
+      * Link to more operations: https://stackoverflow.com/questions/6807540/scala-pattern-matching-on-sequences-other-than-lists
       *
       * Any performance/memory concern? not sure yet! <- time lapse below shows it has a bad performance
       * So stick to the 'Seq' and the '@_*'
@@ -123,21 +125,22 @@ object TailVsNonTailRecursion_TreeEntry extends App {
 
     var deepNest = Branch(List())
 
-    for (i <- 1 to 400000) {
+    for (i <- 1 to 490000) {
       deepNest = Branch(List(deepNest))
 
       //the above case would call the below copy method from the CompanionObject
       //      deepNest = deepNest.copy(List(deepNest))
     }
 
-    println("-- uniqueContent_TailRecursive_ViaSeq --")
     val b = Branch(List(Leaf("hello"), Branch(List(Leaf("hi"), Leaf("bye")))))
+
+    println("-- uniqueContent_TailRecursive_ViaSeq --")
     println(uniqueContent_TailRecursive_ViaSeq(List(b)))
 
     var s = System.currentTimeMillis();
     println(uniqueContent_TailRecursive_ViaSeq(List(deepNest))) //no StackOverflow after performing tail recursion
     var e = System.currentTimeMillis();
-    println(e-s)
+    println(e - s)
 
     println("-- uniqueContent_TailRecursive_ViaList --")
     println(uniqueContent_TailRecursive_ViaList(List(b)))
@@ -145,9 +148,37 @@ object TailVsNonTailRecursion_TreeEntry extends App {
     s = System.currentTimeMillis();
     println(uniqueContent_TailRecursive_ViaList(List(deepNest))) //no StackOverflow after performing tail recursion
     e = System.currentTimeMillis();
-    println(e-s)
+    println(e - s)
 
 
+    /**
+      * Equivalent performance to [[uniqueContent_TailRecursive_ViaSeq]]
+      *
+      * @param currentLevel
+      * @param seenSoFar
+      * @return
+      */
+    def uniqueContent_TailRecursive_ViaListAndCasting(currentLevel: List[TreeEntry], seenSoFar: List[String] = List()): List[String] = {
+
+      currentLevel match {
+
+        case List(Branch(children), rest@_*) => uniqueContent_TailRecursive_ViaListAndCasting(children ++ rest.asInstanceOf[List[TreeEntry]], seenSoFar)
+
+        // It would be cool if we can specify the type of the Seq extractor like this 'rest:List @_*'
+        case List(Leaf(content), rest@_*) => uniqueContent_TailRecursive_ViaListAndCasting(rest.asInstanceOf[List[TreeEntry]], seenSoFar :+ content)
+
+        case _ => seenSoFar
+      }
+
+    }
+
+    println("-- uniqueContent_TailRecursive_ViaListAndCasting --")
+    println(uniqueContent_TailRecursive_ViaListAndCasting(List(b)))
+
+    s = System.currentTimeMillis();
+    println(uniqueContent_TailRecursive_ViaListAndCasting(List(deepNest))) //no StackOverflow after performing tail recursion
+    e = System.currentTimeMillis();
+    println(e - s)
   }
 
   TailRecursiveCalls

@@ -13,13 +13,13 @@
         <module>Collections</module>
         <module>Abstraction</module>
         <module>Operators</module>
-        <module>Traits</module>
         <module>Packages</module>
         <module>ForComprehensions</module>
         <module>Exceptions</module>
         <module>TypeParametrization</module>
         <module>Strings</module>
         <module>Methods</module>
+        <module>PatternMatchers</module>
     </modules>
 
     <name>${project.artifactId}</name>
