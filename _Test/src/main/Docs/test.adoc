@@ -1,0 +1,190 @@
+:icons: font
+
+'''
+
+Werewolves are allergic to #cassia cinnamon#.
+
+Did the werewolves read the [.small]#small print#?
+
+Where did all the [.underline]#cores# run off to?
+
+We need [.line-through]#ten# make that twenty VMs.
+
+[big]##O##nce upon an infinite loop.
+
+[.circle]#asciidoctor#
+
+
+'''
+
+:experimental:
+
+menu:View[Zoom > Reset]
+
+Press the btn:[OK] button when you are finished.
+
+kbd:[Alt+F11] - Toggle Full Screen Mode in the Eclipse IDE
+
+
+icon:comment[] This is a comment icon
+
+icon:file[] And a file icon
+
+icon:battery-full[] And a battery icon
+
+icon:facebook[ss] http://safdg
+
+'''
+
+icon:tags[role="blue"] ruby, asciidoctor
+
+'''
+
+
+* [*] checked
+* [x] also checked
+* [ ] not checked
+*     normal list item
+
+'''
+
+[%interactive]
+
+* [*] checked
+* [x] also checked
+* [ ] not checked
+*     normal list item
+
+'''
+
+[ditaa, round-corners=true]
+....
+                   +-------------+
+                   | Asciidoctor |-------+
+                   |   diagram   |       |
+                   +-------------+       | PNG out
+                       ^                 |
+                       | ditaa in        |
+                       |                 v
+ +--------+   +--------+----+    /---------------\
+ |        | --+ Asciidoctor +--> |               |
+ |  Text  |   +-------------+    |   Beautiful   |
+ |Document|   |   !magic!   |    |    Output     |
+ |     {d}|   |             |    |               |
+ +---+----+   +-------------+    \---------------/
+     :                                   ^
+     |          Lots of work             |
+     +-----------------------------------+
+....
+
+
+[plantuml, diagram-classes, png]
+....
+class BlockProcessor
+class DiagramBlock
+class DitaaBlock
+class PlantUmlBlock
+
+BlockProcessor <|-- DiagramBlock
+DiagramBlock <|-- DitaaBlock
+DiagramBlock <|-- PlantUmlBlock
+....
+
+
+[source, java]
+----
+public class Person {
+  private String name;
+  public Person(String name) {
+    this.name = name;
+  }
+}
+----
+
+'''
+
+[source, scala]
+----
+package foo
+
+case class Employee
+
+trait ExampleTrait {
+  // This is a comment
+}
+----
+
+'''
+
+[source,xml]
+<meta name="viewport"
+  content="width=device-width, initial-scale=1.0">
+
+'''
+
+. first
+. second
+.. sdf
+. third
+
+
+'''
+
+
+:home: https://example.org
+
+Go {home}[Home].
+
+
+[#usage]
+== Usage
+
+. [[step-1]]Download the software
+. [[step-1]]Download the software
+
+= sadf
+
+
+icon:fire[]
+
+= Document Title
+
+fgd
+
+=========================
+
+
+[TIP]
+It's possible to use Unicode glyphs as admonition icons
+
+[WARNING]
+It's possible to use Unicode glyphs as admonition icons
+
+[CAUTION]
+It's possible to use Unicode glyphs as admonition icons
+
+[NOTE]
+It's possible to use Unicode glyphs as admonition icons
+
+[IMPORTANT]
+It's possible to use Unicode glyphs as admonition icons
+
+
+.AsciiDoc history
+****
+AsciiDoc was first released in Nov 2002 by Stuart Rackham.
+It was designed from the start to be a shorthand syntax
+for producing professional documents like DocBook and LaTeX.
+****
+
+stem:[sqrt(4) = 2]
+
+[stem]
+++++
+sqrt(16) = 4
+++++
+
+latexmath:[C = \alpha + \beta Y^{\gamma} + \epsilon]
+
+
+
