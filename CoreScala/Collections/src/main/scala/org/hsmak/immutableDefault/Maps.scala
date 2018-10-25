@@ -32,6 +32,10 @@ object Maps extends App {
 
     println(m2.get(10)) // return None
 
+    println("--- two ways of getOrElse:")
+    println(m2.getOrElse(10, -1)) // return None
+    println(m2 get (10) getOrElse  (-1)) // return None
+
     println(s"List of tuples using toList: ${m2.toList}")
     println(m2.keys) //return a Set
     println(m2.keySet) //return a Set
@@ -40,6 +44,8 @@ object Maps extends App {
     println(m2.values.toList) // return MapLike
     println
 
+    println("-- adding a new tuple and return a new Map. Remember: Map is immutable")
+    println(m2 + (212 -> "anyhow"))
 
     println("-------------Symbols in Maps------------")
 

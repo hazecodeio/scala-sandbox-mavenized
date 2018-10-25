@@ -3,12 +3,16 @@ package org.hsmak
 /**
   * - the need to match on cases without constructing a complex structure like another case class
   * - use a singleton object
+  * - useful to create filters to be used in conjunction with match/case
+  *   - and beyond filters like map or a regular match/case vlocks
   *
   * - Two major methods:
   *     - unapply()
   *     - unapplySeq()
   *
-  * - This is covered in th eExtractor topic:
+  * - can we mix both unapply() & unapplySeq() in one singleton??????
+  *
+  * - This is covered in the Extractor topic:
   *     - https://www.safaribooksonline.com/library/view/programming-in-scala/9780981531687/extractors.html
   *     - https://www.safaribooksonline.com/videos/scala-intermediate-recipes/9781788397650/9781788397650-video1_7
   */
@@ -20,7 +24,7 @@ object CustomPatternMatchers extends App {
 
   println("###################### `using unapply()` ######################")
 
-  object `using unapply()` {
+  object using_unapply {
     /**
       * Notice how the Cases in the PatternMatcher inside the "filter()" and "map()" make use of the Singleton FarmAnimal
       * case will call the unapply() defined in the singleton object "FarmAnimal"
@@ -93,7 +97,7 @@ object CustomPatternMatchers extends App {
 
   }
 
-  `using unapply()`
+  using_unapply
   println
 
 

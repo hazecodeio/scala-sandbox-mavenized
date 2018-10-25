@@ -29,8 +29,17 @@ object Implicits extends App {
     */
   object WithImplicit {
 
-    //implicit is to supply default value??
+
+    /**
+      * Implicit is one way to supply default value but not the only benefit.
+      *
+      * Name doesn't matter. Compiler matches the param/return type.
+      * If more than one of the same param/return type it will yield compile time error
+      *
+      * test with implicitly[String] <- maybe works only with implicit methods/classes!?!?
+      */
     implicit val op = (x: String) => x.contains("H")
+//    implicit val op2 = (x: String) => x.contains("W")// compile time error for the previous one already satisfies the param/return type
 
     /**
       *
@@ -161,8 +170,8 @@ object Implicits extends App {
 
       implicit def constructGoogleQueryURL(query: String): URL = new URL(s"http://www.google.com/?q=$query")
 
-      implicit class QueryParamToURL(query: String){
-        def toGoogleQueryURL : URL  = new URL(s"http://www.google.com/?q=$query")
+      implicit class QueryParamToURL(query: String) {
+        def toGoogleQueryURL: URL = new URL(s"http://www.google.com/?q=$query")
       }
 
     }
@@ -175,12 +184,16 @@ object Implicits extends App {
     def printURL(url: URL): String = url.toString
 
     println("-- using implicit def")
+
     import Implicits.constructGoogleQueryURL
+
     println(printURL("foo")) // will print: http://www.google.com/?q=foo
 
 
     println("-- using implicit class <- better and expressive")
+
     import Implicits.QueryParamToURL
+
     println(printURL("foo".toGoogleQueryURL)) // will print: http://www.google.com/?q=foo
 
 

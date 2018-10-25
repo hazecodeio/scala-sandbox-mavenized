@@ -29,7 +29,7 @@ object Lists extends App {
     println(l1.isEmpty)
     println(l1.nonEmpty)
 
-    println(l1(3))// apply() is what is being called
+    println(l1(3)) // apply() is what is being called
     println(l1.apply(3))
 
     println(l1.updated(0, 32))
@@ -46,4 +46,5 @@ object Lists extends App {
 
   MyList
   println
+
 }

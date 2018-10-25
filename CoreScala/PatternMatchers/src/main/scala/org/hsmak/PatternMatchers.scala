@@ -185,4 +185,23 @@ object PatternMatchers extends App {
   SpecialMatchingForSequence
   println
 
+  println("----------------- Matching with Map <- really matching with the extracted Tuple2 -------------------")
+
+  object MatchingWithMap {
+    val m = Map("Huss" -> 22, "Fred" -> 40)
+
+    val list = m.map {
+      case (name, age) => s"name($name) and age($age)"
+    } //return list of concatenated key/value pairs
+    println(list)
+
+    val newMap = m.map {
+      case (name, age) => (name + " Last" -> age)
+    } //return map of the new tuples
+    println(newMap)
+  }
+
+
+  MatchingWithMap
+  println
 }
