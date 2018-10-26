@@ -1,4 +1,4 @@
-package org.hsmak
+package org.hsmak.functionalOperations
 
 /**
   * general formula for non-list input:
@@ -8,7 +8,7 @@ package org.hsmak
   *     - lambdas.foldLeft(seeds)((accs, func) => accs.Process(func))// re-stream accs and apply func on each
   *
   */
-object AdvancedConcepts extends App {
+object AdvancedConceptsViaFoldAndReduce extends App {
 
   println("------------ StreamLambdasOntoInts: not testable, readable, and composable ----------------")
 
@@ -50,6 +50,8 @@ object AdvancedConcepts extends App {
 
     println(ints.foldLeft(List[Int]())((acc, n) => n :: acc))
 
+    // breaking the filters out into their own method would make them testable
+
     def isDivisiblBy11(x: Int) = x % 11 == 0
 
     def isGreaterThan40(x: Int) = x > 40
@@ -88,6 +90,8 @@ object AdvancedConcepts extends App {
     */
   object StreamLambdasOntoInts_ViaPassingFunctions {
     val ints = List(1, 2, 22, 33, 44, 45, 21, 12, 121, 60, 99, 98, 26)
+
+    // the followings are functions/lambdas not methods
 
     val isDivisiblBy11 = (x: Int) => (x % 11 == 0)
 

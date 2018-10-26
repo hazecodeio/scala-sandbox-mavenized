@@ -1,5 +1,12 @@
 package org.hsmak.performance
 
+/**
+  * how about Array()?
+  *
+  * links:
+  *   - https://stackoverflow.com/questions/6928327/when-should-i-choose-vector-in-scala
+  *   - https://docs.scala-lang.org/overviews/collections/performance-characteristics.html
+  */
 object ListVsVector extends App {
 
   println("###################### Performance: List Vs Vector #########################")

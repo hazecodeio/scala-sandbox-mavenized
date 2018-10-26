@@ -2,7 +2,9 @@ package org.hsmak.functionalOperations
 
 object RandomAPIMethods extends App {
 
-  object RandomAPIMethods {
+  println("-------------- Functional Programming (Take & Drop) ------------")
+
+  object TakeAndDrop {
 
     println("partition: " + (1 to 12).partition(x => x % 2 == 0))
 
@@ -22,8 +24,14 @@ object RandomAPIMethods extends App {
       val y = 20
       x + y + 19
     })
-    println
-    println("-------------- Functional Programming ------------")
+  }
+
+  TakeAndDrop
+  println
+
+  println("-------------- Functional Programming (Zipping & Mapping) ------------")
+
+  object ZippingAndMapping {
 
     val groceries = List("Apple", "Milk", "Naan", "Eggs", "Oranges")
     println(groceries zip (1 to 100)) //assign indeces to each item
@@ -50,6 +58,6 @@ object RandomAPIMethods extends App {
     println(groceries.view.sorted.zipWithIndex.map(t => (t._1, t._2 + 1)).map(_.swap).map(t => s"${t._1}. ${t._2}").mkString("\n"))
   }
 
-  RandomAPIMethods
+  ZippingAndMapping
   println
 }
