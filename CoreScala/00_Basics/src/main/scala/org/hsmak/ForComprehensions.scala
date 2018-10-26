@@ -13,7 +13,7 @@ object ForComprehensions extends App {
     *
     * ForComprehensions is immutable
     */
-  object MyForComprehension {
+  object BasicForComprehension {
 
     println("------------------ yield <=> map() using Ranges ---------------")
 
@@ -60,36 +60,117 @@ object ForComprehensions extends App {
     println
 
 
-    println("---------------- map() and filter() Vs withFilter() -----------------")
-
-    ///////using map & filter // one caveat with filter is the performance <- use withFilter instead because it's lazy call
-
-    val result9 = (1 to 4)
-      .filter(_ % 2 == 0)
-      .flatMap(i => (5 to 8)
-        .map(j => (i, j)))
-    println("map(): " + result9)
-
-    val result10 = (1 to 4)
-      .flatMap(i => (5 to 8)
-        .filter(_ < 7)
-        .map(j => (i, j)))
-    println("map(): " + result10)
-
-    ////// using withFilter <- lazy evaluation
-    val result11 = (1 to 4)
-      .withFilter(_ % 2 == 0)
-      .flatMap(i => (5 to 8)
-        .map(j => (i, j))) //removing toList will return into vector
-    println("map(): " + result11)
-
-    val result12 = (1 to 4)
-      .flatMap(i => (5 to 8)
-        .withFilter(_ < 7)
-        .map(j => (i, j)))
-    println("map(): " + result12)
   }
 
-  MyForComprehension
+  BasicForComprehension
   println
+
+  object ForComprehensionWithBlock {
+
+    sealed trait Species
+
+    /**
+      * Notice the case objects, not case classes!!
+      */
+
+    case object Cow extends Species
+
+    case object Horse extends Species
+
+    case object Chicken extends Species
+
+    case object Dog extends Species
+
+    case object Cat extends Species
+
+    case object Wolf extends Species
+
+
+    case class Animal(name: String, age: Int, species: Species)
+
+    val animals = Seq(
+      Animal("Babs", 12, Chicken),
+      Animal("Lady", 4, Chicken),
+      Animal("Babsie", 9, Cow),
+      Animal("Bessy", 12, Cow),
+      Animal("Lettie", 6, Cow),
+      Animal("Douglas", 12, Horse),
+      Animal("Cleo", 12, Dog),
+      Animal("Bonnie", 9, Dog),
+      Animal("Santiago", 12, Cat),
+      Animal("Athena", 3, Cat)
+    )
+
+    println("------------------ For Comprehension with {} Instead of () -------------------")
+    var yieldedNames = for {
+      animal <- animals
+      if animal.age >= 10
+    } yield (animal.name) // yield a Seq[String]
+
+    yieldedNames.foreach(println)
+    println
+
+    println("""------------------ For Comprehension {} with " _ = println" -------------------"""")
+
+    yieldedNames = for {
+      animal <- animals
+
+      // Notice the "_"
+      _ = println("printing age between the lines: " + animal.age)
+
+      if animal.age >= 10
+
+    } yield (animal.name) // yield a Seq[String]
+
+    yieldedNames.foreach(println)
+
+    println("""------------------ For Comprehension {} with PatternMatchers -------------------"""")
+
+    yieldedNames = for {
+      Animal(name, age, species) <- animals
+
+      // Notice the "_"
+      _ = println("printing age between the lines: " + age)
+
+      if age >= 10
+
+    } yield (name) // yield a Seq[String]
+
+    yieldedNames.foreach(println)
+    println
+
+    println("""------------------ For Comprehension {} with PatternMatchers and Fixed Values -------------------"""")
+
+    println("Extracting only Cows (names):")
+    yieldedNames = for {
+      //Extract only Cows
+      Animal(name, age, Cow) <- animals
+
+      if age >= 10
+
+    } yield (name) // yield a Seq[String]
+
+    yieldedNames.foreach(println)
+    println
+
+
+    println("Extracting only Cows (Animal object):")
+    var yieldedAnimals = for {
+      //Extract only Cows
+      animal@Animal(_, age, Cow) <- animals
+
+      if age >= 10
+
+    } yield (animal) // yield a Seq[String]
+
+    yieldedAnimals.foreach(println)
+    println
+
+  }
+
+
+  ForComprehensionWithBlock
+  println()
+
+
 }

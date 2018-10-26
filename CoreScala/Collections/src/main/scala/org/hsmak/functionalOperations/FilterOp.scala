@@ -54,4 +54,38 @@ object FilterOp extends App {
   MyFilter
   println
 
+  object FilterWith {
+    println("---------------- map() and filter() Vs withFilter() -----------------")
+
+    ///////using map & filter // one caveat with filter is the performance <- use withFilter instead because it's lazy call
+
+    val result9 = (1 to 4)
+      .filter(_ % 2 == 0)
+      .flatMap(i => (5 to 8)
+        .map(j => (i, j)))
+    println("map(): " + result9)
+
+    val result10 = (1 to 4)
+      .flatMap(i => (5 to 8)
+        .filter(_ < 7)
+        .map(j => (i, j)))
+    println("map(): " + result10)
+
+    ////// using withFilter <- lazy evaluation
+    val result11 = (1 to 4)
+      .withFilter(_ % 2 == 0)
+      .flatMap(i => (5 to 8)
+        .map(j => (i, j))) //removing toList will return into vector
+    println("map(): " + result11)
+
+    val result12 = (1 to 4)
+      .flatMap(i => (5 to 8)
+        .withFilter(_ < 7)
+        .map(j => (i, j)))
+    println("map(): " + result12)
+  }
+
+  FilterWith
+  println
+
 }
