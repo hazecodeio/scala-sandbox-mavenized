@@ -4,6 +4,11 @@ package org.hsmak
   * Recursion:
   *     - Intermediate/Recursive Case
   *     - Terminal Case
+  *
+  * Determine the:
+  *     - param type
+  *     - return type <- this will determine how the function recurse
+  *
   */
 object TailVsNonTailRecursion_TreeEntry extends App {
 
@@ -28,7 +33,7 @@ object TailVsNonTailRecursion_TreeEntry extends App {
 
       root match {
 
-        case Branch(children) => children.foldLeft(List[String]()) { (acc, nxt) => acc ++ uniqueContent_NonTailRecursive(nxt) } //Recursive Case
+        case Branch(children) => children.foldLeft(List[String]()) { (acc, nxt) => acc ++ uniqueContent_NonTailRecursive(nxt) } //Recursive Case "non-tail"
 
         /**
           * this is exactly like the previous line. it just makes use of the underscore "_"
@@ -77,10 +82,11 @@ object TailVsNonTailRecursion_TreeEntry extends App {
     /**
       * extract content from all leaves
       *
-      * @param root
+      * @param currentLevel
       * @param seenSoFar <- this is the key of having a tail Recursion, a param the keeps track what has been visited in the terminal case
       * @return
       */
+    @annotation.tailrec
     def uniqueContent_TailRecursive_ViaSeq(currentLevel: Seq[TreeEntry], seenSoFar: Seq[String] = List()): Seq[String] = {
 
       currentLevel match {
@@ -110,6 +116,7 @@ object TailVsNonTailRecursion_TreeEntry extends App {
       * @param seenSoFar
       * @return
       */
+    @annotation.tailrec
     def uniqueContent_TailRecursive_ViaList(currentLevel: List[TreeEntry], seenSoFar: List[String] = List()): List[String] = {
 
       currentLevel match {
@@ -158,6 +165,7 @@ object TailVsNonTailRecursion_TreeEntry extends App {
       * @param seenSoFar
       * @return
       */
+    @annotation.tailrec
     def uniqueContent_TailRecursive_ViaListAndCasting(currentLevel: List[TreeEntry], seenSoFar: List[String] = List()): List[String] = {
 
       currentLevel match {
