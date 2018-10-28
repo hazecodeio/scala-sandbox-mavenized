@@ -1,12 +1,11 @@
 package org.hsmak
 
+object Implicits_Basics extends App {
 
-object Implicits extends App {
 
+  println("------------ JustExplicitNoMore -------------")
 
-  println("------------ NoImplicit -------------")
-
-  object NoImplicit {
+  object JustExplicitNoMore {
 
     def operateOnString(str: String, op: String => Boolean) = {
       if (op(str))
@@ -19,10 +18,10 @@ object Implicits extends App {
     println(operateOnString("Hello", x => x.contains("q")))
   }
 
-  NoImplicit
+  JustExplicitNoMore
   println
 
-  println("------------- WithImplicit ---------------")
+  println("------------- Implicit Vals ---------------")
 
   /**
     * Currying must be used if implicits are to be used
@@ -33,12 +32,11 @@ object Implicits extends App {
     /**
       * Implicit is one way to supply default value but not the only benefit.
       *
-      * Name doesn't matter. Compiler matches the param/return type.
-      * If more than one of the same param/return type it will yield compile time error
+      * - Name doesn't matter. Compiler matches the param/return type.
+      * - If more than one of the same param/return type it will yield compile time error
       *
-      * test with implicitly[String] <- maybe works only with implicit methods/classes!?!?
       */
-    implicit val op = (x: String) => x.contains("H")
+    implicit val op = (x: String) => x.contains("H")// Remember op is really of type Function1: "val op:Function1[String, Boolean]"
 //    implicit val op2 = (x: String) => x.contains("W")// compile time error for the previous one already satisfies the param/return type
 
     /**
@@ -57,13 +55,23 @@ object Implicits extends App {
     println(operateOnString("Hello")) // implicit val is kicking in; which is: x.contains("H")
     println(operateOnString("Hello")(x => x.contains("H")))
     println(operateOnString("Hello")(x => x.contains("q")))
+    println
+
+    /**
+      * Only the following are allowed to be implicit:
+      *     - byValue
+      *     - byFunction
+      *
+      */
+    //    def byNameImplicitIsNotAllowed(implicit op: => String): String = op
+
 
   }
 
   WithImplicit
   println
 
-  println("------------------- AdvancedImplicits ---------------------")
+  println("------------------- Implicit Methods---------------------")
 
   /**
     * Links:
@@ -114,7 +122,7 @@ object Implicits extends App {
   AdvancedImplicitsWithVal
   println
 
-  println("------------------- AdvancedImplicitsWithMethods ------------------------")
+  println("------------------- Implicits Classes ------------------------")
 
   object AdvancedImplicitsWithMethods {
 
@@ -123,8 +131,13 @@ object Implicits extends App {
 
     object Implicits {
 
+      //This will automatically convert a method param of type String into a URL <- if the method doesn't have one!?!?
       implicit def stringToUrl(str: String): URL = new URL(str)
 
+      /**
+        * This wrapper will modify the class String and add the implemented method to it
+        * @param str
+        */
       implicit class StringToURLable(str: String) {
         def toURL: URL = new URL(str)
       }
