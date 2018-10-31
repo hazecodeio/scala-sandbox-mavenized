@@ -34,7 +34,7 @@ object RandomAPIMethods extends App {
   object ZippingAndMapping {
 
     val groceries = List("Apple", "Milk", "Naan", "Eggs", "Oranges")
-    println(groceries zip (1 to 100)) //assign indeces to each item
+    println(groceries zip (1 to 100)) //assign indices to each item
     println(groceries zipWithIndex) // however it starts with zero
 
     //let's add one to each index and swap

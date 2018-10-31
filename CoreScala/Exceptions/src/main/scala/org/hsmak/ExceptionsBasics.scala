@@ -1,9 +1,12 @@
 package org.hsmak
 
+import scala.util.Try
+
 /**
   * Exceptions make heavy use of Patter Matches
   * for more detailed illustration, refer to the PatternMatchers maven module
   */
+
 object ExceptionsBasics extends App {
 
   object ThrowingException {
@@ -33,4 +36,22 @@ object ExceptionsBasics extends App {
   ThrowingException
   println
 
+  //ToDo: Chained fluid exception handling: TryWithSuccessFailure
+  object TryWithSuccessFailure {
+
+  }
+  TryWithSuccessFailure
+  println
+
+  //ToDo: TryWithSuccessFailureAndEither
+  object TryWithSuccessFailureAndEither {
+
+  }
+  TryWithSuccessFailureAndEither
+  println
+
+  val r = Right("R")
+  val l = Left("L")
+  val list = List(Try(r), Try(l))
+  println(l.map(_.toString))
 }

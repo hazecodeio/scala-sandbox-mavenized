@@ -72,6 +72,10 @@ object CustomPatternMatchers extends App {
       *     - else it will check the next case
       *
       *  - unapply(): must return Option[T] because that's how cases in matchers work
+      *
+      *  - How different this mechanism from PartialFunction[In, Out]?
+      *     - Maybe this can be shipped with CompanionObject, hence part of the library and end use can't modify!
+      *     - PartialFunction: I guess provides a way of doing the same thing while it's at end user's hand!
       */
     object FarmAnimal {
 

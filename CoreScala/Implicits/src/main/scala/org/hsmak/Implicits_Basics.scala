@@ -181,8 +181,20 @@ object Implicits_Basics extends App {
 
     object Implicits {
 
+      /**
+        * Auto conversion of method params
+        *   - String -> URL
+        *   - if a method with the passed param isn't found/overload, auto-conversion will kick in!?
+        * @param query
+        * @return
+        */
       implicit def constructGoogleQueryURL(query: String): URL = new URL(s"http://www.google.com/?q=$query")
 
+      /**
+        * Object extension
+        * this method 'toGoogleQueryURL' will be added to the String object
+        * @param query
+        */
       implicit class QueryParamToURL(query: String) {
         def toGoogleQueryURL: URL = new URL(s"http://www.google.com/?q=$query")
       }

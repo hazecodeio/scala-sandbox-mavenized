@@ -5,9 +5,9 @@ package org.hsmak
   * AnyVal
   * AnyRef
   */
+//TODO: Consolidate this file for Any, AnyVal, & AnyRef material
 object TypesAndConversions extends App {
 
-  println("------------------- ConvertingBetweenNumericTypes -------------------")
 
   /**
     * default return type is: Any <- the common ancestor between Int and String i.e. AnyVal and AnyRef respectively
@@ -16,6 +16,7 @@ object TypesAndConversions extends App {
     * @param y
     * @return
     */
+  println("------------------- Add -------------------")
 
   //Different Types returned by a method/function
   def add(x: Int, y: Int) = { // Remember that 'Any' is the the parent of AnyRef and AnyVal. Therefore, the return common type for both here is 'Any'
@@ -23,11 +24,12 @@ object TypesAndConversions extends App {
     else x + y // return Int!!
   }
 
-  ConvertingBetweenNumericTypes
-  println
+
+  println(add(11, 2))
+  println(add(5, 2))
 
 
-  println("------------------- Add -------------------")
+  println("------------------- Add2 -------------------")
 
   /**
     * Return AnyVal because Unit is AnyVal which is the common ancestor between Unit and Int
@@ -40,18 +42,19 @@ object TypesAndConversions extends App {
     if (x > 10) println(x + y) //return Unit
     else x + y //return Int
 
-
-  println(add(11, 2))
-  println(add(5, 2))
+  println(add2(11, 2)) //printing "()"
 
 
-  println("------------------- Add2 -------------------")
+  println("------------------- nonsense -------------------")
+
 
   def nonsense(g: Unit): Int = 40
 
-  println(add2(11, 2)) //printing "()"
+  println(nonsense(())) //passing a unit-typed value
+  println(nonsense((): Unit)) // explicitly
 
-  println("------------------- nonsense -------------------")
+
+  println("------------------- ConvertingBetweenNumericTypes -------------------")
 
   object ConvertingBetweenNumericTypes {
 
@@ -62,8 +65,8 @@ object TypesAndConversions extends App {
     println(doubleNum.round.toInt)
   }
 
-  println(nonsense(())) //passing a unit-typed value
-  println(nonsense((): Unit)) // explicitly
+  ConvertingBetweenNumericTypes
+  println
 
 
   println("------------------- UnitAndUnitConversion -------------------")
@@ -77,7 +80,7 @@ object TypesAndConversions extends App {
     */
   object UnitAndUnitConversion {
 
-    val g: Unit = ();
+    val g: Unit = ()
 
     val a = println("Scala Rocks!")
     println(a) //it will simply print "()"
