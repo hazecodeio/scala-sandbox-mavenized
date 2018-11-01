@@ -6,6 +6,7 @@ object ParameterizedMethods extends App {
   //parametrized types on methods. Similar to Java's generics
 
   def parameterizedFunction[T](param: T) = param //param is of the type being passed during invocation
+
   println(parameterizedFunction[Boolean](true)) //brackets might be unnecessary if compiler can infer types
   println(parameterizedFunction(true))
   println

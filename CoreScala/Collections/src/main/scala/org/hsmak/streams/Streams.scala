@@ -6,7 +6,6 @@ package org.hsmak.streams
   *     - Intermediate Operation
   *     - Terminal operation
   */
-//ToDo: To Complete Streams
 object Streams extends App {
 
   println("without Streams:")

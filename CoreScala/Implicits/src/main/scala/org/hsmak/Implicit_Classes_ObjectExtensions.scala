@@ -4,7 +4,18 @@ object Implicit_Classes_ObjectExtensions extends App {
 
   object ImplicitInterpolator {
 
+    /**
+      * implicit interpolator
+      *
+      * @param sc
+      */
     implicit class MagicInterpolator(val sc: StringContext) {
+
+      /**
+        * method name 'm' will be used to call the interpolator
+        *
+        * @param parameters
+        */
       def m(parameters: Any*) = {
         println(sc.parts)
         println(parameters)
@@ -20,6 +31,7 @@ object Implicit_Classes_ObjectExtensions extends App {
     m"Hello $name"
     println
 
+
     /**
       * WrappedArray(Hello ,  , )
       * WrappedArray(Scala, Scala)
@@ -32,9 +44,9 @@ object Implicit_Classes_ObjectExtensions extends App {
   ImplicitInterpolator
   println
 
-  println("------------- ImplicitInterpolator_02 ---------------")
+  println("------------- ImplicitInterpolator_WithPatternMatchers ---------------")
 
-  object ImplicitInterpolator_02 {
+  object ImplicitInterpolator_WithPatternMatchers {
 
     implicit class MagicInterpolator(val sc: StringContext) {
 
@@ -63,26 +75,12 @@ object Implicit_Classes_ObjectExtensions extends App {
 
   }
 
-  ImplicitInterpolator_02
+  ImplicitInterpolator_WithPatternMatchers
   println
 
-  object ExperimentingZippingAll {
 
-    def `LeftSeq = RightSeq`: Unit = println(Seq(1, 2, 3, 4).zipAll(Seq(5, 6, 7, 8), "L", "R"))
-
-    def `LeftSeq > RightSeq`: Unit = println(Seq(1).zipAll(Seq(2, 3, 4, 5, 6, 7, 8), "L", "R"))
-
-    def `LeftSeq < RightSeq`: Unit = println(Seq(1, 2, 3, 4, 5, 6, 7).zipAll(Seq(8), "L", "R"))
-
-    `LeftSeq = RightSeq`
-    `LeftSeq > RightSeq`
-    `LeftSeq < RightSeq`
-  }
-
-  ExperimentingZippingAll
-
-  println("--------------- ImplicitObject_IE_Wrappers_!? -------------------")
-  object ImplicitObject_IE_Wrappers_!? {
+  println("--------------- ImplicitClassesAndObject -------------------")
+  object ImplicitClassesAndObject {
 
     /**
       * String objects will have this new method "poundify"
@@ -97,5 +95,5 @@ object Implicit_Classes_ObjectExtensions extends App {
     println(statement)
     println(statement.poundify)// notice method "poundify" is recognized
   }
-  ImplicitObject_IE_Wrappers_!?
+  ImplicitClassesAndObject
 }
