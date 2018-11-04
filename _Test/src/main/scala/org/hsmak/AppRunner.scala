@@ -30,7 +30,6 @@ object AppRunner extends App {
 
   println(LocalDate.now.plusDays(2))
 
-
 }
 
 
@@ -182,7 +181,7 @@ object PassingFunctionsAsParam extends App {
 
   def times4(num: Int) = num * 4
 
-  def multIt(func: (Int => Double), num: Int): Double = {
+  def multIt(func: Int => Double, num: Int): Double = {
     func(num)
   }
 

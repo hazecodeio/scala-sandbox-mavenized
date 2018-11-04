@@ -3,6 +3,7 @@ package org.hsmak
 /**
   * In Scala, it's called ControlAbstraction:
   *     - passing a function as a param; aka method reference
+  *       - it has to do with Higher order functions: functions that take other functions as param and return a function
   *     - Strategy design pattern
   *     - In Java, this is called BehaviourParameterization
   *

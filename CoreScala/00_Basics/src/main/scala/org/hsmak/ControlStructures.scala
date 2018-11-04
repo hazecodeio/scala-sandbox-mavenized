@@ -95,7 +95,7 @@ object ControlStructures extends App {
   object NestedLoop {
     /*
     equivalent to nested loop
-    useful in multi dimentional matrices
+    useful in multi dimensional matrices
    */
     for (i <- 1 to 5; j <- 6 to 10) {
       println("i: " + i)

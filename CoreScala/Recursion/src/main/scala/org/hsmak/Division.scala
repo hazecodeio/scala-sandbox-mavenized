@@ -1,11 +1,14 @@
 package org.hsmak
 
+import scala.annotation.tailrec
+
 object Division extends App {
 
   def divide(num: Int, denom: Int): Option[Int] = {
 
     if (denom == 0) return None
 
+    @tailrec
     def divHelper(num: Int, acc: Int): Option[Int] = {
       (num - denom) match {
         case n if n < 0 => Some(acc)
