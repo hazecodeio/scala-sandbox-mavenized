@@ -28,4 +28,46 @@ object HigherOrderFunctions extends App {
 
   FuncWithFunc
   println
+
+  object SumExample {
+
+    /**
+      * Abstract function that accept a custom operation via a Lambda Expression
+      *
+      * @param f
+      * @param a
+      * @param b
+      * @return
+      */
+    def sum(f: Int => Int, a: Int, b: Int): Int = {
+      if (a > b) 0
+      else f(a) + sum(f, a + 1, b) // passing the function reference 'f'
+    }
+
+    ///////////Specific Method Implementation////////////////
+
+    def id(x: Int): Int = x
+
+    def sumInts(a: Int, b: Int) = sum(id, a, b)
+
+    def sumIntsWithAnonymousFun(a: Int, b: Int) = sum(x => x, a, b)
+
+    def cube(x: Int): Int = x * x * x
+
+    def sumCubes(a: Int, b: Int) = sum(cube, a, b)
+
+    def sumCubesWithAnonymousFun(a: Int, b: Int) = sum(x => x * x * x, a, b)
+
+    def factorial(n: Int): Int = {
+      def fact(n: Int, accum: Int): Int = if (n == 0 || n == 1) accum else fact(n - 1, n * accum)
+
+      fact(n, 1)
+    }
+
+    def sumFactorials(a: Int, b: Int) = sum(factorial, a, b)
+
+  }
+
+  SumExample
+  println
 }

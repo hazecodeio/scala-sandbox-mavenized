@@ -99,6 +99,29 @@ object TypesOfPrimitives extends App {
     val bBool = true
     val bBool2: Boolean = true
 
+    /**
+      * you can compare booleans!?!?
+      *
+      * @see [[java.lang.Boolean.compare]] which return 0, 1, -1
+      * @see [[java.lang.Boolean.TRUE.compareTo] which return 0, 1, -1
+      *
+      */
+
+    println("(true > false): " + (true > false))
+    println("(true < false): " + (true < false))
+    println("(false > true): " + (false > true))
+    println("(false < true): " + (false < true))
+    println
+
+    println("(true >= false): " + (true >= false))
+    println("(true <= false): " + (true <= false))
+    println("(false >= true): " + (false >= true))
+    println("(false <= true): " + (false <= true))
+    println
+
+    println("(true == true): " + (true == true))
+    println("(false == false): " + (false == false))
+
   }
 
   Boolean

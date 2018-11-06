@@ -44,7 +44,7 @@ object OptionsOfSomeAndNone extends App {
 
     //making constructor private
     //class Employee private (val firstName: String, val middleName: Option[String], val lastName: String) {
-    class Employee (val firstName: String, val middleName: Option[String], val lastName: String) {
+    class Employee(val firstName: String, val middleName: Option[String], val lastName: String) {
 
       /*
       use Ancillary constructors to hide the Option param from end user. if you wish you may make the main constructor private so users isn'y aware of Option at all
@@ -56,11 +56,14 @@ object OptionsOfSomeAndNone extends App {
       def this() = this("Unknown", "Unknown")
     }
 
-    object Employee{
+    object Employee {
       def apply(firstName: String, middleName: String, lastName: String) = new Employee(firstName: String, middleName: String, lastName: String)
+
       def apply(firstName: String, lastName: String) = new Employee(firstName: String, lastName: String)
+
       def apply() = new Employee()
-//      def apply = new Employee// the missing () hid the access to the getters???
+
+      //      def apply = new Employee// the missing () hid the access to the getters???
     }
 
     //This is how it will look like if constructor was public and there was no CompanionObject
@@ -68,8 +71,8 @@ object OptionsOfSomeAndNone extends App {
     val antony = new Employee("Antony", None, "Last")
 
     val husAk2 = Employee("Hus", "W", "AK")
-    val antony2 =  Employee("Antony", "Last")
-    val unknown =  Employee()
+    val antony2 = Employee("Antony", "Last")
+    val unknown = Employee()
 
     // retrieve values from Option using get/getOrElse
 
@@ -105,13 +108,13 @@ object OptionsOfSomeAndNone extends App {
     val myPet = Some("Pet")
     val noPet = None
 
-    val someRelationship:Option[String] = noAlly orElse myFriend orElse myPet
+    val someRelationship: Option[String] = noAlly orElse myFriend orElse myPet
     println(someRelationship)
 
-    val relationship:String = noAlly orElse myFriend orElse myPet getOrElse "myself"
+    val relationship: String = noAlly orElse myFriend orElse myPet getOrElse "myself"
     println(relationship)
 
-    val nobody:String = noAlly orElse noFriend orElse noPet getOrElse "myself"
+    val nobody: String = noAlly orElse noFriend orElse noPet getOrElse "myself"
     println(nobody)
   }
 
@@ -119,6 +122,7 @@ object OptionsOfSomeAndNone extends App {
   println()
 
   println("---------------------- OptionOfMultipleElements ------------------------")
+
   /**
     * It's still  one element but it will unfold into a Tuple of these elements
     * Remember as of Scala 2.12 you can go up to 'Tuple22'
@@ -127,7 +131,7 @@ object OptionsOfSomeAndNone extends App {
     val o = Some(1, 2, 3)
 
     // the above would be unfolded into the following; Tuple
-    val o2:Option[Tuple3[Int,Int,Int]] = Some(1, 2, 3)
+    val o2: Option[Tuple3[Int, Int, Int]] = Some(1, 2, 3)
 
     println(o2)
     println(o2.map(x => x._1))
@@ -136,5 +140,18 @@ object OptionsOfSomeAndNone extends App {
   }
 
   OptionOfMultipleElements
+  println
+
+  object FoldingWithOption {
+    val number: Option[Int] = Some(3)
+    val noNumber: Option[Int] = None
+    val result1 = number.fold(1)(_ * 3)
+    val result2 = noNumber.fold(1)(_ * 3)
+
+    println(result1)
+    println(result2)
+  }
+
+  FoldingWithOption
   println
 }
