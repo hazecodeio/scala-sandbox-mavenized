@@ -156,7 +156,7 @@ object ExceptionWithTryObject extends App {
 
   object TryWithSuccessFailureAndEither {
 
-    import scala.util.{Try, Success, Failure}
+    import scala.util.{Failure, Success, Try}
 
     val r = Right("R")
     val l = Left("L")
@@ -180,7 +180,7 @@ object ExceptionWithTryObject extends App {
 
   object TryWithSuccessFailureAndEitherAndPatternMatcher {
 
-    import scala.util.{Try, Success, Failure}
+    import scala.util.{Failure, Success, Try}
 
     def asIntWithTryAndEither(s: String): Either[String, Int] = Try(s.toInt) match {
       case Success(value) => Right(value)
@@ -205,8 +205,14 @@ object ExceptionWithTryObject extends App {
 
   object TryWithSuccessFailureAndEitherAndForComprehension {
 
-    import scala.util.{Try, Success, Failure}
+    import scala.util.{Failure, Success, Try}
 
+    /**
+      * Either is “right biased”
+      *
+      * @param s
+      * @return
+      */
     def asIntWithTryAndEither(s: String): Either[String, Int] = Try(s.toInt) match {
       case Success(value) => Right(value)
       case Failure(_) => Left(s"Invalid Int [${s}]!")
@@ -222,4 +228,17 @@ object ExceptionWithTryObject extends App {
   TryWithSuccessFailureAndEitherAndForComprehension
   println
 
+  object RightLeftWithEither {
+
+    def triple(x: Int): Int = 3 * x
+
+    def tripleEither(x: Either[String, Int]): Either[String, Int] =
+      x.right.map(triple)
+
+    println(tripleEither(Right(1)))
+    println(tripleEither(Left("not a number")))
+  }
+
+  RightLeftWithEither
+  println
 }

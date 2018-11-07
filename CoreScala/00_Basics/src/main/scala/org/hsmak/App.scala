@@ -5,9 +5,10 @@ package org.hsmak
   */
 object App {
 
+  // tag::contains[]
   def main(args: Array[String]) {
     println("Hello World!")
-    println("concat arguments = " + foo(args))
+    println("concat arguments = " + foo(args)) //<1>
 
 
 
@@ -20,6 +21,7 @@ object App {
 
 
   }
+  // end::contains[]
 
   def foo(x: Array[String]) = x.foldLeft("")((a, b) => a + b)
 }
