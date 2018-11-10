@@ -1,6 +1,10 @@
-case class Person(first: String, last: String, age: Int = 0, ssn: String = "")
-val p1 = Person("Fred", "Jones", 23, "111-22-3333")
+val doubleEvens: PartialFunction[Int, Int] = {
+  case x if (x % 2) == 0 ⇒ x * 2
+}
+val tripleOdds: PartialFunction[Int, Int] = {
+  case x if (x % 2) != 0 ⇒ x * 3
+}
 
-val parts = Person.unapply(p1).get // this seems weird, but it's critical to other features of Scala
-
-parts._1
+val addFive = (x: Int) ⇒ (x + 5)
+val whatToDo = doubleEvens orElse tripleOdds andThen addFive
+whatToDo(3)

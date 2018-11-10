@@ -1,0 +1,8 @@
+= Abstraction: Traits
+HusAK
+:toc:
+:toclevels: 3
+
+= Basic Traits
+= Stacking Traits (Linearization)
+= TBD
