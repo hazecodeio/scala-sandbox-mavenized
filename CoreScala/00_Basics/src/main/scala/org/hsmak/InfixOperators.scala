@@ -4,11 +4,14 @@ object InfixOperators extends App {
 
   class Foo(x: Int) {
     def bar(y: Int) = x + y
+
     def baz(y: Int, z: Int) = x + y + z
-    def qux(y:Int) = new Foo(x + y)
+
+    def qux(y: Int) = new Foo(x + y)
   }
 
   println("------------------- InfixWithOneParam ----------------------")
+
   object InfixWithOneParam {
     Console.println("Using a dot")
     Console println "Infix"
@@ -22,6 +25,7 @@ object InfixOperators extends App {
   println
 
   println("------------------- AnotherInfixWithOneParam ----------------------")
+
   object AnotherInfixWithOneParam {
 
     val foo = new Foo(5)
@@ -37,6 +41,7 @@ object InfixOperators extends App {
   println
 
   println("------------------- InfixWithMultipleParams ----------------------")
+
   object InfixWithMultipleParams {
 
 
@@ -50,6 +55,7 @@ object InfixOperators extends App {
   println
 
   println("------------------- InfixWithQuxMethod ----------------------")
+
   object InfixWithQuxMethod {
 
 
@@ -61,4 +67,66 @@ object InfixOperators extends App {
   InfixWithQuxMethod
   println
 
+
+  /**
+    * An infix type T1 op T2 consists of an infix operator op which gets applied to two type operands T1 and T2.
+    * The type is equivalent to the type application op[T1,T2].
+    */
+  object AnotherInfixBizarre {
+
+    case class Person(name: String)
+
+    class Loves[A, B](val a: A, val b: B)
+
+    /**
+      * Bizarre
+      *
+      * @param couple
+      * @return
+      */
+    def announceCouple(couple: Person Loves Person) =
+    //Notice our type: Person loves Person!
+      couple.a.name + " is in love with " + couple.b.name
+
+    val romeo = new Person("Romeo")
+    val juliet = new Person("Juliet")
+
+    println(announceCouple(new Loves(romeo, juliet)))
+  }
+
+  AnotherInfixBizarre
+  println
+
+  /**
+    * An infix type T1 op T2 consists of an infix operator op which gets applied to two type operands T1 and T2.
+    * The type is equivalent to the type application op[T1,T2].
+    *
+    * more elegant
+    */
+  object AnotherInfixBizarre_02 {
+
+    case class Person(name: String) {
+      def loves(person: Person) = new Loves(this, person)
+    }
+
+    class Loves[A, B](val a: A, val b: B)
+
+    /**
+      * Bizarre
+      *
+      * @param couple
+      * @return
+      */
+    def announceCouple(couple: Person Loves Person) =
+    //Notice our type: Person loves Person!
+      couple.a.name + " is in love with " + couple.b.name
+
+    val romeo = new Person("Romeo")
+    val juliet = new Person("Juliet")
+
+    println(announceCouple(romeo loves juliet))// notice how it's more elegant
+  }
+
+  AnotherInfixBizarre_02
+  println
 }

@@ -1,7 +1,7 @@
 package org.hsmak.advanced.monads
 
 /**
-  * A monad:
+  * A Monad:
   *     - is a wrapper around an existing data type.
   *     - It applies a transformation to a data of wrapper type and returns a value of the same wrapper type.
   *     - Scala implements monads as type classes with unit and flatMap methods.

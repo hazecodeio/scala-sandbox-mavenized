@@ -1,5 +1,11 @@
 package org.hsmak
 
+/**
+  * My Understandings of Implicits is that there are three types:
+  *   - Auto conversion between types   -> implicit def   ...
+  *   - Supply default argument value   -> implicit val   ... in conjunction with Implicit Function Parameters
+  *   - Add new methods to a type       -> implicit class ... constructor will hold the target type
+  */
 object Implicits_Basics extends App {
 
 
@@ -36,8 +42,8 @@ object Implicits_Basics extends App {
       * - If more than one of the same param/return type it will yield compile time error
       *
       */
-    implicit val op = (x: String) => x.contains("H")// Remember op is really of type Function1: "val op:Function1[String, Boolean]"
-//    implicit val op2 = (x: String) => x.contains("W")// compile time error for the previous one already satisfies the param/return type
+    implicit val op = (x: String) => x.contains("H") // Remember op is really of type Function1: "val op:Function1[String, Boolean]"
+    //    implicit val op2 = (x: String) => x.contains("W")// compile time error for the previous one already satisfies the param/return type
 
     /**
       *
@@ -136,6 +142,7 @@ object Implicits_Basics extends App {
 
       /**
         * This wrapper will modify the class String and add the implemented method to it
+        *
         * @param str
         */
       implicit class StringToURLable(str: String) {
@@ -185,6 +192,7 @@ object Implicits_Basics extends App {
         * Auto conversion of method params
         *   - String -> URL
         *   - if a method with the passed param isn't found/overload, auto-conversion will kick in!?
+        *
         * @param query
         * @return
         */
@@ -193,6 +201,7 @@ object Implicits_Basics extends App {
       /**
         * Object extension
         * this method 'toGoogleQueryURL' will be added to the String object
+        *
         * @param query
         */
       implicit class QueryParamToURL(query: String) {

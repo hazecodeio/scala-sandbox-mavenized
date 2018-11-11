@@ -1,10 +1,16 @@
-val doubleEvens: PartialFunction[Int, Int] = {
-  case x if (x % 2) == 0 ⇒ x * 2
-}
-val tripleOdds: PartialFunction[Int, Int] = {
-  case x if (x % 2) != 0 ⇒ x * 3
+def repeatedParameterMethod(x: Int, y: String, z: Any*) = {
+  "%d %ss can give you %s".format(x, y, z.mkString(", "))
 }
 
-val addFive = (x: Int) ⇒ (x + 5)
-val whatToDo = doubleEvens orElse tripleOdds andThen addFive
-whatToDo(3)
+repeatedParameterMethod(3, "egg", List("a delicious sandwich", "protein", "high cholesterol"))
+
+object PigLatinizer {
+  def apply(x: ⇒ String) = x.tail + x.head + "ay"
+}
+
+val result = PigLatinizer {
+  val x = "pret"
+  val z = "zel"
+  x ++ z //concatenate the strings
+}
+

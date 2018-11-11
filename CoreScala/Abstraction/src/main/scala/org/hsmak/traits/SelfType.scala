@@ -9,6 +9,10 @@ package org.hsmak.traits
   *   - however, the method is a member of that interface
   *   - so provide a "use-a" relationship
   *   - in the case of the trait,
+  *
+  * Found this somewhere:
+  *   - Traits also can use self-types. A self-type lists the required dependencies for mixing in the trait.
+  *   - When mixing in the main trait, all self-type dependencies of that trait must also be mixed in, otherwise a compile-time error is thrown.
   */
 object SelfType extends App {
 
@@ -27,7 +31,7 @@ object SelfType extends App {
   abstract case class ProtectedClassV1() {
 
     self: MyAbstractV1 =>
-    // this: MyAbstractV1 => // using 'this' seems to be equivalent to 'self'
+    // this: MyAbstractV1 => // using 'this' seems to be equivalent to 'self'.. not sure yet!
 
     def methodDependentOnAbstractMethodV1(): Unit = {
       moveV1 //
@@ -58,6 +62,27 @@ object SelfType extends App {
 
   //  val a = ProtectedClass()
   //  a.fun()
+
+  println("------------- SelfTypeAndMixinTraits ----------------------")
+  object SelfTypeAndMixinTraits {
+
+    trait B {
+      def bId = 2
+    }
+
+    trait A {
+      self: B =>
+
+      def aId = 1
+    }
+
+    //val a = new A  //***does not compile!!!***
+    val obj = new A with B
+    println((obj.aId + obj.bId))
+  }
+  SelfTypeAndMixinTraits
+  println
+
 }
 
 
