@@ -1,16 +1,17 @@
-def repeatedParameterMethod(x: Int, y: String, z: Any*) = {
-  "%d %ss can give you %s".format(x, y, z.mkString(", "))
+trait Node[+B] {
+  def prepend[U >: B](elem: U): Node[U]
 }
 
-repeatedParameterMethod(3, "egg", List("a delicious sandwich", "protein", "high cholesterol"))
-
-object PigLatinizer {
-  def apply(x: ⇒ String) = x.tail + x.head + "ay"
+case class ListNode[+B](h: B, t: Node[B]) extends Node[B] {
+  def prepend[U >: B](elem: U): ListNode[U] = ListNode(elem, this)
+  def head: B = h
+  def tail: Node[B] = t
 }
 
-val result = PigLatinizer {
-  val x = "pret"
-  val z = "zel"
-  x ++ z //concatenate the strings
+case class Nil[+B]() extends Node[B] {
+  def prepend[U >: B](elem: U): ListNode[U] = ListNode(elem, this)
 }
 
+case class Test[+A](a : List[A])
+
+Test[AnyVal](List[Int](1))
