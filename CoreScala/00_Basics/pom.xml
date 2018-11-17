@@ -68,7 +68,7 @@
                 <!-- see http://davidb.github.com/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.3.2</version>
+                <version>3.4.4</version>
                 <executions>
                     <execution>
                         <goals>
@@ -113,6 +113,51 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>attach-descriptor</id>
+                        <goals>
+                            <goal>attach-descriptor</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
+
+        <!--
+            This is also needed so "mvn site" would call "scala:doc" to generate the Scaladoc???
+            -->
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-site-plugin</artifactId>
+                    <version>3.7.1</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
+
+
+    <!--
+        Notes:
+            - use <reporting> not <reportPlugin>
+
+        Links:
+            - https://maven.apache.org/plugins/maven-site-plugin/maven-3.html#Using_maven-site-plugin_2.x_with_Maven_2_and_maven-site-plugin_3.x_with_Maven_3
+            -
+    -->
+    <reporting>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>scala-maven-plugin</artifactId>
+                <version>3.4.4</version>
+            </plugin>
+        </plugins>
+    </reporting>
+
 </project>
