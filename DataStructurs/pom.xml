@@ -21,7 +21,7 @@
         <maven.compiler.release>11</maven.compiler.release>
 
         <encoding>UTF-8</encoding>
-        <scala.version>2.12.7</scala.version>
+        <scala.version>2.12.8</scala.version>
         <scala.compat.version>2.12</scala.compat.version>
         <spec2.version>4.3.4</spec2.version>
     </properties>
@@ -73,7 +73,7 @@
                 <!-- see http://davidb.github.com/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.4.2</version>
+                <version>3.4.4</version>
                 <executions>
                     <execution>
                         <goals>
