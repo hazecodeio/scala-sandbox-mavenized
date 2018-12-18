@@ -58,7 +58,7 @@ object StringInterpolation extends App {
 
         /////refactor///
 
-        // Similar to induction//
+        // Similar to proof by Induction as in math//
         // base step: first operator and the two operands
         val start = ops(0).apply(ints(0), ints(1))
 
@@ -89,8 +89,8 @@ object StringInterpolation extends App {
   object XMLInterpolator {
 
     implicit class XmlInterpolator(val sc: StringContext) extends AnyVal {
-      def xml(paramaters: Any*) = {
-        val str = sc.parts.zipAll(paramaters, "", "").collect{
+      def xml(parameters: Any*) = {
+        val str = sc.parts.zipAll(parameters, "", "").collect{
           case (part, param) => part + param.toString
         }.mkString("")
 
@@ -105,7 +105,7 @@ object StringInterpolation extends App {
 
     println(xml"<div>a ${5} ${"hello".split("e").toList} b c</div>")
 
-    println(xml"<div>a ${5} ${<b>thing</b>} b c</div>")
+    println(xml"<div>a ${5} ${"<b>thing</b>"} b c</div>")
 
   }
   XMLInterpolator

@@ -53,6 +53,7 @@ object Streams extends App {
   println("Using #::")
   val stream = 0 #:: 1 #:: 2 #:: 3 #:: 4 #:: Stream.empty[Int]
   println(stream.filter(_%2 == 0).toList)
+  println
 
   println("------------- StreamsUnderTheHood -----------")
 
@@ -74,7 +75,7 @@ object Streams extends App {
     val xs = Stream.cons(1, Stream.cons(2, Stream.cons(3, Stream.empty)))
     println(xs)
 
-    //similarity
+    //similarity to the Nil List instantiation
     val lxs = new ::(0, new ::(1, new ::(2, new ::(3, Nil))))
     println(lxs)
 
