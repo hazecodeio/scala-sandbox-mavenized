@@ -31,6 +31,10 @@ object RandomAPIMethods extends App {
 
   println("-------------- Functional Programming (Zipping & Mapping) ------------")
 
+  /**
+    * Zipping: combining towo data types in a Tuple
+    * Unzipping: is the reverse of zipping; unpacking each type from a list of tuples into a separate list of that type
+    */
   object ZippingAndMapping {
 
     val groceries = List("Apple", "Milk", "Naan", "Eggs", "Oranges")
@@ -59,5 +63,19 @@ object RandomAPIMethods extends App {
   }
 
   ZippingAndMapping
+  println
+
+  object UnZippingAndMapping {
+
+    val groceries = List("Apple", "Milk", "Naan", "Eggs", "Oranges")
+    val zippedGroceries = groceries.zipWithIndex //assign indices to each item
+    println(zippedGroceries)
+
+    val (restoredGro, indices) = zippedGroceries.unzip
+    println(restoredGro)
+
+  }
+
+  UnZippingAndMapping
   println
 }
