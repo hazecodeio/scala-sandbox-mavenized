@@ -2,13 +2,36 @@ package org.hsmak
 
 object Currying extends App {
 
+  /**
+    * https://stackoverflow.com/questions/13793756/implementing-a-higher-order-function-that-performs-currying-in-scala
+    */
+  object ImplementingPartialCurrUncurr {
+
+    def partial1[A, B, C](a: A, f: (A, B) => C): B => C = {
+      (b: B) => f(a, b)
+    }
+
+    def curry[A, B, C](f: (A, B) => C): A => (B => C) = {
+      (a: A) => (b: B) => f(a, b)
+    }
+
+    def uncurry[A, B, C](f: A => B => C): (A, B) => C = {
+      (a: A, b: B) => f(a)(b)
+    }
+
+    def compose[A,B,C](f: B => C, g: A => B): A => C = {
+      (a: A) => f(g(a))
+    }
+
+  }
+
   println("################################### Curried Methods ###################################")
 
   object CurriedMethods {
 
     /**
       * Currying: named after Haskell Curry.
-      *   - Haskel lang was named after his first name and
+      *   - Haskell lang was named after his first name and
       *   - Currying concept was named after his last name!
       *
       * Currying breaks the function into parts so we can feed it in parts. I.e. a sequence of functions returning functions

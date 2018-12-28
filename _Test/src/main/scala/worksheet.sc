@@ -15,3 +15,4 @@ def fibonacci(n: Long): Long = {
 }
 
 println("Fibonacci of 10th: " + fibonacci(10))
+
