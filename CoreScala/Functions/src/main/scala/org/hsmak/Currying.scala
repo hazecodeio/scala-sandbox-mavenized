@@ -2,6 +2,8 @@ package org.hsmak
 
 object Currying extends App {
 
+
+  println("############ ImplementingPartialCurrUncurr #################")
   /**
     * https://stackoverflow.com/questions/13793756/implementing-a-higher-order-function-that-performs-currying-in-scala
     */
@@ -19,11 +21,16 @@ object Currying extends App {
       (a: A, b: B) => f(a)(b)
     }
 
-    def compose[A,B,C](f: B => C, g: A => B): A => C = {
+    def compose[A, B, C](f: B => C, g: A => B): A => C = {
       (a: A) => f(g(a))
     }
 
+    val f = curry((x: Int, y: Int) => x + y)
+    println(f(3)(2))
   }
+
+  ImplementingPartialCurrUncurr
+  println
 
   println("################################### Curried Methods ###################################")
 
