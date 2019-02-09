@@ -6,8 +6,16 @@ object MethodsVsFunctions extends App {
   println("################################### Methods vs Functions ###################################")
 
   object MethOrFun {
-    val f = (x: Int) => x + 1 // Function -> which is an object itself; that's why we can call apply() on it. so 'f' is a reference to the real object. Look up Method reference in Java8
-    def g(x: Int) = x + 1 // Method -> it has to be part of an object so it's a member of class/object not a n object itself
+    /**
+      * Function -> which is an object itself; that's why we can call apply() on it.
+      * so 'f' is a reference to the real object. Look up Method reference in Java8
+      */
+    val f = (x: Int) => x + 1
+
+    /**
+      * Method -> it has to be part of an object so it's a member of class/object not a n object itself
+      */
+    def g(x: Int) = x + 1
 
 
   }
