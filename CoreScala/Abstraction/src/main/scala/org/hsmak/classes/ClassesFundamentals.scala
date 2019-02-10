@@ -51,11 +51,11 @@ object ClassesFundamentals extends App {
       /**
         * Overloaded constructor
         *
-        * @param firstname
+        * @param firstName
         * @param lastName
         * @return
         */
-      def this(firstname: String, lastName: String) = this(firstname, lastName, -1)
+      def this(firstName: String, lastName: String) = this(firstName, lastName, -1)
 
       /**
         * create a new object by cloning this current object using the supplied default values or any explicitly passed is param

@@ -19,7 +19,7 @@ object ValueClasses extends App {
     case class MyValue(int: Int) extends AnyVal
 
     /**
-      *
+      * Non-case class
       * @param int -> must be 'val'
       */
     class MyValue2(val int: Int) extends AnyVal
