@@ -159,7 +159,7 @@ object ArrayUtils extends App {
   sortedNums = nums.sortWith(_ < _)
   sortedNums.foreach(println)
 
-  sortedNums.deep.mkString(", ").foreach(print)
+//  sortedNums.deep.mkString(", ").foreach(print)
 }
 
 object MyMap extends App {

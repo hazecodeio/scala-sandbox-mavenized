@@ -1,5 +1,7 @@
 package org.hsmak
 
+// in order to use '.par' as of scala 2.13
+import scala.collection.parallel.CollectionConverters._
 import scala.collection.parallel.immutable.ParSeq
 
 /**

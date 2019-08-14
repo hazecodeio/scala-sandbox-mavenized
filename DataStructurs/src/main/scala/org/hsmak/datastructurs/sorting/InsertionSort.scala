@@ -13,10 +13,10 @@ object InsertionSort extends App {
 
   def insert(x: Int, xs: List[Int]): List[Int] =
     xs match {
-      case List() => x :: Nil // if empty them just add the element x to the empty list; empty can result from recursively retrieving the tail
+      case List() => x :: Nil // if empty then just add the element x to the empty list; empty can result from recursively retrieving the tail
 
       case y :: ys =>
-        if (cond(x, y)) x :: y :: ys // if condition is satisfied them simply prepend x
+        if (cond(x, y)) x :: y :: ys // if condition is satisfied then simply prepend x
         else y :: insert(x, ys) // else recursively call insert() on tail[] till the previous condition is satisfied
     }
 

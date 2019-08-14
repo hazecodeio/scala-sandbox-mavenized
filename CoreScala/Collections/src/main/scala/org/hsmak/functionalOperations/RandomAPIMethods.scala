@@ -37,6 +37,8 @@ object RandomAPIMethods extends App {
     */
   object ZippingAndMapping {
 
+    import scala.language.postfixOps
+
     val groceries = List("Apple", "Milk", "Naan", "Eggs", "Oranges")
     println(groceries zip (1 to 100)) //assign indices to each item
     println(groceries zipWithIndex) // however it starts with zero

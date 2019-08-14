@@ -1,8 +1,8 @@
 package org.hsmak
 
 /**
-  * I'm not sure if there is any special thing of using 'Option[() => String]'
-  * Option[String] worked just fine!
+  * I'm not sure if there is any special thing of using 'Option[() => String]' <- Option of a Lambda
+  * Option[String] worked just fine! <- Option of a String
   * Maybe it has to do with deferred calls?
   *
   * Lazy Val can be used in configuring apps

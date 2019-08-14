@@ -2,7 +2,7 @@ package org.hsmak.datastructurs
 
 import scala.annotation.tailrec
 
-//ToDo - move this to anew repository "functional-data-structures"
+//ToDo - move this to a new repository "functional-data-structures"
 object Folding extends App {
 
 

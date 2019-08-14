@@ -17,8 +17,9 @@
         <main.class>org.hsmak.AppRunner</main.class>
 
         <!--Scala Version-->
-        <scala.major-version>2.12</scala.major-version>
-        <scala.version>${scala.major-version}.7</scala.version>
+        <scala.version>2.13.0</scala.version>
+        <scala.compat.version>2.13</scala.compat.version>
+        <spec2.version>4.7.0</spec2.version>
     </properties>
 
     <dependencyManagement>
@@ -36,15 +37,15 @@
 
         <dependency>
             <groupId>org.scalaj</groupId>
-            <artifactId>scalaj-http_${scala.major-version}</artifactId>
-            <version>2.4.1</version>
+            <artifactId>scalaj-http_${scala.compat.version}</artifactId>
+            <version>2.4.2</version>
         </dependency>
 
         <!-- https://mvnrepository.com/artifact/com.typesafe.play/play_2.12 -->
         <dependency>
             <groupId>com.typesafe.play</groupId>
-            <artifactId>play_2.12</artifactId>
-            <version>2.6.20</version>
+            <artifactId>play_${scala.compat.version}</artifactId>
+            <version>2.7.3</version>
         </dependency>
 
 

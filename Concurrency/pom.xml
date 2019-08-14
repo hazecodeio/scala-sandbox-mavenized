@@ -19,9 +19,9 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <encoding>UTF-8</encoding>
-        <scala.version>2.12.8</scala.version>
-        <scala.compat.version>2.12</scala.compat.version>
-        <spec2.version>4.3.5</spec2.version>
+        <scala.version>2.13.0</scala.version>
+        <scala.compat.version>2.13</scala.compat.version>
+        <spec2.version>4.7.0</spec2.version>
     </properties>
 
     <dependencies>
@@ -30,6 +30,14 @@
             <artifactId>scala-library</artifactId>
             <version>${scala.version}</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.scala-lang.modules/scala-parallel-collections -->
+        <dependency>
+            <groupId>org.scala-lang.modules</groupId>
+            <artifactId>scala-parallel-collections_${scala.compat.version}</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
 
         <!-- Test -->
         <dependency>
@@ -41,7 +49,7 @@
         <dependency>
             <groupId>org.scalatest</groupId>
             <artifactId>scalatest_${scala.compat.version}</artifactId>
-            <version>3.0.5</version>
+            <version>3.0.8</version>
             <scope>test</scope>
         </dependency>
         <dependency>
