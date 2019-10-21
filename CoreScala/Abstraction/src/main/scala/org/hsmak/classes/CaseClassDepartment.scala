@@ -1,21 +1,21 @@
 package org.hsmak.classes
 
-/**
-  * case classes will automatically add: toString(), equals(), hashCode(), copy(), apply() so no need to use 'new' keyword, CompanionObject?
-  * 'val' is the default to constructor params
-  * if you don't like what case provides you can always override
-  * used in pattern matching
-  * it makes the following possible: val Department(n) = dept// param already assigned in dept will be extracted and assigned to 'n'
-  * and so on
-  *
-  * WRONG! -> however, case classes can't be extended/subclassed, maybe because the copy() will always return an instance of the superclass; which violate Liskov Substitution principle
-  *
-  * @param name
-  */
-case class Department(val name: String)
 
 object CaseClassDepartment extends App {
 
+  /**
+    * case classes will automatically add: toString(), equals(), hashCode(), copy(), apply() so no need to use 'new' keyword, CompanionObject?
+    * 'val' is the default to constructor params
+    * if you don't like what case provides you can always override
+    * used in pattern matching
+    * it makes the following possible: val Department(n) = dept// param already assigned in dept will be extracted and assigned to 'n'
+    * and so on
+    *
+    * WRONG! -> however, case classes can't be extended/subclassed, maybe because the copy() will always return an instance of the superclass; which violate Liskov Substitution principle
+    *
+    * @param name
+    */
+  case class Department(val name: String)
 
   println("################################### Case Class Department ###################################")
 
@@ -28,7 +28,7 @@ object CaseClassDepartment extends App {
   println(d1 == d2)
   println(d1 == d1_another)
 
-  val name = d1 match{
+  val name = d1 match {
     case Department("D2") => "This is D2"
     case Department(n) => n
     case _ => "Unknown"

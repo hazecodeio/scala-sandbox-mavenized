@@ -58,33 +58,40 @@ object ControlStructures extends App {
 
   object ForLoop {
 
-    for (i <- 1 to 10) {
-      // Ranges can only be done with For loops
+    // For loops accept iterative construct such as: Range, List, etc
+    for (i <- 1 to 10) { // via Range
       println(i)
     }
 
     val xs = List(1, 2, 3, 4, 5)
 
-    //imperative way
+    //imperative way 01
+
     val result = for (i <- xs; // notice the semicolon ';' because we are using parens (). no need for ';' if curly braces {} are used
                       j = i * 2) yield (j)
+    println(s"result: $result")
+
+    // The Functional Way
+
+
+    var resultL = List[Int]()
+    for (a <- xs) {
+      resultL = resultL :+ (a + 1) //append to list. note List must be var for append to work
+    }
+    println(resultL)
+
+
+
+
     var prependedList = List[Int]()
     var appendedList = List[Int]()
     for (i <- xs) {
       appendedList = appendedList :+ (i * 2) //append to list. note List must be var for append to work
       prependedList = (i * 2) +: prependedList // ':' the colon is right associative operator
     }
-    println(appendedList)
-    println(prependedList)
+    println(s"appendedList: $appendedList")
+    println(s"prependedList: $prependedList")
 
-    // The Functional Way
-
-    println(result)
-    var resultL = List[Int]()
-    for (a <- xs) {
-      resultL = resultL :+ (a + 1) //append to list. note List must be var for append to work
-    }
-    println(resultL)
   }
 
   ForLoop
@@ -97,10 +104,13 @@ object ControlStructures extends App {
     equivalent to nested loop
     useful in multi dimensional matrices
    */
-    for (i <- 1 to 5; j <- 6 to 10) {
-      println("i: " + i)
-      println("j: " + j)
-    }
+
+    // notice the semicolons ";"
+    for(i <- 0 to 2;
+        j <- 0 to 3;
+        k <- 0 to 4)
+      println(s"($i; $j, $k)")
+
   }
 
   NestedLoop
@@ -117,6 +127,9 @@ object ControlStructures extends App {
 
     val result2 = (100 to 1 by -1).mkString(",")
     println(result2)
+
+    val reverse2 = (1 to 100).reverse.by(-2).mkString(",")
+    println(reverse2)
   }
 
   FunctionalLooping

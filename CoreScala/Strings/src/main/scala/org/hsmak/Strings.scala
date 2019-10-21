@@ -29,6 +29,7 @@ object Strings extends App {
 
   println("------------------ Equality: Object vs Reference ------------------------")
 
+  // Note: the `==` in Scala is the opposite of that in Java
   println(strObj == strP1) //true
   println(strObj eq strP1) //false -> different reference
 

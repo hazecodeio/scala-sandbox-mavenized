@@ -1,8 +1,0 @@
-= Abstraction: Classes
-HusAK
-:toc:
-:toclevels: 3
-
-= Case Classes
-= Constructors
-= TBD

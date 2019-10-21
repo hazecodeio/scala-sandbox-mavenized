@@ -11,7 +11,7 @@ object TypesOfPrimitives extends App {
 
   object Byte {
     //Byte is 8 bits
-    val bMax: Byte = 127 //max value. 128 will give compile error. -128 <-> 127 ----------->-2^7 <-> 2^7 - 1
+    val bMax: Byte = 127 //max value. 128 will give compile error. -128 <-> 127 -----------> -2^7 <-> 2^7 - 1
     val bMin: Byte = -128 // compile error. Type mismatch
     println(s"Byte (bMax, bMin): ($bMax, $bMin)")
   }
@@ -22,8 +22,9 @@ object TypesOfPrimitives extends App {
   println("-------------- Short is 16 bits --------------")
 
   object Short {
-    val sMax: Short = 32767
-    val sMin: Short = -32768
+    //Link: https://stackoverflow.com/questions/32277626/operators-on-scala-short-return-int
+    val sMax: Short = (-(Math.pow(2,15).toShort + 1)).asInstanceOf[Short]
+    val sMin: Short =  Math.pow(2,15).toShort
 
     println(s"Short (sMax, sMin): ($sMax, $sMin)")
   }
@@ -34,8 +35,8 @@ object TypesOfPrimitives extends App {
   println("-------------- Int is 32 bits --------------")
 
   object Int {
-    val iMax: Int = 2147483647
-    val iMin: Int = -2147483648
+    val iMin: Int = -2147483648 //-(Math.pow(2,31).toInt + 1)
+    val iMax: Int = 2147483647 // Math.pow(2,31).toInt
 
     println(s"Integer (iMax, iMin): ($iMax, $iMin)")
 
@@ -51,6 +52,10 @@ object TypesOfPrimitives extends App {
     val lNum2 = 123L
     val lNum3 = 123l
 
+    val lMax:Long = Math.pow(2, 63).toLong
+    val lMin:Long = -(Math.pow(2,63).toLong + 1)
+    println(s"Long (lMax, lMin): ($lMax, $lMin)")
+
   }
 
   Long
@@ -62,6 +67,7 @@ object TypesOfPrimitives extends App {
     val fNum: Float = 123.2F // Notice here you still have to append the 'F' otherwise it will be inferred as a Double and result in compile error "mismatch"
     val fNum2 = 123.2F
     val fNum3 = 123.2f
+    val fExpNum = 12e-5 // Floats can also be expressed with exponents with a small e or a capital E.
 
   }
 
