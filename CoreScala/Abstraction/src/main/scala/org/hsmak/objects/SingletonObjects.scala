@@ -1,14 +1,31 @@
 package org.hsmak.objects
 
+/**
+  * For Classes:
+  *  - Need to define a template to create multiple instances
+  *  - Every instance has a state
+  *
+  * For Objects:
+  *  - You need a singleton
+  *  - You need a factory pattern, which defined as: Creating families of related or dependent
+  *     objects without specifying or hiding their concrete classes.
+  *  - You need to implement pattern matching logic
+  *  - You need create a utility that doesn’t require and instance or a state.
+  *  - You have some default values or constants
+  *
+  *  In a Nutshell: Objects are typically meant for factories, utilities, defining pattern matching, defining
+  * defaults, and main methods
+  */
 object SingletonObjects extends App {
 
-  object quickyObject {
+  object QuickyObject {
 
     /**
       * You can have one and only one object without a class
       * it's called SingletonObject
       */
     object JustAnObject
+//    case object JustAnObject // notice the case keyword
 
     println(
       s"""${JustAnObject.toString}
@@ -29,7 +46,8 @@ object SingletonObjects extends App {
       * 'eq' is reference equality
       */
 
-    // this will yield this warning: comparing values of types org.hsmak.objects.SingletonObjects.quickyObject.SingletonObject.type and org.hsmak.objects.SingletonObjects.quickyObject.JustAnObject.type using `==' will always yield false
+    // this will yield this warning: comparing values of types org.hsmak.objects.SingletonObjects.quickyObject.SingletonObject.type and
+    // org.hsmak.objects.SingletonObjects.quickyObject.JustAnObject.type using `==' will always yield false
     println(a1 == j) //false
     println(a1 eq j) //false
 
@@ -45,7 +63,7 @@ object SingletonObjects extends App {
     println(ObjectWithMethods.foo(2, 3))
   }
 
-  quickyObject
+  QuickyObject
   println
 
   object objectExtendingClass {

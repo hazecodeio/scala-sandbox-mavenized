@@ -21,7 +21,9 @@ object FunctionalObjects extends App {
   println(new Rational(66, 42))
   println(oneHalf + twoThirds)
   println(oneHalf * twoThirds)
-  println(twoThirds + oneHalf * twoThirds) // precedence is behaving as expected, that is, * is performed 1st then add => twoThirds + (oneHalf * twoThirds)
+  println("twoThirds + oneHalf * twoThirds " + (twoThirds + oneHalf * twoThirds)) // precedence is behaving as expected, that is, * is performed 1st then add => twoThirds + (oneHalf * twoThirds)
+  println("twoThirds + oneHalf multiply twoThirds " + (twoThirds + oneHalf multiply twoThirds)) // Wrong!! Because this from left to right with no precedence in effect!
+  println("twoThirds + oneHalf.multiply(twoThirds) " + (twoThirds + oneHalf.multiply(twoThirds))) // Correct! Because the Dot notation already specified which operation belongs to which object!
   println(twoThirds * 2)
 
   implicit def intToRational(x: Int) = new Rational(x) // This defines a conversion method from Int to Rational. This needs to be in scope of the object or the interpreter

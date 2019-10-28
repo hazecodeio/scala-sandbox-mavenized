@@ -26,6 +26,9 @@ object OptionsOfSomeAndNone extends App {
   println(s"$middleName $middleName2 $middleName3")
   println
 
+  println(middleName.getOrElse("Unknown"))
+  println
+
   println("----------------- Option - None ----------------")
 
   val noMiddleName = None // None is a type of Option[Nothing]. It's a singleton object
@@ -46,9 +49,14 @@ object OptionsOfSomeAndNone extends App {
     //class Employee private (val firstName: String, val middleName: Option[String], val lastName: String) {
     class Employee(val firstName: String, val middleName: Option[String], val lastName: String) {
 
-      /*
-      use Ancillary constructors to hide the Option param from end user. if you wish you may make the main constructor private so users isn'y aware of Option at all
-     */
+      /**
+        * Use Ancillary constructors to hide the Option param from end user.
+        * If you wish you may make the main constructor private so users isn't aware of Option at all
+        *
+        * @param firstName
+        * @param middleName
+        * @param lastName
+        */
       def this(firstName: String, middleName: String, lastName: String) = this(firstName, Option(middleName), lastName)
 
       def this(firstName: String, lastName: String) = this(firstName, None, lastName)
@@ -56,6 +64,9 @@ object OptionsOfSomeAndNone extends App {
       def this() = this("Unknown", "Unknown")
     }
 
+    /**
+      * CompanionObject
+      */
     object Employee {
       def apply(firstName: String, middleName: String, lastName: String) = new Employee(firstName: String, middleName: String, lastName: String)
 
@@ -70,13 +81,13 @@ object OptionsOfSomeAndNone extends App {
     val husAk = new Employee("Hus", Some("W"), "AK")
     val antony = new Employee("Antony", None, "Last")
 
+    //Using the CompanionObject
     val husAk2 = Employee("Hus", "W", "AK")
     val antony2 = Employee("Antony", "Last")
     val unknown = Employee()
 
     // retrieve values from Option using get/getOrElse
 
-    println(middleName.getOrElse("Unknown"))
     println(noMiddleName.getOrElse("Unknown"))
     println(husAk2.middleName.getOrElse("Unknown2"))
     println(unknown.middleName.getOrElse("Unknown2"))
@@ -98,13 +109,20 @@ object OptionsOfSomeAndNone extends App {
   EmployeeWithOption
   println
 
-  println("---------------------------------- OrElse_GetOrElse -------------------------------")
+  println("---------------------------------- OrElse_vs_GetOrElse -------------------------------")
 
+  /**
+    * orElse(): Functional and Intermediate Operation
+    * get()/getOrElse(): Terminal operation
+    */
   object OrElse_GetOrElse {
+
     val myAlly = Some("Ally")
     val noAlly = None
+
     val myFriend = Some("Friend")
     val noFriend = None
+
     val myPet = Some("Pet")
     val noPet = None
 

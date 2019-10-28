@@ -2,6 +2,7 @@ package org.hsmak
 
 /**
   * Java8 Functions have a major impact on how Scala implements its functions
+  * Functions are traits that we instantiate anonymously.
   */
 object FunctionsFundamentals extends App {
 
@@ -173,9 +174,12 @@ object FunctionsFundamentals extends App {
       override def apply(): Int = 4
     }
 
-    List(f0_1, f0_2, f0_3, f0_4).foreach(println)
-    List(f0_1.apply(), f0_2.apply(), f0_3.apply(), f0_4.apply()).foreach(println)
-    List(f0_1(), f0_2(), f0_3(), f0_4()).foreach(println)
+    List(f0_1, f0_2, f0_3, f0_4).foreach(println);
+    println
+    List(f0_1.apply(), f0_2.apply(), f0_3.apply(), f0_4.apply()).foreach(println);
+    println
+    List(f0_1(), f0_2(), f0_3(), f0_4()).foreach(println);
+    println
   }
 
   RecapFunctions_0
@@ -243,5 +247,14 @@ object FunctionsFundamentals extends App {
   FunctionWithMultipleReturnValues
   println
 
+  object TrimmingWithUnderscore {
+    /**
+      * The first _ represents the first argument
+      * The second _ represents the second argument
+      * The third _ represents the third argument
+      */
+    val ff: (Int, Int, String) => String = _ + _ + _
+  }
 
+  TrimmingWithUnderscore
 }

@@ -35,9 +35,12 @@ object MapOp extends App {
 
     println("--------------- Map.map() ---------------")
 
-    val m = Map('Germani -> 4, 'Brazil -> 5, 'Italy -> 4, 'Argentina -> 2) // tuples of (Symbols, Int)
+    //    Literal symbol ' is deprecated as of 2.13
+    //    val m = Map('Germani -> 4, 'Brazil -> 5, 'Italy -> 4, 'Argentina -> 2)
+
+    val m = Map(Symbol("Germani") -> 4, Symbol("Brazil") -> 5, Symbol("Italy") -> 4, Symbol("Argentina") -> 2) // tuples of (Symbols, Int)
     //Just prepend the word "Team" to the each Symbol
-    println(m.map(t => (Symbol("Team " + t._1.name), t._2))) //since t._1 is a symbole, we need to extract the String name out of the Symbol
+    println(m.map(t => (Symbol("Team " + t._1.name), t._2))) //since t._1 is a symbol, we need to extract the String name out of the Symbol
     println
 
     println("------------ String.map() ------------")

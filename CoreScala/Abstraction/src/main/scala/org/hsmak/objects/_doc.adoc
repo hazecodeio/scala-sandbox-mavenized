@@ -1,8 +1,0 @@
-= Abstraction: Objects
-HusAK
-:toc:
-:toclevels: 3
-
-= Singleton Objects
-= Companion Objects
-= TBD

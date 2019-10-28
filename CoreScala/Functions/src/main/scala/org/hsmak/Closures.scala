@@ -4,12 +4,13 @@ object Closures extends App {
 
   //################################### Closure ###################################
 
-  object MyClosue {
+  object MyClosure {
 
     // var for closure isn't recommended because there will be different behaviour
+    var m = 200
+
     val f = (x: Int) => x + m // this is where the closure effect takes place
     val foo = new Foo(100)
-    var m = 200
 
     class Foo(x: Int) {
       def bar(y: Int => Int) = y(x)
@@ -20,7 +21,7 @@ object Closures extends App {
     println(foo.bar(f))
   }
 
-  MyClosue
+  MyClosure
   println
 
 }

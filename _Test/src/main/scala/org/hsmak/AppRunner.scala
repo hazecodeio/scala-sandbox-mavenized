@@ -12,11 +12,11 @@ object AppRunner extends App {
 
   /*
     notice how the for loop is used here to do formatting/filtering
-    notice the {} which can be replaced by () with a little modification (Maybe??)
+    notice the {} which can be replaced by () with a little modification (Maybe?? The use of semicolon ';'??)
    */
   val even = for {i <- 1 to 20
                   if (i % 2) == 0
-  } yield i // yield to a collection. This is hoe to makwe a Functional for loop. Notice even is a val not var
+  } yield i // yield to a collection. This is how to make a Functional for loop. Notice even is a val not var
 
   for (i <- even)
     println(i)
@@ -24,11 +24,6 @@ object AppRunner extends App {
   println("use ForEach:")
   even.foreach(println) //inferred lamda expression
   even.foreach(a => println(a)) //expanded lamda expression
-
-
-  import java.time._
-
-  println(LocalDate.now.plusDays(2))
 
 }
 
@@ -46,13 +41,7 @@ object doWhileReadFromConsole extends App {
 }
 
 
-object DefFunctions extends App {
-  var sum = getSum()
-  var sum2 = getSum(1, 2, 3, 4)
-  println(sum)
-
-  sum = getSum(2, 10)
-  println(sum)
+object DefMethods extends App {
 
   /**
     *
@@ -61,7 +50,7 @@ object DefFunctions extends App {
     * @return
     */
   def getSum(num1: Int = 1, num2: Int = 1): Int = {
-    //return is valid but not necessary unless you want to use it to break out of a bloak of statements e.g. loop
+    //return is valid but not necessary unless you want to use it to break out of a block of statements e.g. loop
     //    return num1 + num2
     num1 + num2
   }
@@ -73,6 +62,15 @@ object DefFunctions extends App {
       sum += num
     sum
   }
+
+  var sum = getSum()
+  var sum2 = getSum(1, 2, 3, 4)
+  println(sum)
+
+  sum = getSum(2, 10)
+  println(sum)
+
+
 
   println(sum2)
 }

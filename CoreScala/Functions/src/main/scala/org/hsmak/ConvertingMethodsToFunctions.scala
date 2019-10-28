@@ -63,7 +63,6 @@ object ConvertingMethodsToFunctions extends App {
     val fExpanded:Function1[Int, Int] = x.bar _
     println("fExpanded: " + fExpanded(20))
 
-    val z = new Baz(20)
     /**
       * In console:
       * scala> val f = x.bar _
@@ -82,6 +81,8 @@ object ConvertingMethodsToFunctions extends App {
     //partially applied functions for two params
     val f3 = x.gym _ // Now the underscore '_' is expecting two params: 'f3:(Int, Int) => Int'
 
+
+    val z = new Baz(20)
     // passing the partially applied function
     println("z.qux(f) ", z.qux(f)) // from above: 'val f = x.bar _'
     println("z.qux(x.bar _) ", z.qux(x.bar _)) // without calling the val f

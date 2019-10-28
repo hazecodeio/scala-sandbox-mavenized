@@ -5,7 +5,7 @@ import scala.beans.BeanProperty
 object Inheritance extends App {
 
   object AbstractClass {
-    // remember: inheritance inherits both State & Behaviour from the parent (to doscuss further later on private access)
+    // remember: inheritance inherits both State & Behaviour from the parent (to discuss further later on private access)
     // val is simply to add an accessor
     // same Java's polymorphism rules apply such object type, reference type, variable type, Is-A relationship etc
 

@@ -1,5 +1,7 @@
 package org.hsmak
 
+import scala.annotation.tailrec
+
 object HigherOrderFunctions extends App {
 
   //################################### Functions with Functions, AKA Higher Order Functions ###################################
@@ -12,11 +14,11 @@ object HigherOrderFunctions extends App {
     println(f(3, (m: Int) => m + 1)) // the 2nd param is a lambda expression which is an implementation of the function y. Here m is x which is the input and that is 3
     println(f(3, m => m + 1)) // by inference type will be inferred
     println(f(3, _ + 1)) // a placeholder will do just fine as well
-    println(f(3, 1 + _)) // by commutative property of teh addition process
+    println(f(3, 1 + _)) // by commutative property of the addition process
 
     import scala.language.postfixOps
     // turn on the postfixOps flag to turn off the warning
-    println(f(3, 1 +)) // if the '_' i sthe last param we can take it away
+    println(f(3, 1+)) // if the '_' is the last param we can take it away
 
 
     // return a function from a function
@@ -59,6 +61,7 @@ object HigherOrderFunctions extends App {
     def sumCubesWithAnonymousFun(a: Int, b: Int) = sum(x => x * x * x, a, b)
 
     def factorial(n: Int): Int = {
+      @tailrec
       def fact(n: Int, accum: Int): Int = if (n == 0 || n == 1) accum else fact(n - 1, n * accum)
 
       fact(n, 1)

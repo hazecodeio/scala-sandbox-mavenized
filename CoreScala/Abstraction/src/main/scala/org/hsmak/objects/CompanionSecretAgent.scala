@@ -19,7 +19,7 @@ class SecretAgent(val name: String) {
   * Sol: Have the companionObject create that for you and keep the constructor clean
   */
 object SecretAgent {
-  private var b: Int = 3000
+  private var b: Int = 3000 // this var will be shared between all instances
 
   def bullets = b
 

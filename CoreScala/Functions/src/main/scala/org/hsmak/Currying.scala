@@ -4,6 +4,7 @@ object Currying extends App {
 
 
   println("############ ImplementingPartialCurrUncurr #################")
+
   /**
     * https://stackoverflow.com/questions/13793756/implementing-a-higher-order-function-that-performs-currying-in-scala
     */
@@ -61,11 +62,11 @@ object Currying extends App {
     //multiple-param function. signature from the REPL: '(Int, Int) => Int'
     val f = (x: Int, y: Int) => x + y
 
-    val fc = f.curried // Aftwr currying, fc is exactly as same as g
-
     // convert a regular function into a curried one. f will become: val f = (x:Int) => ((y:Int) => x + y). Signature: 'Int => (Int => Int)'
-    val uncurFC = Function.uncurried(fc)
+    val fc = f.curried // After currying, fc is exactly as same as g
+
     // uncurrying a curried function
+    val uncurFC = Function.uncurried(fc)
 
 
   }
@@ -75,11 +76,11 @@ object Currying extends App {
 
   println("################################### Curried Parameters ###################################")
 
-  object CurriedParamters {
+  object CurriedParameters {
 
     /**
       * - Remember these are methods not functions
-      * - You have to use '_' to convert them to functions
+      * - You have to use '_' to convert them to functions; in Java this is how to create a reference to a method "Method Reference"
       */
 
     def foo(x: Int, y: Int, z: Int) = x + y + z //a method not a function
@@ -87,6 +88,14 @@ object Currying extends App {
     def bar(x: Int)(y: Int)(z: Int) = x + y + z //a method with 3, or 2?, curried params <- fully curried method (note: not a function)
 
     def baz(x: Int, y: Int)(z: Int) = x + y + z //a method with one curried param
+
+     /*
+      * ToDo:
+      *   - Convert to a a function
+      *   - Curry it
+      *   - Call the curried one
+      */
+    def foo2(x: Int, y: Int, z: Int => Int) = z(x + y) // note the 3rd param is a function!
 
     //remember: '_' converts a method into a function
     val fo = foo _ // REPL: (Int, Int, Int) => Int <- converting to a regular function with 3 params
@@ -128,7 +137,7 @@ object Currying extends App {
     println(s"bz2(3)(3): ${bz2(3)(3)}")
   }
 
-  CurriedParamters
+  CurriedParameters
   println
 
 }

@@ -4,7 +4,6 @@ object JavaStyleConstructors extends App {
 
   import scala.beans.BeanProperty
 
-  val e = EmployeeJavaStyle("FirstName", "Lastname")
 
   /**
     * Notice @BeanProperty: this will generate the Java style getters/setters; beside the scala style
@@ -15,6 +14,8 @@ object JavaStyleConstructors extends App {
     */
   case class EmployeeJavaStyle(@BeanProperty val firstName: String,
                                @BeanProperty var lastName: String)//warning: Scala programmers don't like vars but this is for illustration
+
+  val e = EmployeeJavaStyle("FirstName", "Lastname")
 
   e.setLastName("ModifiedLastName") // JavaStyle Setter
   println(e)

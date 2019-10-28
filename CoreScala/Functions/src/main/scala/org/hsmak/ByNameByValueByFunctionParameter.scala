@@ -44,7 +44,7 @@ object ByNameByValueByFunctionParameter extends App {
 
 
     val b = byFunction(3)(() => {
-      //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
+      //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then the below will be executed
       println("In call")
       19
     })
@@ -73,7 +73,7 @@ object ByNameByValueByFunctionParameter extends App {
     }
 
     val c = byName(3) {
-      //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then th ebelow will be executed
+      //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then the below will be executed
       println("In call")
       19
     }
@@ -91,7 +91,7 @@ object ByNameByValueByFunctionParameter extends App {
       */
     def divideSafely(f: => Int): Option[Int] = {
       try {
-        Some(f)
+        Some(f)// f will be initialized here
       } catch {
         case ae: ArithmeticException => None
       }

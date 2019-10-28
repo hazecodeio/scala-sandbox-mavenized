@@ -18,7 +18,7 @@ object FlatMapOp extends App {
 
     println(l.map(x => List(-x, 0, x))) // produce List of Lists
     println("flatten(): " + l.map(x => List(-x, 0, x)).flatten) // flattened list without performing a function on it
-    println("flatMap(): " + l.flatMap(x => List(-x, 0, x))) //flatMap = Flatten + Map <- flatten then perform a function/operation
+    println("flatMap(): " + l.flatMap(x => List(-x, 0, x))) //flatMap = Map + Flatten <- Perform a function/operation then Flatten
     println
 
     println("------------FlatMap on List[List[List]] ----------------")
@@ -36,14 +36,25 @@ object FlatMapOp extends App {
     println("flatMap():                                " + b.flatMap(c => c)) // one list is reduced
     println("flatMap().flatMap():                      " + b.flatMap(c => c).flatMap(c => c)) // one more list is reduced so now we only have one list containing all elements
 
-    //  println(b.flatMap(c => c).flatMap(c => c).flatMap(c => c))// if we add one more flatmap call by mistake it won't work because lambda expression in flatmap is expecting 'f: (A) => GenTraversableOnce[B}'
+    //  println(b.flatMap(c => c).flatMap(c => c).flatMap(c => c))// if we add one more flatMap call by mistake it won't work because lambda expression in flatMap is expecting 'f: (A) => GenTraversableOnce[B}'
     println("flatMap().flatMap().flatMap(List(-c, c)): " + b.flatMap(c => c).flatMap(c => c).flatMap(c => List(-c, c))) //extract, modify, add to list, flatten again to a general list
     println
+
+    /* Alternative to the previous - Since (c => c) is simply returning itself and not performing any kind of operation, we can replace it by either of the following:
+     *    - flatMap(identity _)
+     *    - flatten
+     *
+     * The Identity Function:
+     *    - The identity function is take the input and make it the output
+     *    - Instead of writing x ⇒ x, you can opt for identity(x)
+     *    - identity comes from the Predef
+     */
+
 
     println("------------FlatMap on Set[Set] ----------------")
 
     val s = Set(2, 4, 10, 11)
-    println(s.flatMap(x => Set(x, x * 5))) // same thing. Couple the modification using Sets so you will have a Set of Sets then use flatmap to flatten them out
+    println(s.flatMap(x => Set(x, x * 5))) // same thing. Couple the modification using Sets so you will have a Set of Sets then use flatMap to flatten them out
     println
 
     println("------------FlatMap on List[Map[Tuple2]] ----------------")
