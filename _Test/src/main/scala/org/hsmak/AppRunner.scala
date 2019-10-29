@@ -16,7 +16,7 @@ object AppRunner extends App {
    */
   val even = for {i <- 1 to 20
                   if (i % 2) == 0
-  } yield i // yield to a collection. This is how to make a Functional for loop. Notice even is a val not var
+                  } yield i // yield to a collection. This is how to make a Functional for loop. Notice even is a val not var
 
   for (i <- even)
     println(i)
@@ -71,7 +71,6 @@ object DefMethods extends App {
   println(sum)
 
 
-
   println(sum2)
 }
 
@@ -89,57 +88,112 @@ object Recursion extends App {
   println("Factorial of 4 = " + factorial(4))
 
 
+  /**
+    * 0 1 2 3 4 5 6  7  8
+    * 0 1 1 2 3 5 8 13 21
+    *
+    * @param n
+    * @return
+    */
   def fibonacci(n: Long): Long = {
 
     import scala.annotation.tailrec
     @tailrec
     def fib(n: Long, prev: Long, curr: Long): Long = {
       n match {
-        case 0 => curr - 1
+        case 0 => prev
         case 1 => curr
-        case _ => fib(n-1, curr, prev + curr)
+        case _ => fib(n - 1, curr, prev + curr)
       }
     }
 
     fib(n, 0, 1)
   }
 
+  println("Fibonacci of 0th: " + fibonacci(0))
+  println("Fibonacci of 1st: " + fibonacci(1))
+  println("Fibonacci of 2nd: " + fibonacci(2))
+  println("Fibonacci of 3rd: " + fibonacci(3))
+  println("Fibonacci of 5th: " + fibonacci(5))
+  println("Fibonacci of 6th: " + fibonacci(6))
   println("Fibonacci of 10th: " + fibonacci(10))
 
 }
 
 
+/**
+  *
+  * Array:
+  *     - Mutable: only updates to elements
+  *     - Fixed Size: must specify size at instantiation.
+  *     - No Ops to append arrays:
+  *       - unless it's a "var" so there a reassignment another the hood?
+  *
+  * ArrayBuffer:
+  *     - Mutable
+  *     - Dynamic Size: has Ops to append arrays.
+  *       - It doesn't matter if it's "var" or "val"
+  *
+  * Note the instantiation via: "new" key word vs CompanionObject
+  *
+  */
 object Arrays extends App {
-  val myArray = new Array[Int](10)
+
+  println("------------------- Array --------------------")
+  //Fixed Size
   // can't change size once instantiated
-  val anotherArr = Array("Tom", "Huss") // can't change size once instantiated
+  val arr1 = new Array[Int](10) // reserve 10 elements
+  val arr2 = Array(1, 2, 3) // 3 elements
 
-  anotherArr(0) = "alkhamis"
-  println(anotherArr(0))
+  val arr3 = Array("Tom", "Huss")
+  arr3(0) = "John" // mutable
+  println(arr3(0))
   println
 
-  var buffArr = new ArrayBuffer[String]() //since it is a buffer no need to specify the size
-  buffArr.insert(0, "Husain")
-  buffArr += "Russ" // inserting a string at the end of the array
-  buffArr ++= Array("Hard", "Hashir") // appending another array
-  buffArr.insert(1, "Inserted at 1")
+  // create a "var" Array
+  var varArr = Array(1, 2)
+  varArr ++= Array(3, 4) // append another array via reassignment
+  println("varArr:")
+  varArr.foreach(println)
+  println
 
-  for (fr <- buffArr)
+  println("------------------- ArrayBuffer --------------------")
+
+  //Dynamic Size
+  val arrBuff = new ArrayBuffer[String]() //since it is a buffer no need to specify the size
+  arrBuff.insert(0, "Husain")
+  arrBuff += "Russ" // inserting a string at the end of the array
+  arrBuff ++= Array("Ben", "Tom") // appending another array
+  arrBuff.insert(1, "Inserted at 1")
+
+  for (fr <- arrBuff)
     println(fr)
-
   println
-  buffArr.foreach(println)
 
-  println("anothBuffArr")
-  var anothBuffArr = for (i <- buffArr) yield i + " y" // or you can use curly braces instead of parentheses
-  anothBuffArr.foreach(println)
-
+  arrBuff.foreach(println)
   println
+
+  println("------------ anotherArrBuff -------------")
+  var anotherArrBuff = for (i <- arrBuff) yield i + " y" // or you can use curly braces instead of parentheses
+  anotherArrBuff.foreach(println)
+  println
+
+  println("---------------------- Array.ofDim() ---------------")
+
+  // 10 x 10 matrix
   var multTable = Array.ofDim[Int](10, 10)
-  for (i <- 0 until multTable.length; j <- 0 until multTable(0).length) {
+
+  // via curly braces
+  for {i <- 0 until multTable.length
+       j <- 0 until multTable(0).length} {
+
     multTable(i)(j) = i * j
   }
-  for (i <- 0 until multTable.length; j <- 0 until multTable(0).length) {
+
+  // via parens. notice the semicolon ';'
+  for (i <- 0 until multTable.length;
+       j <- 0 until multTable(0).length) {
+
     printf("%d * %d = %d\n", i, j, multTable(i)(j))
   }
 }
@@ -149,20 +203,26 @@ object ArrayUtils extends App {
   println(nums.sum)
   println(nums.max)
   println(nums.min)
+  println
 
   //  var sortedNums = nums.sortWith((s1, s2) => s1>s2)
   var sortedNums = nums.sortWith(_ > _)
-  sortedNums.foreach(println)
+  println(sortedNums mkString " ")
   println
-  sortedNums = nums.sortWith(_ < _)
-  sortedNums.foreach(println)
 
-//  sortedNums.deep.mkString(", ").foreach(print)
+  sortedNums = nums.sortWith(_ < _)
+  println(sortedNums mkString " ")
+  println
+
+  println(nums.sorted.mkString(" "))
+  println(nums.sorted.reverse.mkString(" "))
+
 }
 
 object MyMap extends App {
+
   //immutable map
-  var employees = Map(
+  val employees = Map(
     "Manager" -> "Husain",
     "Secretary" -> "Sue")
 
@@ -170,20 +230,29 @@ object MyMap extends App {
     println(employees("Manager"))
   }
 
-  var immMap = collection.immutable.Map(100 -> "Paul", 101 -> "Sally")
+  // explicit
+  val immMap = collection.immutable.Map(100 -> "Paul", 101 -> "Sally")
   println(immMap(100))
 
   for ((k, v) <- immMap) {
     printf("%d : %s\n", k, v)
   }
+
+  val mutableMap = collection.mutable.Map(100 -> "aaa", 200 -> "bbb")
+  mutableMap(300) = "ccc" // you can't do this with immutable
+  mutableMap.foreach(println)
 }
 
 
 object Tuples extends App {
-  var myTuple = (103, "Husain", 3.5);
-  println(myTuple._1)
-  myTuple.productIterator.foreach(println)
-  println(myTuple)
+
+  var explicitTupleV1:Tuple3[Int, String, Double] = (103, "Husain", 3.5)
+  var explicitTupleV2:(Int, String, Double) = (103, "Husain", 3.5)
+
+  var t = (103, "Husain", 3.5)
+   println(t._1)
+  t.productIterator.foreach(println)
+  println(t)
 }
 
 object PassingFunctionsAsParam extends App {
@@ -192,11 +261,21 @@ object PassingFunctionsAsParam extends App {
 
   def times4(num: Int) = num * 4
 
+  /**
+    *
+    * @param func
+    * @param num
+    * @return
+    */
   def multIt(func: Int => Double, num: Int): Double = {
     func(num)
   }
 
   println(multIt(times3, 4))
+
+  //val multItThreeTimes = multIt(times3 _, _) // we can remove the '_' of times3.. Why is it possible??
+  val multItThreeTimes = multIt(times3, _)
+  print(multItThreeTimes(4))
 }
 
 object Closures extends App {
@@ -208,13 +287,12 @@ object Closures extends App {
 
 object Exceptions extends App {
 
-
   //how about return type?
   def divideNum(num1: Int, num2: Int) = try {
 
     num1 / num2
 
-  } catch {
+  } catch { // a pattern matching similar to match/case
 
     case ex: ArithmeticException => "Can't divde by zero" // Exceptions are of type Nothing!
 

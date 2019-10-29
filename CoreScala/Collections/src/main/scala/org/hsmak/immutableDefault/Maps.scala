@@ -52,7 +52,7 @@ object Maps extends App {
     /////////////// Symbols: they have a pool of their own
 
     val co = Symbol("Co")
-    val co2 = 'Co
+    val co2 = 'Co //deprecated in 2.13
 
     println(co == co2) //true
     println(co eq co2) //true
