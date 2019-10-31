@@ -18,7 +18,7 @@ object ControlStructures extends App {
     val a = 10
     val result = //notice the val to avoid the mutable reassignment i.e. var
       if (a < 10) "a is less than 10"
-      else if (a < 10) "a is grerater than 10"
+      else if (a > 10) "a is grerater than 10"
       else "a is 10"
 
     println(result)
@@ -71,8 +71,6 @@ object ControlStructures extends App {
                       j = i * 2) yield (j)
     println(s"result: $result")
 
-    // The Functional Way
-
 
     var resultL = List[Int]()
     for (a <- xs) {
@@ -81,7 +79,14 @@ object ControlStructures extends App {
     println(resultL)
 
 
-
+    // The Functional Way??? <- I don't think this is.
+    // I'd avoid 'var' and use FunctionalOps such as map, fold, reduce, etc
+    /*
+     * val appendedList = xs.foldLeft(List[Int]())((acc, nxt) => acc:+nxt*2)
+     * val prependedList = xs.foldLeft(List[Int]())((acc, nxt) => nxt*2+:acc)
+     *
+     * the same can be done using foldRight().
+     */
 
     var prependedList = List[Int]()
     var appendedList = List[Int]()
@@ -91,6 +96,17 @@ object ControlStructures extends App {
     }
     println(s"appendedList: $appendedList")
     println(s"prependedList: $prependedList")
+
+    // I'd avoid 'var' and use FunctionalOps such as map, fold, reduce, etc
+    /*
+     * val appendedList = xs.foldLeft(List[Int]())((acc, nxt) => acc:+nxt*2)
+     * val prependedList = xs.foldLeft(List[Int]())((acc, nxt) => nxt*2+:acc)
+     *
+     * the same can be done using foldRight().
+     */
+
+     val appendedList2 = xs.foldLeft(List[Int]())((acc, nxt) => acc:+nxt*2)
+     val prependedList2 = xs.foldLeft(List[Int]())((acc, nxt) => nxt*2+:acc)
 
   }
 
@@ -106,9 +122,9 @@ object ControlStructures extends App {
    */
 
     // notice the semicolons ";"
-    for(i <- 0 to 2;
-        j <- 0 to 3;
-        k <- 0 to 4)
+    for (i <- 0 to 2;
+         j <- 0 to 3;
+         k <- 0 to 4)
       println(s"($i; $j, $k)")
 
   }
@@ -119,16 +135,16 @@ object ControlStructures extends App {
   println("----------------- Looping the Functional Way---------------------")
 
   object FunctionalLooping {
-    val result = (1 to 100).reverse.mkString(",")
+    val result = (1 to 10).reverse.mkString(",")
     println(result)
 
     val steppingBy2 = (1 to 10 by 2).mkString(", ")
     println(steppingBy2)
 
-    val result2 = (100 to 1 by -1).mkString(",")
+    val result2 = (10 to 1 by -1).mkString(",")
     println(result2)
 
-    val reverse2 = (1 to 100).reverse.by(-2).mkString(",")
+    val reverse2 = (1 to 10).reverse.by(-2).mkString(",")
     println(reverse2)
   }
 

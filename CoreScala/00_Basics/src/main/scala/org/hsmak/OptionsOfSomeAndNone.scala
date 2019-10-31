@@ -41,7 +41,7 @@ object OptionsOfSomeAndNone extends App {
   println
 
 
-  println("--------------------- Employe - with Option ----------------------")
+  println("--------------------- Employee - with Option ----------------------")
 
   object EmployeeWithOption {
 

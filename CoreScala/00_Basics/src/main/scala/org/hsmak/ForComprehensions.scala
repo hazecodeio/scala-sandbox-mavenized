@@ -48,7 +48,7 @@ object ForComprehensions extends App {
     println("flatMap(): " + resultFaltMap6)
 
     val result7 = for (i <- List(1, 2, 3, 4)
-                       if i % 2 == 0; // if is part of the previous line so why the senicolon ';' is here
+                       if i % 2 == 0; // if is part of the previous line so why the semicolon ';' is here
                        j <- List(5, 6, 7, 8)) yield (i, j) //couple even numbers from i with every number in j
     println("Another yield 1: " + result7)
 
@@ -109,6 +109,21 @@ object ForComprehensions extends App {
 
     yieldedNames.foreach(println)
     println
+
+    //Alternatively:
+
+    //animals.filter(_.age >= 10).map(_.name)
+
+    //animals.filter(_.age >= 10).collect{case s => s.name}
+
+    //animals.filter(_.age >= 10).collect{a => a match{
+    //     | case Animal(name, age, species) => name
+    //     | }}
+
+    //animals.filter(_.age >= 10).collect{_ match{ // notice the underscore '_'
+    //     | case Animal(name, age, species) => name
+    //     | }}
+
 
     println("""------------------ For Comprehension {} with " _ = println" -------------------"""")
 

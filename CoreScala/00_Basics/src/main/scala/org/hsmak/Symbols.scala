@@ -1,5 +1,8 @@
 package org.hsmak
 
+/**
+  * deprecated in 2.13
+  */
 object Symbols extends App {
 
   println("-------------------------------- Symbols: they have a pool of their own --------------------------------")

@@ -81,11 +81,11 @@ object InfixOperators extends App {
     /**
       * Bizarre
       *
-      * @param couple
+      * @param couple : Loves[Person, Person] <=> Person Loves Person
       * @return
       */
-    def announceCouple(couple: Person Loves Person) =
-    //Notice our type: Person loves Person!
+    //ToDo - Revisit to understand infix Types
+    def announceCouple(couple: Person Loves Person) = //Notice our type: Person Loves Person!
       couple.a.name + " is in love with " + couple.b.name
 
     val romeo = new Person("Romeo")
@@ -114,17 +114,17 @@ object InfixOperators extends App {
     /**
       * Bizarre
       *
-      * @param couple
+      * @param couple : Loves[Person, Person] <=> Person Loves Person
       * @return
       */
-    def announceCouple(couple: Person Loves Person) =
-    //Notice our type: Person loves Person!
+    //ToDo - Revisit to understand infix Types
+    def announceCouple(couple: Person Loves Person) = //Notice our type: Person Loves Person!
       couple.a.name + " is in love with " + couple.b.name
 
     val romeo = new Person("Romeo")
     val juliet = new Person("Juliet")
 
-    println(announceCouple(romeo loves juliet))// notice how it's more elegant
+    println(announceCouple(romeo loves juliet)) // notice how it's more elegant
   }
 
   AnotherInfixBizarre_02

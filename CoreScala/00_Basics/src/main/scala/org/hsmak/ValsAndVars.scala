@@ -41,11 +41,12 @@ object ValsAndVars extends App {
     } //instantiated when it's first called hence lazy val. This is only for val not var
     println(n)
 
-    lazy val a1 = 10 + b1 // without lazy this won't be possible
+    lazy val a1 = 10 + b1 // without lazy this won't be possible. It will print 10!!
     lazy val b1 = 5
     println(s"a1 + b1 = ${a1}")
 
     println("----------- Banding Variables to our Wills using Backticks! ----------- ")
+
     //bending var/val to a free text
     val `This is a val` = 123 // the backticks also allow to use keywords as var/val such as `import`
     println(`This is a val`)
@@ -66,12 +67,13 @@ object ValsAndVars extends App {
   object Val_LazyVal_Def {
     val builder = new StringBuilder
 
-    val x = { builder += 'x'; 1 }
-    lazy val y = { builder += 'y'; 2 }
-    def z = { builder += 'z'; 3 }
+    val x = { builder += 'x'; 1 }// block is executed only once; Eager
+    lazy val y = { builder += 'y'; 2 }// block is executed only once; Lazy
+    def z = { builder += 'z'; 3 }// black will be executed whenever z is referenced/called; analogous to a function call
 
-    z + y + x + z + y + x
+    val r = "" + z + y + x + z + y + x
 
+    println(r)
     println(builder.result())
   }
   Val_LazyVal_Def

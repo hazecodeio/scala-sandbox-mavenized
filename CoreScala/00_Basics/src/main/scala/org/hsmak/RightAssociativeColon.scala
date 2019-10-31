@@ -24,7 +24,7 @@ object RightAssociativeColon extends App {
 
   val ls = List(1,2)
 
-  println(11 :: 21 :: 31 :: ls) //prepend
+  println(11 :: 21 :: 31 :: ls) //prepend <- create a new List
   println(11 +: 21 +: 31 +: ls) //prepend
   println(ls :+ 11 :+ 21 :+ 31) //append
 
