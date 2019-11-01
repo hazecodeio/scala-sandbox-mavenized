@@ -17,7 +17,7 @@ object MonadicValidation extends App {
 
   println("----------------------------- ProceduralWay ----------------------------")
 
-  object ProceduralWay {
+  object ImperativeWay {
 
     try {
       val email = extractFromEmailString("EmailID@MyDomain.com")
@@ -35,7 +35,7 @@ object MonadicValidation extends App {
     }
   }
 
-  ProceduralWay
+  ImperativeWay
   println
 
 
@@ -45,7 +45,7 @@ object MonadicValidation extends App {
 
   /**
     * List of validators
-    * notice the lambda type of th elist: 'String => Option[ValidationError]'
+    * notice the lambda type of the list: 'String => Option[ValidationError]'
     */
   val validators: List[String => Option[ValidationError]] = List(isEmail_?)
 
@@ -70,7 +70,7 @@ object MonadicValidation extends App {
       //filter the errors out
       validators.map(_ (input)).filter(_.isDefined).map(_.get) match {
 
-        case List() => {
+        case Nil => {
           //empty list means no errors. All validators passed
           val splitInput = input.toLowerCase.split("@")
           Right(Email(splitInput(0), splitInput(1)))
@@ -97,8 +97,8 @@ object MonadicValidation extends App {
     def validateViaValidators(input: String): Either[List[ValidationError], Email] = {
       // filter the errors out
       //      validators.map(_(input)).filter(_.isDefined).map(_.get) match {
-      validators.flatMap(_ (input)) match {
-        case List() => {
+      validators.flatMap(_ (input)) match {// flatten List[Option[ValidationError]] to List[ValidationError]
+        case Nil => {
           //empty list means no errors. All validators passed
           val splitInput = input.toLowerCase.split("@")
           Right(Email(splitInput(0), splitInput(1)))

@@ -66,6 +66,7 @@ object ValueClasses extends App {
 
     /**
       * compiler will create an instance
+      * Possible Reason: maybe Pattern Matchers rely on the unapply() method defined in the CompanionObject??
       */
     ValueCaseClass(5) match {
       case ValueCaseClass(int) => int
