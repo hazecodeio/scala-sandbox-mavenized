@@ -2,11 +2,21 @@ package org.hsmak.mutable
 
 import scala.collection._
 
+
+/**
+  * Rule of Thumb:
+  *   - Any ops with ':' won't mutate the container
+  *   - Any ops with '=' will mutate the container
+  */
+/**
+  * ArrayBuffers use Array under the hood with initial default size.
+  * Once the ArrayBuffer is full, another Array of a larger size will be created and elements of old Array will be copied into the new one.
+  */
 object ArrayBuffers extends App {
 
   /**
     * Unlike other collections, Arrays are:
-    *   - WARNING: Mutable by default.... !
+    *   - WARNING: Mutable by default.... ! However, static size while ArrayBuff is dynamic in size
     *   - converted into primitive Arrays of [] by the JVM under the hood
     */
 
@@ -18,13 +28,14 @@ object ArrayBuffers extends App {
     ab += 200 // Mutate the ArrayBuffer. This can't be done for the immutable Array
     println("a += 200 : " + ab)
 
-    ab.append(34)
-    ab.prepend(-34)
-    println("append()/prepend(): " + ab)
-
     ab -= 1 //Remove an element from ArrayBuffer if exists
     println("a -= 1 : " + ab)
     println
+
+    ab.append(34) // note the op ":+" will append into a new ArrayBuffer
+    ab.prepend(-34) // note the op "+:" will prepend into a new ArrayBuffer
+    println("append()/prepend(): " + ab)
+
 
     println("------------- Mutating by adding/removing other collections --------------")
     ab ++= List(11, 22)

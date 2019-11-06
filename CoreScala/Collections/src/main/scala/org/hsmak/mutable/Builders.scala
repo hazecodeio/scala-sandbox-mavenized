@@ -11,8 +11,7 @@ object Builders extends App {
 
   object MyListBuilder {
 
-    // ToDo: not sure why it is a compile error when specifying the type!!!!!
-    //    val listBuilder:ListBuffer[Int] = List.newBuilder[Int] // returns ListBuffer[Int]
+    // val listBuilder:ListBuffer[Int] = List.newBuilder[Int] // returns ListBuffer[Int] -> that's of type "scala.collection.mutable.Builder[Int,List[Int]]"
 
     /* From the REPL:
 
@@ -26,7 +25,7 @@ object Builders extends App {
     res5: scala.collection.mutable.Builder[Int,List[Int]] = ListBuffer(1
      */
 
-    val listBuilder = List.newBuilder[Int] // returns ListBuffer[Int]
+    val listBuilder = List.newBuilder[Int] // returns ListBuffer[Int] -> of type "scala.collection.mutable.Builder[Int,List[Int]]"
 
     println(listBuilder)
 
@@ -49,10 +48,7 @@ object Builders extends App {
 
   object MyVectorBuilder {
 
-    // ToDo: not sure why it is a compile error when specifying the type!!!!!
-    //    val vectorBuilder:VectorBuilder[Int] = Vector.newBuilder[Int]
-
-    val vectorBuilder = Vector.newBuilder[Int] // returns VectorBuilder
+    val vectorBuilder = Vector.newBuilder[Int] // returns VectorBuilder -> of type scala.collection.mutable.ReusableBuilder[Int,scala.collection.immutable.Vector[Int]]
     println(vectorBuilder)
 
     vectorBuilder += 5

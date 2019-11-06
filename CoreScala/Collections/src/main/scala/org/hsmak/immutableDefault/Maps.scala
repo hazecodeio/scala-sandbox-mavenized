@@ -33,8 +33,11 @@ object Maps extends App {
     println(m2.get(10)) // return None
 
     println("--- two ways of getOrElse:")
-    println(m2.getOrElse(10, -1)) // return None
-    println(m2 get (10) getOrElse  (-1)) // return None
+    println(m2.getOrElse(10, -1)) // return -1
+    println(m2 get (10) getOrElse  (-1)) // return -1
+    println(m2 get (10) orElse  Some(-1)) // return Some(-1)
+    println(m2 get (10) orElse  None) // return None
+
 
     println(s"List of tuples using toList: ${m2.toList}")
     println(m2.keys) //return a Set

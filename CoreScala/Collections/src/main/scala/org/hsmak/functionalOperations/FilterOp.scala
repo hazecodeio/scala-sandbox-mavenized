@@ -41,7 +41,9 @@ object FilterOp extends App {
 
     val m = Map(1 -> "One", 2 -> "Two", 3 -> "Three", 4 -> "Four")
 
-    println(s"m.filterKeys: ${m.filterKeys(_ % 2 == 0)}")
+    //    @deprecated("Use .view.filterKeys(f). A future version will include a strict version of this method (for now, .view.filterKeys(p).toMap).", "2.13.0")
+    println(s"m.filterKeys: ${m.filterKeys(_ % 2 == 0).toSeq}")
+    println(s"m.filterKeys: ${m.view.filterKeys(_ % 2 == 0).toSeq}")
     println
 
 
@@ -61,28 +63,34 @@ object FilterOp extends App {
 
     val result9 = (1 to 4)
       .filter(_ % 2 == 0)
-      .flatMap(i => (5 to 8)
-        .map(j => (i, j)))
-    println("map(): " + result9)
+      .flatMap(i => (5 to 8).map(j => (i, j)))
+    println("result9 map(): " + result9)
 
     val result10 = (1 to 4)
-      .flatMap(i => (5 to 8)
-        .filter(_ < 7)
-        .map(j => (i, j)))
-    println("map(): " + result10)
+      .flatMap(i => (5 to 8).filter(_ < 7).map(j => (i, j)))
+    println("result10 map(): " + result10)
+    println
 
-    ////// using withFilter <- lazy evaluation
+
+    println("-------- using withFilter <- lazy evaluation? ------")
+
+    /*
+     * ToDo - withFilter() : how is it lazy evaluation?
+     *  Link: https://stackoverflow.com/questions/19617378/withfilter-instead-of-filter
+     * Description:
+     *  Note: the difference between c filter p and c withFilter p is that the former creates a new collection,
+     *  whereas the latter only restricts the domain of subsequent map, flatMap, foreach, and withFilter operations.
+     *
+     *  Note: might return different results for different runs, unless the underlying collection type is ordered.
+     */
     val result11 = (1 to 4)
       .withFilter(_ % 2 == 0)
-      .flatMap(i => (5 to 8)
-        .map(j => (i, j))) //removing toList will return into vector
-    println("map(): " + result11)
+      .flatMap(i => (5 to 8).map(j => (i, j))) //removing toList will return into vector
+    println("result11 map(): " + result11)
 
     val result12 = (1 to 4)
-      .flatMap(i => (5 to 8)
-        .withFilter(_ < 7)
-        .map(j => (i, j)))
-    println("map(): " + result12)
+      .flatMap(i => (5 to 8).withFilter(_ < 7).map(j => (i, j)))
+    println("result12 map(): " + result12)
   }
 
   FilterWith

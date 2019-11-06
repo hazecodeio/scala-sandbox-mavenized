@@ -3,7 +3,8 @@ package org.hsmak.functionalOperations
 object FoldAndReduce extends App {
 
 
-  //######################################## Fold/Reduce ################################
+  println("######################################## Fold/Reduce ################################")
+  println()
 
   object FoldAndReduceRunner {
     /**
@@ -27,7 +28,7 @@ object FoldAndReduce extends App {
     println("foldLeftResultWithPrintln: " + foldLeftResultWithPrintln)
     println("-------")
 
-    //////////// reduceLeft
+    println("---------------- reduceLeft ----------------")
 
     /**
       * signature
@@ -42,7 +43,7 @@ object FoldAndReduce extends App {
     println("reduceLeftResult: " + reduceLeftResult)
     println("------")
 
-    ////////////////// foldRight
+    println("---------------- foldRight ----------------")
 
     /**
       * signature
@@ -60,7 +61,7 @@ object FoldAndReduce extends App {
     println("foldRightResult: " + foldRightResult)
     println("-------------")
 
-    ////////// reduceRight
+    println("---------------- reduceRight ----------------")
 
     /**
       * signature (swapping [A] & [B] in the operation if compared to reduceLeft)
@@ -83,7 +84,7 @@ object FoldAndReduce extends App {
 
     println("-----------")
 
-    //////////////// using the underscore '_' fo rthe above operations
+    //////////////// using the underscore '_' for the above operations
 
     println("foldLeft(0)(_ + _): " + (1 to 10).foldLeft(0)(_ + _)) // first '_' for first param "total" and second '_' for second param "next"
 

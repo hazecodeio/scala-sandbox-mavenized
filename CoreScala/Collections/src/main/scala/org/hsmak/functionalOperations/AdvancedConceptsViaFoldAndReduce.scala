@@ -77,6 +77,8 @@ object AdvancedConceptsViaFoldAndReduce extends App {
     println(filteredIntsWithInference)
 
     filters.foldLeft(ints)((acc, nxt) => acc.filter(nxt))
+
+    filters.foldLeft(ints)(_.filter(_))
   }
 
   StreamLambdasOntoInts_ViaMethodReferences
@@ -154,6 +156,7 @@ object AdvancedConceptsViaFoldAndReduce extends App {
       else
         accumulator
     }))
+
   }
 
   StreamIntsOntoLambdas

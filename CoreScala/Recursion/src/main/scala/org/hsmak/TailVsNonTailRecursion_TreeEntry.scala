@@ -141,7 +141,7 @@ object TailVsNonTailRecursion_TreeEntry extends App {
 
     val b = Branch(List(Leaf("hello"), Branch(List(Leaf("hi"), Leaf("bye")))))
 
-    println("-- uniqueContent_TailRecursive_ViaSeq --")
+    println("--------------------------------- uniqueContent_TailRecursive_ViaSeq --")
     println(uniqueContent_TailRecursive_ViaSeq(List(b)))
 
     var s = System.currentTimeMillis();
@@ -149,7 +149,7 @@ object TailVsNonTailRecursion_TreeEntry extends App {
     var e = System.currentTimeMillis();
     println(e - s)
 
-    println("-- uniqueContent_TailRecursive_ViaList --")
+    println("--------------------------------- uniqueContent_TailRecursive_ViaList --")
     println(uniqueContent_TailRecursive_ViaList(List(b)))
 
     s = System.currentTimeMillis();
@@ -180,7 +180,7 @@ object TailVsNonTailRecursion_TreeEntry extends App {
 
     }
 
-    println("-- uniqueContent_TailRecursive_ViaListAndCasting --")
+    println("--------------------------------- uniqueContent_TailRecursive_ViaListAndCasting --")
     println(uniqueContent_TailRecursive_ViaListAndCasting(List(b)))
 
     s = System.currentTimeMillis();

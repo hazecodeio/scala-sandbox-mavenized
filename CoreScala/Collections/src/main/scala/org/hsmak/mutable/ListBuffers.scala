@@ -2,6 +2,14 @@ package org.hsmak.mutable
 
 import scala.collection._
 
+/**
+  * Rule of Thumb:
+  *   - Any ops with ':' won't mutate the container
+  *   - Any ops with '=' will mutate the container
+  */
+/**
+  * ListBuffer uses List under the hood; which is a LinkedList implementation
+  */
 object ListBuffers extends App {
 
   object MyListBuffer {
@@ -9,16 +17,8 @@ object ListBuffers extends App {
     // using the CompanionObject
     val l1 = mutable.ListBuffer(1, 2, 3, 4)
 
-
     // using the CompanionObject.apply()
     val l2 = mutable.ListBuffer.apply(1, 2, 3, 4)
-
-    // '::' is right associative operator
-    val lColon = 1 :: 2 :: 3 :: 4 :: Nil
-    println(s"lColon: ${lColon}")
-
-    val lColon2 = Nil.::(4).::(3).::(2).::(1)
-    println(s"lColon2: ${lColon2}")
 
     println(s"head: ${l1.head}")
     println(s"tail: ${l1.tail}")
@@ -43,7 +43,11 @@ object ListBuffers extends App {
 
     println("------------- Combining ListBuffers using '++' ---------")
 
-    println(l1 ++ l2)
+    println(l1 ++: l2) // won't mutate l1
+    println(l1)
+
+    println(l1 ++= l2) // will mutate l1
+    println(l1)
 
   }
 

@@ -26,13 +26,14 @@ object Tuples extends App {
 
   object MyTuple {
 
+    case class Department(name: String)
+
     val u = ("4", Department("QA")) // check scala api for tuples: https://www.scala-lang.org/api/current/scala/Tuple2.html
-    val u2 = u.swap // only Tuple2. it doesn't make sense to have this method for tuple size > 2
     println("-------- swapping in Tuple2 ------------")
     println(u)
 
-    case class Department(name: String)
 
+    val u2 = u.swap // only Tuple2. it doesn't make sense to have this method for tuple size > 2
     println(u2)
     println(u) // because scala is immutable by nature the original will stay the same
   }

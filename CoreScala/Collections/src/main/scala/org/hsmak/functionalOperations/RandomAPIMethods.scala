@@ -16,6 +16,7 @@ object RandomAPIMethods extends App {
     println((1 to 100).takeRight(10))
     println((1 to 100).takeWhile(x => x % 50 != 0)) // take the first elements that satisfy the predicate then stop. Use filter if to return all elemnts that satisfy the predicate
     println((1 to 100).drop(80)) //drop the first 80 items
+    println((1 to 100).dropRight(80)) //drop the last 80 items
     println((1 to 100).dropWhile(x => x % 80 != 0)) // drop as long it satisfies the predicate. Once true stop dropping and take the rest of the collection
 
     println(List.fill(10) {
@@ -56,7 +57,7 @@ object RandomAPIMethods extends App {
     println(groceries.zipWithIndex.map(t => (t._1, t._2 + 1)).map(_.swap).map(t => s"${t._1}. ${t._2}").mkString("\n"))
     println("-------------")
 
-    //use view for lazyiness -> all operations taking place after 'view.' will not be called till the terminal op is called i.e the reduce op 'mkString'
+    //use view for laziness -> all operations taking place after 'view.' will not be called till the terminal op is called i.e the reduce op 'mkString'
     println(groceries.view.zipWithIndex.map(t => (t._1, t._2 + 1)).map(_.swap).map(t => s"${t._1}. ${t._2}").mkString("\n"))
     println("-------------")
 

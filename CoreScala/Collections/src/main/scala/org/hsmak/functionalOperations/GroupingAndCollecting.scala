@@ -39,6 +39,7 @@ object GroupingAndCollecting extends App {
   println("----------------- UsingFilters -----------------")
 
   object UsingFilters {
+
     println("print the animals whose age is < 10")
     animals.filter(_.age < 10).map(_.name).foreach(println)
     println
@@ -131,15 +132,37 @@ object GroupingAndCollecting extends App {
     val speciesToAnimals: Map[Species, Seq[Animal]] = animals.groupBy(_.species)
     println(speciesToAnimals)
 
-    private val speciesToVectorOfAnimals: Map[Species, Vector[Animal]] = animals.toVector.groupBy(_.species)
+    val speciesToVectorOfAnimals: Map[Species, Vector[Animal]] = animals.toVector.groupBy(_.species)
     println(speciesToVectorOfAnimals)
   }
 
   UsingGroupBy
   println
 
+  // ToDo - groupMap()
+  object UsingGroupMap {
+    val mapOfSpeciesAndTheirNames: Map[Species, Seq[String]] = animals.groupMap(_.species)(_.name)
+    println(mapOfSpeciesAndTheirNames)
+  }
+
+  UsingGroupMap
+  println
+
+  // ToDo - groupMapReduce()
+  // It is equivalent to `groupBy(key).mapValues(_.map(f).reduce(reduce))`, but more efficient.
+  /**
+    * perform a function on the list of values of that particular key
+    */
+  object UsingGroupMapReduce {
+    val mapOfSpeciesAndTheirAgesSummed: Map[Species, Int] = animals.groupMapReduce(_.species)(_.age)(_ + _)
+    println(mapOfSpeciesAndTheirAgesSummed)
+  }
+
+  UsingGroupMapReduce
+  println
+
   object UseLiftInsteadOfIndex {
-    //usie lift() to avoid Excpetions
+    //using lift() to avoid Exceptions
     animals.lift(9).foreach(println) //get the 10th index if exists otherwise return None.
   }
 
