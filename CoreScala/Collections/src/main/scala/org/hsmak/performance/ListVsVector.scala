@@ -15,7 +15,7 @@ object ListVsVector extends App {
     * measure elapsed time
     *
     * @param f
-    * @param A
+    * @tparam A
     * @return
     */
   def time[A](msg: String)(f: => A): A = {
