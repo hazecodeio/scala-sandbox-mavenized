@@ -77,6 +77,9 @@ object SortingAndOrdering extends App {
   /**
     * - works with containers of complex/custom types when Scalal doesn't know how to sort it
     * - override the natural ordering
+    *
+    * - Notice how it actually calls sorted() and Ordering.fromLessThan()
+    *     def sortWith(lt: (A, A) => Boolean): C = sorted(Ordering.fromLessThan(lt))
     */
   object SortWithMethod {
 
@@ -101,7 +104,8 @@ object SortingAndOrdering extends App {
   println("############ SortByMethod ###############")
 
   /**
-    *
+    * - Notice how it actually calls sorted() and Ordering.fromLessThan()
+    *     def sortBy[B](f: A => B)(implicit ord: Ordering[B]): C = sorted(ord on f)
     */
   object SortByMethod {
 
@@ -142,10 +146,13 @@ object SortingAndOrdering extends App {
 
     import java.time.LocalDateTime
 
-    val firstDate = LocalDateTime.now
-    val secondDate = LocalDateTime.now
+    val firstDate = LocalDateTime.now // now
 
-    val seqOfDates = Seq(firstDate, secondDate)
+    val secondDate = LocalDateTime.now.plusDays(5) // after now
+
+    val thirdDate = LocalDateTime.now.minusDays(2) // before now
+
+    val seqOfDates = Seq(firstDate, secondDate, thirdDate)
     println(seqOfDates)
 
     println("-- DateOrdering (_ isAfter _) --")
@@ -157,6 +164,11 @@ object SortingAndOrdering extends App {
     // hence commented and supplied explicitly
     //    implicit val dateOrdering_Inc = Ordering.fromLessThan[LocalDateTime](_ isBefore _) // equivalent to  "_ > _"
     println(seqOfDates.sorted(Ordering.fromLessThan[LocalDateTime](_ isBefore _))) // Again an implicit ordering must be defined before hand
+    println
+
+    println("----- via sortWith ------")
+    println(seqOfDates.sortWith(_ isAfter _))
+    println(seqOfDates.sortWith(_ isBefore _))
 
   }
 
