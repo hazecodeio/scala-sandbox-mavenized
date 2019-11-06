@@ -7,6 +7,10 @@ package org.hsmak.functionalOperations
   * general formula for list input:
   *     - lambdas.foldLeft(seeds)((accs, func) => accs.Process(func))// re-stream accs and apply func on each
   *
+  * Observation:
+  *     - 'Seed' doesn't have to be an empty List/String/etc.
+  *     - In this case. the Seed was the List of Ints needed transformations
+  *
   */
 object AdvancedConceptsViaFoldAndReduce extends App {
 
@@ -131,12 +135,12 @@ object AdvancedConceptsViaFoldAndReduce extends App {
   object StreamIntsOntoLambdas {
     val ints = List(1, 2, 22, 33, 44, 45, 21, 12, 121, 60, 99, 98, 26)
 
-    val isDivisiblBy11 = (x: Int) => (x % 11 == 0)
+    val isDivisibleBy11 = (x: Int) => (x % 11 == 0)
 
     val isGreaterThan40 = (x: Int) => x > 40
 
     val filters: List[Int => Boolean] = List(
-      isDivisiblBy11, //Method Reference
+      isDivisibleBy11, //Method Reference
       isGreaterThan40 //Method Reference
     )
 
