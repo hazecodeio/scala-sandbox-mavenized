@@ -10,6 +10,12 @@ object ParametrizedClasses extends App {
     def coupleWith[U](u: U): Box[Couple[T, U]] = Box(Couple(t, u))
   }
 
+  println("--------------------- Swapping Method -----------------------")
+  case class Couple[A, B](first: A, second: B) {
+    //    def swap(): Couple[B, A] = new Couple[B, A](second, first)
+    def swap() = new Couple[B, A](second, first) // return type will be inferred
+  }
+
   val intBox1 = new Box(1)
 
   // in Java -> public class Box<T>{public Box(T t)}
@@ -27,11 +33,7 @@ object ParametrizedClasses extends App {
   println(new Couple(10, "Scala").toString)
   println(Couple[Int, String](10, "Scala"))
 
-  println("--------------------- Swapping Method -----------------------")
-  case class Couple[A, B](first: A, second: B) {
-    //    def swap(): Couple[B, A] = new Couple[B, A](second, first)
-    def swap() = new Couple[B, A](second, first) // return type will be inferred
-  }
+
 
   println(couple)
   Couple("Hello", Couple(3, 22.2))

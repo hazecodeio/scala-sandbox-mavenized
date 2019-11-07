@@ -92,7 +92,7 @@ object ClassesFundamentals extends App {
 
   object ConstructorWithDefaultArgument {
 
-    case class Employee(val firstName: String, var lastName: String, age:Int = 30)//supllying default value
+    case class Employee(val firstName: String, var lastName: String, age:Int = 30)//supplying default value
 
 
     println(Employee(lastName = "llll", firstName = "ffff"))// this actually calls the constructor with the age argument

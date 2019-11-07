@@ -68,7 +68,7 @@ object Inheritance extends App {
       * 'val' is the default to constructor params
       * if you don't like what case provides you can always override
       * used in pattern matching
-      * it makes the following possiple: val Department(n) = dept// param already assigned in dept will be extracted and assigned to 'n'
+      * it makes the following possible: val Department(n) = dept// param already assigned in dept will be extracted and assigned to 'n'
       * and so on
       *
       * however, case classes can't be extended/subclassed, maybe because the copy() will always return an instance of the superclass; which violate Liskov Substitution principle

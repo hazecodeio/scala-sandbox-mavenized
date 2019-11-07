@@ -25,15 +25,36 @@ object Constructors extends App {
       /**
         * Overloaded constructor
         *
-        * @param firstname
+        * @param firstName
         * @param lastName
         * @return
         */
-      def this(firstname: String, lastName: String) = this(firstname, lastName, -1)
+      def this(firstName: String, lastName: String) = this(firstName, lastName, -1)
 
     }
 
-    println(new Employee("hhhh", "lllllll"))
+    /*
+     * ToDo - So we there aren't apply() methods in the CompanionObject for overloaded constructor??
+     *    - override the CompanionObject and overload the apply() method in it
+     */
+    println( new Employee("hhhh", "lllllll"))
+
+    /**
+      * Overriding the CompanionObject Employee
+      */
+    object Employee{
+      /**
+        * Overloading the apply() method
+        *
+        * @param firstName
+        * @param lastName
+        * @return
+        */
+
+      def apply(firstName: String, lastName: String): Employee = new Employee(firstName, lastName)
+    }
+
+    println( Employee("hhhh", "lllllll"))
 
   }
 
@@ -60,8 +81,7 @@ object Constructors extends App {
 
     case class Employee(val firstName: String, var lastName: String, age: Int = 30)
 
-    //supllying default value
-
+    //supplying default value
 
     println(Employee(lastName = "llll", firstName = "ffff")) // this actually calls the constructor with the age argument
   }
@@ -87,7 +107,7 @@ object Constructors extends App {
         */
       def copy(firstName: String = this.firstName,
                lastName: String = this.lastName,
-               age: Int = this.age) = new Employee(firstName, lastName, age)
+               age: Int = this.age) = new Employee(firstName, lastName, age) // you can omit the 'new' keyword
 
       def changeLastName(ln: String) = Employee(firstName, ln)
     }

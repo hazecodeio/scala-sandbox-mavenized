@@ -15,8 +15,10 @@ object JavaStyleConstructors extends App {
   case class EmployeeJavaStyle(@BeanProperty val firstName: String,
                                @BeanProperty var lastName: String)//warning: Scala programmers don't like vars but this is for illustration
 
-  val e = EmployeeJavaStyle("FirstName", "Lastname")
+  val e = EmployeeJavaStyle("FirstName", "LastName")
 
   e.setLastName("ModifiedLastName") // JavaStyle Setter
   println(e)
+  println(e.firstName)
+  println(e.getFirstName)
 }
