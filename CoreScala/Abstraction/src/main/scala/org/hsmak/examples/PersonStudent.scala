@@ -34,12 +34,12 @@ object ClassesConcrete {
     /**
       * overloading the main constructor
       */
-    def this() {
+    def this() = { // looks like you can omit the '=' if it's overriding constructor??
       // use Option instead of null
       this("none", 0)
     }
 
-    def this(name: String) {
+    def this(name: String) = { // looks like you can omit the '=' if it's overriding constructor??
       this(name, 0)
     }
 

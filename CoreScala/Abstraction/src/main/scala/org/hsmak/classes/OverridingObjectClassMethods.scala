@@ -1,6 +1,11 @@
 package org.hsmak.classes
 
-object OverridingObjectMethods extends App {
+/**
+  * Note:
+  *     - there is no Object class in Scala
+  *     - Scala has 'Any' is parent class of all classes
+  */
+object OverridingObjectClassMethods extends App {
 
   object OverrideToStringEqualHash {
 

@@ -45,7 +45,7 @@ object ControlAbstraction {
     * @return
     */
   def filesEnding(query: String) =
-    filesMatching(_.endsWith(query)) // this is a closure becaus eof the free variable "query"
+    filesMatching(_.endsWith(query)) // this is a closure because of the free variable "query"
 
   /**
     * 'filesContaining' is one behavioral concrete implementation for the ControlAbstraction in 'filesMatching'

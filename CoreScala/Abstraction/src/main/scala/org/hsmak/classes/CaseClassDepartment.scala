@@ -11,8 +11,8 @@ object CaseClassDepartment extends App {
     * it makes the following possible (Pattern Extractors): val Department(n) = dept// param already assigned in dept will be extracted and assigned to 'n'
     * and so on <- the use of 'unapply()'
     *
-    * WRONG! -> however, case classes can't be extended/subclassed,
-    * maybe because the copy() will always return an instance of the superclass; which violate Liskov Substitution principle
+    * However, case-to-case class inheritance isn't possible!
+    *   - Why? maybe because the copy() will always return an instance of the superclass; which violate Liskov Substitution principle??
     *
     * @param name
     */
