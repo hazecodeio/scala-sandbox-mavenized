@@ -129,7 +129,6 @@ object GenericTypeResolution extends App {
     inspectListOfT(animals)
     println
 
-    Nil
     println("-- Having fun with collect{} --")
     inspectListOfT(List(Dog, Cat, Cow, Horse).asInstanceOf[List[Animal]].collect {
       case fa: FarmAnimal => fa

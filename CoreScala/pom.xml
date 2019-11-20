@@ -92,14 +92,17 @@
                 <!-- see http://davidb.github.com/scala-maven-plugin -->
                 <groupId>net.alchim31.maven</groupId>
                 <artifactId>scala-maven-plugin</artifactId>
-                <version>3.4.4</version>
-                <executions>
+                <version>4.3.0</version>
+                <configuration>
+                    <recompileMode>incremental</recompileMode>
+                </configuration>
+                <!--<executions>
                     <execution>
                         <configuration>
                             <recompileMode>incremental</recompileMode>
                         </configuration>
                     </execution>
-                </executions>
+                </executions>-->
             </plugin>
 
             <plugin>

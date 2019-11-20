@@ -5,7 +5,7 @@ object Sets extends App {
   object MySet {
 
     // using the CompanionObject
-    val s = Set(1, 2, 3, 4)// recall the magic mathod 'apply()'
+    val s = Set(1, 2, 3, 4)// recall the magic method 'apply()'
     println(s)
 
     // using the CompanionObject.apply()

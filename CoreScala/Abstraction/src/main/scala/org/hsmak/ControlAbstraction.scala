@@ -1,5 +1,7 @@
 package org.hsmak
 
+import java.io.File
+
 /**
   * In Scala, it's called ControlAbstraction:
   *     - passing a function as a param; aka method reference
@@ -23,6 +25,10 @@ object ControlAbstraction {
   private def filesHere = (new java.io.File("./")).listFiles
 
   /**
+   * ToDo - How about passing a list of filters?
+   * @see [[org.hsmak.functionalOperations.AdvancedConceptsViaFoldAndReduce.StreamLambdasOntoInts]]
+   */
+  /**
     * ControlAbstraction:
     *     - passing a function
     *     - Strategy design pattern
@@ -35,7 +41,20 @@ object ControlAbstraction {
     for (file <- filesHere; if matcher(file.getName))
       yield file
 
+  /**
+    * Alternative to the previous method using FunctionalOps instead of using ForComprehensives
+    *
+    * @param matcher
+    * @param files
+    * @return
+    */
+  private def filesMatching2(matcher: String => Boolean, files: Seq[File]) =
+    files.filter(f => matcher(f.getName))
 
+  def filesEnding2(query: String) =
+    filesMatching2(_.endsWith(query), filesHere) // this is a closure because of the free variable "query"
+
+  println("-------------------------------- ")
   // you can think of the below as anonymous classes or abstract methods implementations
 
   /**
