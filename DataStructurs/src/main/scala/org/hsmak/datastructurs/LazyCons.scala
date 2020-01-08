@@ -4,7 +4,7 @@ sealed trait LazyCons[+A]
 
 case object Empty extends LazyCons[Nothing]
 
-case class Cons[+A](h: () => A, t: () => LazyCons[A]) extends LazyCons[A]
+case class LZCons[+A](h: () => A, t: () => LazyCons[A]) extends LazyCons[A]
 
 object LazyCons {
   /**
@@ -15,16 +15,16 @@ object LazyCons {
     * @tparam A
     * @return
     */
-  def cons[A](h: => A, t: => LazyCons[A]) = {
+  def lzCons[A](h: => A, t: => LazyCons[A]) = {
     lazy val head = h
     lazy val tail = t
-    Cons(() => head, () => tail)
+    LZCons(() => head, () => tail)
   }
 
   //ToDo - what will happen if explicit type is removed
   def empty[A]: LazyCons[A] = Empty
 
   def apply[A](as: A*): LazyCons[A] = {
-    if (as.isEmpty) Empty else cons(as.head, apply(as.tail: _*))
+    if (as.isEmpty) Empty else lzCons(as.head, apply(as.tail: _*))
   }
 }

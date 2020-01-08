@@ -7,12 +7,12 @@ sealed trait SinglyLinkedList[+A]
 
 case object SLLNil extends SinglyLinkedList[Nothing]
 
-case class Cons[+A](head: A, next: SinglyLinkedList[A]) extends SinglyLinkedList[A]{
+case class SLLCons[+A](head: A, next: SinglyLinkedList[A]) extends SinglyLinkedList[A]{
   def headOption = Some(head)
   def tail = next
 }
 
-object Cons {
+object SLLCons {
   /**
     * Construct a list via a repeating parameter
     *
@@ -22,10 +22,10 @@ object Cons {
     */
   def apply[A](as: A*): SinglyLinkedList[A] = {
     if (as.isEmpty) SLLNil
-    else Cons(as.head, apply(as.tail: _*))
+    else SLLCons(as.head, apply(as.tail: _*))
   }
 }
 
 object Runner extends App{
-  println(Cons(1,2,3,4))
+  println(SLLCons(1,2,3,4))
 }
