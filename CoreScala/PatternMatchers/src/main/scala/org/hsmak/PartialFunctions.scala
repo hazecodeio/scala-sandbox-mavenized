@@ -33,6 +33,11 @@ object PartialFunctions extends App {
     case Animal(_, "Dog") => "woof!"
   }
 
+  // expanding the lambda expression
+  /*def woof: PartialFunction[Animal, String] = (animal: Animal) => animal match {
+    case Animal(_, "Dog") => "woof!"
+  }*/
+
   println(woof(pitbull))
   println
 
