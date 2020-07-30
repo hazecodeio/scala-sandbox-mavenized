@@ -139,6 +139,10 @@ object Implicits_Basics extends App {
 
       //This will automatically convert a method param of type String into a URL <- if the method doesn't have one!?!?
       implicit def stringToUrl(str: String): URL = new URL(str)
+      //implicit val stringToUrl = (str: String) => new URL(str) // Similarly, we can use lambda expression, assigned to a val
+      /*implicit val stringToUrl = new Function1[String, URL] { // Similarly, we can use trait Function1, assigned to a val
+        override def apply(str: String): URL = new URL(str)
+      }*/
 
       /**
         * This wrapper will modify the class String and add the implemented method to it
@@ -165,7 +169,8 @@ object Implicits_Basics extends App {
 
     import Implicits.stringToUrl
 
-    println(printURL("http://www.google.com"))
+    println(
+      ("http://www.google.com"))
 
     println("-- using implicit class <- better and expressive")
 

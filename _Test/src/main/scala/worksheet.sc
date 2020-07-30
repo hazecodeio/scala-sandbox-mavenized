@@ -1,39 +1,29 @@
-import scala.annotation.tailrec
+package object resolution {
+  implicit val a: TS = new TS("val in package object") // (1)
+}
 
-def fibonacci(n: Long): Long = {
+package resolution {
+  class TS(override val toString: String)
+  class Parent {
+    // implicit val c: TS = new TS("val in parent class") // (2)
+  }
+  trait Mixin {
+    // implicit val d: TS = new TS("val in mixin") // (3)
+  }
+  // import Outer._ // (4)
+  class Outer {
+    // implicit val e: TS = new TS("val in outer class") // (5)
+    // import Inner._ // (6)
 
-  import scala.annotation.tailrec
-  @tailrec
-  def fib(n: Long, count: Long, prev: Long, curr: Long): Long = {
-    n match {
-      case 0 => 0
-      case 1 => 1
-      case w if w == count => curr
-      case _ => fib(n, count + 1, curr, prev + curr)
+    class Inner(/*implicit (7) */ val arg: TS = implicitly[TS]) extends Parent with Mixin {
+      // implicit val f: TS = new TS("val in inner class") (8)
+      private val resolve = implicitly[TS]
+    }
+    object Inner {
+      implicit val g: TS = new TS("val in companion object")
     }
   }
-
-  fib(n, 1, 0, 1)
-}
-
-println("Fibonacci of 10th: " + fibonacci(10))
-
-
-def foldRight[A, B](as: List[A], z: B)(f: (A, B) => B): B = {
-  as match{
-    case Nil => z
-    case x :: xs => f(x, foldRight(xs, z)(f))//non-tail recursive
+  object Outer {
+    implicit val h: TS = new TS("val in parent companion object")
   }
 }
-
-foldRight(1::2::3::Nil, 0)(_ + _)
-
-@tailrec
-def foldLeft[A, B](as: List[A], z: B)(f: (B, A) => B): B = {
-  as match {
-    case Nil => z
-    case x :: xs => foldLeft(xs, f(z, x))(f)//tail recursive
-  }
-}
-
-foldLeft(1::2::3::Nil, 0)(_ + _)
