@@ -3,8 +3,11 @@ package org.hsmak
 /**
   * Lazy vals are instantiation involves locking mechanism
   */
-object CostOfLazyVals {
-  //  object CostOfLazyVals extends App { // This caused a NullPointerException when all Methods/Threads-Creation where part of main
+object CostOfLazyVals { //} extends App {
+  /** Update: Actually it was a var ordering issue of "threadName"
+    * This caused a NullPointerException when all Methods/Threads-Creation where part of main
+    */
+  // object CostOfLazyVals extends App {
 
   def main(args: Array[String]): Unit = {
     myFunction()
@@ -55,6 +58,13 @@ object CostOfLazyVals {
       "foo"
     }
 
+
+    val threadName = {
+      val tn = new ThreadLocal[String]()
+      tn.set(Thread.currentThread().getName)
+      tn
+    }
+
     //This will finish quickly
     println(s"before creating the new thread: ${threadName.get()}: ${System.currentTimeMillis()} ")
 
@@ -81,7 +91,7 @@ object CostOfLazyVals {
         println(s"inside3: ${threadName.get()}: ${System.currentTimeMillis()} ")
       }).start()*/
 
-    new Thread() {//
+    new Thread() { //
       override def run(): Unit = {
         println(s"inside1: ${threadName.get()}: ${System.currentTimeMillis()} ")
         println(s"inside2: ${threadName.get()}: $variable")
@@ -92,12 +102,6 @@ object CostOfLazyVals {
     println(s"outside: ${threadName.get}: $variable")
     println(s"outside: ${threadName.get}: ${System.currentTimeMillis()}")
 
-  }
-
-  val threadName = {
-    val tn = new ThreadLocal[String]()
-    tn.set(Thread.currentThread().getName)
-    tn
   }
 
 }
