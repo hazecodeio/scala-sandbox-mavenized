@@ -25,14 +25,13 @@ http://www.scalatest.org/
 One way to use ScalaTest is to help make JUnit or TestNG tests more
 clear and concise. Here's an example:
 */
-import org.junit.Test
 
-import scala.collection._
+import org.junit.Test
 import org.scalatest.Assertions
 import org.scalatest.funsuite.AnyFunSuite
-import org.specs2.runner.JUnitRunner
-//import org.junit.Test
-//import org.scalatest.funsuite.AnyFunSuite
+import org.scalatest.matchers.should
+
+import scala.collection._
 
 class StackSuite extends Assertions {
 
@@ -55,18 +54,14 @@ class StackSuite extends Assertions {
 /*
 Here's an example of a FunSuite with Matchers mixed in:
 */
-import org.scalatest._
-import matchers._
 
-
-import org.junit.runner.RunWith
 //import org.scalatest.junit.JUnitRunner
-@RunWith(classOf[JUnitRunner])
+//@RunWith(classOf[JUnitRunner])
 class ListSuite extends AnyFunSuite with should.Matchers {
 
   test("An empty list should be empty") {
-    List() should be ('empty)
-    Nil should be ('empty)
+    List() should be('empty)
+    Nil should be('empty)
   }
 
   test("A non-empty list should not be empty") {
@@ -90,7 +85,8 @@ A Map
 - should only contain keys and values that were added to it
 - should report its size as the number of key/value pairs it contains
 */
-import funspec._
+
+import org.scalatest.funspec._
 
 class ExampleSpec extends AnyFunSpec {
 

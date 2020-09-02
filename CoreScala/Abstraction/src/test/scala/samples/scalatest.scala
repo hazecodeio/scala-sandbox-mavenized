@@ -27,6 +27,8 @@ clear and concise. Here's an example:
 */
 import org.junit.Test
 import org.scalatest.Assertions
+import org.scalatest.flatspec.AnyFlatSpec
+import org.scalatest.funspec.AnyFunSpec
 import org.scalatest.funsuite.AnyFunSuite
 import org.specs2.runner.JUnitRunner
 
@@ -60,7 +62,7 @@ import org.scalatest._
 import org.scalatest.matchers._
 
 //import org.scalatest.junit.JUnitRunner
-@RunWith(classOf[JUnitRunner])
+//@RunWith(classOf[JUnitRunner])
 class ListSuite extends AnyFunSuite with should.Matchers {
 
   test("An empty list should be empty") {
