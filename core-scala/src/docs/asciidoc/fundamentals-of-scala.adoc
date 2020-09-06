@@ -1,0 +1,90 @@
+= Fundamentals of Scala
+HusAk <hus.ak@example.org>
+v1.0, 2018-11-05
+:toc:
+:toclevels: 3
+:icons: font
+:source-highlighter: rouge
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/scala]
+
+This is a user manual for an example project.
+
+== Introduction
+
+This project does something.
+We just haven't decided what that is yet.
+
+== Source Code
+
+
+
+[source,scala]
+.Scala code from project
+----
+include::{sourcedir}/org/hsmak/App.scala[tags=contains,indent=0]
+----
+<1> println statement
+
+
+=== t
+
+==== w
+
+This page was built by the following command:
+
+ $ mvn
+
+== Random Fact about Scala
+
+* VAL VS DEF
+** The right hand side of a *def* definition is evaluated on each use.
+** The right hand side of a *val* definition is evaluated at the point of the definition itself. Afterwards, the name refers to the value.
+
+* NESTED FUNCTIONS
+** We can achieve this and at the same time avoid *“name-space pollution”* by putting the auxiliary functions inside the main function
+
+* TAIL RECURSION
+** if you have a recursive function that calls itself as its last action, then you can reuse the stack frame of that function. This is called tail recursion.
+
+* NONE TAIL RECURSIVE
+** recursive call is not a tail recursive call when it becomes evident in the reduction sequence that there’s a buildup of intermediate results we have to keep until we can compute the final value.
+
+* ALGEBRAIC DATA TYPES
+** Data types defined with sealed trait and case classes are called algebraic data types. An algebraic data type definition can be thought of as a set of possible values.
+
+* Data Abstraction
+** This ability to choose different implementations of the data without affecting clients is called data abstraction.
+
+
+* Implicit Constructors
+** In Scala, a class implicitly introduces a constructor. This one is called the primary constructor of the class. +
+The primary constructor:
+*** takes the parameters of the class
+*** and executes all statements in the class body (such as the require a couple of slides back).
+
+* Singleton Objects
+** In the IntSet example, one could argue that there is really only a single empty IntSet. +
+So it seems overkill to have the user create many instances of it. +
+This defines a singleton object named Empty. No other Empty instances can be (or need to be) created. Singleton objects are values, so Empty evaluates to itself. +
+We can express this case better with an object definition: +
+
+[source,scala]
+----
+object Empty extends IntSet {
+  def contains(x: Int): Boolean = false
+  def incl(x: Int): IntSet = new NonEmpty(x, Empty, Empty)
+}
+
+----
+
+* DYNAMIC BINDING
+** Object-oriented languages (including Scala) implement dynamic method dispatch.
+** This means that the code invoked by a method call depends on the runtime type of the object that contains the method.
+** Dynamic dispatch of methods is analogous to calls to higher-order functions.
+** Can we implement one concept in terms of the other?
+   *** Objects in terms of higher-order functions?
+   *** Higher-order functions in terms of objects?
+
+* EXTENSIBILITY OF CASE CLASSES
+  ** A class can extend another class, whereas a case class can not extend another case class (because it would not be possible to correctly implement their equality).
