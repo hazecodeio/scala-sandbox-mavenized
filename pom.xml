@@ -122,16 +122,10 @@
                     <execution>
                         <goals>
                             <goal>compile</goal>
+                            <goal>testCompile</goal><!--compile test classes-->
                         </goals>
                     </execution>
                 </executions>
-                <!--<executions>
-                    <execution>
-                        <configuration>
-                            <recompileMode>incremental</recompileMode>
-                        </configuration>
-                    </execution>
-                </executions>-->
             </plugin>
 
             <plugin>
@@ -164,8 +158,15 @@
                     <groupId>org.scalatest</groupId>
                     <artifactId>scalatest-maven-plugin</artifactId>
                     <version>2.0.0</version>
+                    <executions>
+                        <execution>
+                            <id>test</id>
+                            <goals>
+                                <goal>test</goal><!--run the test suites/cases/classes-->
+                            </goals>
+                        </execution>
+                    </executions>
                 </plugin>
-
 
                 <!--
                     This is also needed so "mvn site" would call "scala:doc" to generate the Scaladoc???
