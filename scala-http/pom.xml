@@ -24,6 +24,14 @@
             <artifactId>scala-xml_${scala.compat.version}</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.scalaj</groupId>
+            <artifactId>scalaj-http_${scala.compat.version}</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.typesafe.play</groupId>
+            <artifactId>play_${scala.compat.version}</artifactId>
+        </dependency>
+        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
         </dependency>
