@@ -22,7 +22,7 @@ We just haven't decided what that is yet.
 [source,scala]
 .Scala code from project
 ----
-include::{sourcedir}/org/hsmak/App.scala[tags=contains,indent=0]
+include::{sourcedir}/_oo_basics/App.scala[tags=contains,indent=0]
 ----
 <1> println statement
 
