@@ -69,7 +69,7 @@ object CostOfLazyVals { //} extends App {
     println(s"before creating the new thread: ${threadName.get()}: ${System.currentTimeMillis()} ")
 
     /**
-      * Create a new thread
+      * Create a new thread by passing Runnable block to the constructor
       *
       */
 
@@ -81,7 +81,7 @@ object CostOfLazyVals { //} extends App {
 
     /**
       * The below is equivalent to the above
-      * the Lambda is expanded
+      * the Runnable Lambda is expanded
       */
     /*new Thread( // <- notice the paren (
       // Lambda is an implementation of the 'void run()" coming from Runnable Java interface
@@ -91,7 +91,7 @@ object CostOfLazyVals { //} extends App {
         println(s"inside3: ${threadName.get()}: ${System.currentTimeMillis()} ")
       }).start()*/
 
-    new Thread() { //
+    new Thread() { // Anonymous Inner Class; i.e. extending Thread class
       override def run(): Unit = {
         println(s"inside1: ${threadName.get()}: ${System.currentTimeMillis()} ")
         println(s"inside2: ${threadName.get()}: $variable")
