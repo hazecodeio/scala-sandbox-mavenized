@@ -25,6 +25,11 @@ object AppRunner extends App {
   even.foreach(println) //inferred lamda expression
   even.foreach(a => println(a)) //expanded lamda expression
 
+  import cats.Semigroup
+
+  print("Semigroup[Int => Int]:")
+  println(Semigroup[Int => Int].combine(_+1, _*10).apply(6))
+
 }
 
 
