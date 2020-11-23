@@ -22,8 +22,8 @@ object AppRunner extends App {
     println(i)
   //print the functional way
   println("use ForEach:")
-  even.foreach(println) //inferred lamda expression
-  even.foreach(a => println(a)) //expanded lamda expression
+  even.foreach(println) //inferred lambda expression
+  even.foreach(a => println(a)) //expanded lambda expression
 
   import cats.Semigroup
 
