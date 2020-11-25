@@ -44,8 +44,8 @@ object ForComprehensions extends App {
     val result6 = List(1, 2, 3, 4).map(i => List(5, 6, 7, 8).map(j => (i, j)))
     println("map().flatten: " + result6.flatten)
 
-    val resultFaltMap6 = List(1, 2, 3, 4).flatMap(i => List(5, 6, 7, 8).map(j => (i, j)))
-    println("flatMap(): " + resultFaltMap6)
+    val resultFlatMap6 = List(1, 2, 3, 4).flatMap(i => List(5, 6, 7, 8).map(j => (i, j)))
+    println("flatMap(): " + resultFlatMap6)
 
     val result7 = for (i <- List(1, 2, 3, 4)
                        if i % 2 == 0; // if is part of the previous line so why the semicolon ';' is here
