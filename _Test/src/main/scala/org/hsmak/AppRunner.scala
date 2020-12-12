@@ -7,7 +7,7 @@ import scala.io.StdIn
   * To run a scala script from Intellij
   *   - Link: https://www.youtube.com/watch?v=phjxbbLk4WM
   */
-object AppRunner extends App {
+object RandomRunner extends App {
 
 
   /*

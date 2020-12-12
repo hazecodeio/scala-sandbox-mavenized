@@ -1,5 +1,8 @@
 package _oo_basics
 
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+
 /*
  * ToDo:
  *    - Apply the Java 8's new Date/Time API
@@ -32,8 +35,17 @@ object DateTime extends App {
     val now = new Date
     val df = getDateInstance(LONG, Locale.FRANCE)
 
+
     // less verbose than "df.format(now)"
     println(df format now)
+
+    import java.time.format.DateTimeFormatter._
+    // Another better way using the Java 8's Date/Time API
+    val withFrenchLocale = ofPattern("dd MMMM yyyy").withLocale(Locale.FRENCH)
+    val date = LocalDate.now()
+    println(date format withFrenchLocale)
+    println( withFrenchLocale format date)
+
   }
 
   FrenchDate
