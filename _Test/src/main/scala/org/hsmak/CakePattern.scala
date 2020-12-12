@@ -43,8 +43,10 @@ object CakePattern extends App {
   println
 
   println("---------------------------- Example 2 ----------------------------\n")
-  // Link: https://github.com/Baeldung/scala-tutorials/tree/master/scala-design-patterns/src/main/scala/com/baeldung/scala/cakepattern
 
+  /*
+   * Link: https://github.com/Baeldung/scala-tutorials/tree/master/scala-design-patterns/src/main/scala/com/baeldung/scala/cakepattern
+   */
   object Example_2 {
 
     import scala.jdk.CollectionConverters._
@@ -118,6 +120,7 @@ object CakePattern extends App {
       override val env: Registry.TestEnvironment = new WindowsTestEnvironment
       override val testExecutor: Registry.TestExecutor = new TestExecutor
     }
+
   }
 
   Example_2
