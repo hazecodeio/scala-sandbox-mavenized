@@ -10,7 +10,7 @@
         <module>_Test</module>
         <module>core-scala</module>
         <module>concurrency</module>
-        <module>functional-data-structures</module>
+        <module>data-structures</module>
         <module>scala-http</module>
     </modules>
 

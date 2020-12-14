@@ -1,4 +1,4 @@
-package org.hsmak.datastructurs
+package org.hsmak.datastructures
 
 import scala.annotation.tailrec
 
@@ -67,13 +67,14 @@ object Folding extends App {
     case _ => as
   }
 
-  def dropWhile2[A](as: List[A])( f: A => Boolean): List[A] = as match {
+  def dropWhile2[A](as: List[A])(f: A => Boolean): List[A] = as match {
     case x :: xs if f(x) => dropWhile2(xs)(f)
     case _ => as
   }
-  dropWhile(List(1,2,3), (x:Int) => x < 2)
-  dropWhile2(List(1,2,3))(x => x < 2) // type inference works better with currying
-  dropWhile2(List(1,2,3))(_ < 2) // type inference works better with currying
+
+  dropWhile(List(1, 2, 3), (x: Int) => x < 2)
+  dropWhile2(List(1, 2, 3))(x => x < 2) // type inference works better with currying
+  dropWhile2(List(1, 2, 3))(_ < 2) // type inference works better with currying
 
 
   def append[A](as: List[A], bs: List[A]): List[A] = as match {

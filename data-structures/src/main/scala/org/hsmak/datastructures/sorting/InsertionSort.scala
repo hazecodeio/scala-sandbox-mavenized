@@ -1,4 +1,4 @@
-package org.hsmak.datastructurs.sorting
+package org.hsmak.datastructures.sorting
 
 object InsertionSort extends App {
 
