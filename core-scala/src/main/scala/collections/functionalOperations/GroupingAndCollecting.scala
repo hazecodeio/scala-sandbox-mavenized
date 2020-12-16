@@ -2,7 +2,22 @@ package collections.functionalOperations
 
 object GroupingAndCollecting extends App {
 
+  val animals = Seq(
+    Animal("Babs", 12, Chicken),
+    Animal("Lady", 4, Chicken),
+    Animal("Babsie", 9, Cow),
+    Animal("Bessy", 12, Cow),
+    Animal("Lettie", 6, Cow),
+    Animal("Douglas", 12, Horse),
+    Animal("Cleo", 12, Dog),
+    Animal("Bonnie", 9, Dog),
+    Animal("Santiago", 12, Cat),
+    Animal("Athena", 3, Cat)
+  )
+
   sealed trait Species
+
+  case class Animal(name: String, age: Int, species: Species)
 
   /**
     * Notice the case objects, not case classes!!
@@ -19,22 +34,6 @@ object GroupingAndCollecting extends App {
   case object Cat extends Species
 
   case object Wolf extends Species
-
-
-  case class Animal(name: String, age: Int, species: Species)
-
-  val animals = Seq(
-    Animal("Babs", 12, Chicken),
-    Animal("Lady", 4, Chicken),
-    Animal("Babsie", 9, Cow),
-    Animal("Bessy", 12, Cow),
-    Animal("Lettie", 6, Cow),
-    Animal("Douglas", 12, Horse),
-    Animal("Cleo", 12, Dog),
-    Animal("Bonnie", 9, Dog),
-    Animal("Santiago", 12, Cat),
-    Animal("Athena", 3, Cat)
-  )
 
   println("----------------- UsingFilters -----------------")
 
@@ -156,6 +155,13 @@ object GroupingAndCollecting extends App {
   object UsingGroupMapReduce {
     val mapOfSpeciesAndTheirAgesSummed: Map[Species, Int] = animals.groupMapReduce(_.species)(_.age)(_ + _)
     println(mapOfSpeciesAndTheirAgesSummed)
+
+    val letterCounts = "this is actually a Scala Developer coming from Java"
+      .split("")
+      .filterNot(_ == " ")
+      .map(c => (c.toLowerCase -> 1))
+      .groupMapReduce(tuple => tuple._1)(tuple => tuple._2)((val1, val2) => val1 + val2)
+    println(letterCounts)
   }
 
   UsingGroupMapReduce
