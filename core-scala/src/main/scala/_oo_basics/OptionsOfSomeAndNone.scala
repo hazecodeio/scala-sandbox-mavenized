@@ -14,7 +14,7 @@ package _oo_basics
   * Legend: '<-' extends from
   *
   * Link:
-  *   -  scalas-hierarchy: https://www.safaribooksonline.com/library/view/programming-in-scala/9780981531687/scalas-hierarchy.html
+  *   - scalas-hierarchy: https://www.safaribooksonline.com/library/view/programming-in-scala/9780981531687/scalas-hierarchy.html
   */
 object OptionsOfSomeAndNone extends App {
 
@@ -45,6 +45,22 @@ object OptionsOfSomeAndNone extends App {
 
   object EmployeeWithOption {
 
+    //This is how it will look like if constructor was public and there was no CompanionObject
+    val husAk = new Employee("Hus", Some("W"), "AK")
+    val antony = new Employee("Antony", None, "Last")
+    //Using the CompanionObject
+    val husAk2 = Employee("Hus", "W", "AK")
+    val antony2 = Employee("Antony", "Last")
+    val unknown = Employee()
+
+    def peelMiddleName(x: Option[String]): String = {
+      x match {
+        case Some(name) => name
+        case None => "Unknown"
+
+      }
+    }
+
     //making constructor private
     //class Employee private (val firstName: String, val middleName: Option[String], val lastName: String) {
     class Employee(val firstName: String, val middleName: Option[String], val lastName: String) {
@@ -64,6 +80,12 @@ object OptionsOfSomeAndNone extends App {
       def this() = this("Unknown", "Unknown")
     }
 
+    // retrieve values from Option using get/getOrElse
+
+    println(noMiddleName.getOrElse("Unknown"))
+    println(husAk2.middleName.getOrElse("Unknown2"))
+    println(unknown.middleName.getOrElse("Unknown2"))
+
     /**
       * CompanionObject
       */
@@ -75,29 +97,6 @@ object OptionsOfSomeAndNone extends App {
       def apply() = new Employee()
 
       //      def apply = new Employee// the missing () hid the access to the getters???
-    }
-
-    //This is how it will look like if constructor was public and there was no CompanionObject
-    val husAk = new Employee("Hus", Some("W"), "AK")
-    val antony = new Employee("Antony", None, "Last")
-
-    //Using the CompanionObject
-    val husAk2 = Employee("Hus", "W", "AK")
-    val antony2 = Employee("Antony", "Last")
-    val unknown = Employee()
-
-    // retrieve values from Option using get/getOrElse
-
-    println(noMiddleName.getOrElse("Unknown"))
-    println(husAk2.middleName.getOrElse("Unknown2"))
-    println(unknown.middleName.getOrElse("Unknown2"))
-
-    def peelMiddleName(x: Option[String]): String = {
-      x match {
-        case Some(name) => name
-        case None => "Unknown"
-
-      }
     }
 
     println("--------------------- Invoking Peel method -----------------------")
@@ -153,8 +152,6 @@ object OptionsOfSomeAndNone extends App {
 
     println(o2)
     println(o2.map(x => x._1))
-
-
   }
 
   OptionOfMultipleElements
@@ -163,11 +160,14 @@ object OptionsOfSomeAndNone extends App {
   object FoldingWithOption {
     val number: Option[Int] = Some(3)
     val noNumber: Option[Int] = None
-    val result1 = number.fold(1)(_ * 3)
-    val result2 = noNumber.fold(1)(_ * 3)
+    val result1 = number.fold(-1)(_ * 3)
+    val result2 = noNumber.fold(-1)(_ * 3)
 
     println(result1)
     println(result2)
+    println(
+      List(Option(3), None, Option(2))
+        .map(o => o.fold(-1)(_ * 3)))
   }
 
   FoldingWithOption

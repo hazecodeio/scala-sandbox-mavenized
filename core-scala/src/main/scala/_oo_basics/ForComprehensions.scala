@@ -116,16 +116,18 @@ object ForComprehensions extends App {
 
     //animals.filter(_.age >= 10).collect{case s => s.name}
 
-    //animals.filter(_.age >= 10).collect{a => a match{
-    //     | case Animal(name, age, species) => name
-    //     | }}
+//    animals.filter(_.age >= 10).collect { a =>
+//      a match {
+//        case Animal(name, age, species) => name
+//      }}
 
-    //animals.filter(_.age >= 10).collect{_ match{ // notice the underscore '_'
-    //     | case Animal(name, age, species) => name
-    //     | }}
+//    animals.filter(_.age >= 10).collect {
+//      _ match { // notice the underscore '_'
+//        case Animal(name, age, species) => name
+//      }}
 
 
-    println("""------------------ For Comprehension {} with " _ = println" -------------------"""")
+    println("""------------------ For Comprehension {} with " _ = println" -------------------""")
 
     yieldedNames = for {
       animal <- animals
@@ -139,7 +141,7 @@ object ForComprehensions extends App {
 
     yieldedNames.foreach(println)
 
-    println("""------------------ For Comprehension {} with PatternMatchers -------------------"""")
+    println("""------------------ For Comprehension {} with PatternMatchers -------------------""")
 
     yieldedNames = for {
       Animal(name, age, species) <- animals
@@ -154,7 +156,7 @@ object ForComprehensions extends App {
     yieldedNames.foreach(println)
     println
 
-    println("""------------------ For Comprehension {} with PatternMatchers and Fixed Values -------------------"""")
+    println("""------------------ For Comprehension {} with PatternMatchers and Fixed Values -------------------""")
 
     println("Extracting only Cows (names):")
     yieldedNames = for {

@@ -127,7 +127,8 @@ object MonadicValidation extends App {
         //what if this fails???
         val splitInput = str.toLowerCase.split("@")
         Email(splitInput(0), splitInput(1))
-      }).toRight(ValidationError("Missing ID"))
+      })
+        .toRight(ValidationError("Missing ID"))
     }
 
     println("---")

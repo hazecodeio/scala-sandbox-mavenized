@@ -1,7 +1,6 @@
 package _oo_basics
 
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
 
 /*
  * ToDo:
@@ -16,7 +15,6 @@ object DateTime extends App {
  * Multiple classes can be imported from the same package by enclosing them in curly braces as on the first line.
  */
 
-  import java.text.DateFormat
   import java.util.{Date, Locale}
 
   /*
@@ -24,43 +22,79 @@ object DateTime extends App {
    * the asterisk is a valid Scala identifier (e.g. method name)
    */
 
-  import java.text.DateFormat._
 
   /**
     * Created by hsmak on 2/16/17.
     */
-  println("--------------- FrenchDate -------------")
-  object FrenchDate {
+  println("--------------- FrenchDate_ViaWeirdWay -------------")
 
-    val now = new Date
+  object FrenchDate_ViaWeirdWay {
+
+    import java.text.DateFormat._
+
+    val date = new Date
     val df = getDateInstance(LONG, Locale.FRANCE)
 
-
     // less verbose than "df.format(now)"
-    println(df format now)
+    println(df format date)
+  }
+
+  FrenchDate_ViaWeirdWay
+  println
+
+  println("--------------- FrenchDate_ViaJava8DateTimeAPI -------------")
+
+  // Another better way using the Java 8's Date/Time API
+  object FrenchDate_ViaJava8DateTimeAPI {
 
     import java.time.format.DateTimeFormatter._
-    // Another better way using the Java 8's Date/Time API
+
     val withFrenchLocale = ofPattern("dd MMMM yyyy").withLocale(Locale.FRENCH)
     val date = LocalDate.now()
     println(date format withFrenchLocale)
-    println( withFrenchLocale format date)
-
+    println(withFrenchLocale format date)
   }
 
-  FrenchDate
+  FrenchDate_ViaJava8DateTimeAPI
   println
 
-  println("---------------- USDate ------------------")
-  object USDate {
+  println("---------------- USDate_WeirdWay ------------------")
+
+  object USDate_WeirdWay {
+
+    import java.text.DateFormat
+
     val now = new Date
     val df = DateFormat.getDateInstance(DateFormat.LONG, Locale.ENGLISH)
     println(df.format(now))
   }
 
-  USDate
+  USDate_WeirdWay
   println
 
-  import java.time._
-  println(LocalDate.now.plusDays(2))
+  println("---------------- USDate_WeirdWay ------------------")
+
+  object USDate_ViaJava8DateTimeAPI {
+
+    import java.time.format.DateTimeFormatter._
+
+    val withUSLocale = ofPattern("dd MMMM yyyy").withLocale(Locale.US)
+    val now = LocalDate.now();
+    println(now format withUSLocale)
+    println(withUSLocale format now)
+  }
+
+  USDate_ViaJava8DateTimeAPI
+  println
+
+  println("---------------- DateOps -----------------")
+  object DateOps {
+
+    import java.time._
+
+    println(LocalDate.now.plusDays(2))
+  }
+
+  DateOps
+  println
 }

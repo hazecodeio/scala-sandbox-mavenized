@@ -1,29 +1,13 @@
-package object resolution {
-  implicit val a: TS = new TS("val in package object") // (1)
+class Employee(firstname: String, middleName: Option[String], lastName: String) {
+  def this(firstname: String, lastName: String) = this(firstname, None, lastName)
+  def this(firstname: String, middleName: String, lastName: String) = this(firstname, Option(middleName), lastName)
+  def this() = this("unknown", "unknown")
 }
 
-package resolution {
-  class TS(override val toString: String)
-  class Parent {
-    // implicit val c: TS = new TS("val in parent class") // (2)
-  }
-  trait Mixin {
-    // implicit val d: TS = new TS("val in mixin") // (3)
-  }
-  // import Outer._ // (4)
-  class Outer {
-    // implicit val e: TS = new TS("val in outer class") // (5)
-    // import Inner._ // (6)
-
-    class Inner(/*implicit (7) */ val arg: TS = implicitly[TS]) extends Parent with Mixin {
-      // implicit val f: TS = new TS("val in inner class") (8)
-      private val resolve = implicitly[TS]
-    }
-    object Inner {
-      implicit val g: TS = new TS("val in companion object")
-    }
-  }
-  object Outer {
-    implicit val h: TS = new TS("val in parent companion object")
-  }
+object Employee{
+  def apply(firstname: String, middleName: String, lastName: String) = new Employee(firstname, middleName, lastName)
+  def apply(firstname: String, lastName: String) = new Employee(firstname, lastName)
+  def apply() = new Employee();
 }
+
+List(Option(1), None, Option(2)).map(o => o.fold(-1)(_*3))

@@ -74,7 +74,7 @@ object ControlStructures extends App {
 
     var resultL = List[Int]()
     for (a <- xs) {
-      resultL = resultL :+ (a + 1) //append to list. note List must be var for append to work
+      resultL = resultL :+ (a + 1) //append to list. note List must be var for the reassignment to work
     }
     println(resultL)
 
@@ -125,7 +125,7 @@ object ControlStructures extends App {
     for (i <- 0 to 2;
          j <- 0 to 3;
          k <- 0 to 4)
-      println(s"($i; $j, $k)")
+      println(s"($i, $j, $k)")
 
   }
 
