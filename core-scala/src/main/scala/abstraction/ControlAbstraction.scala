@@ -73,7 +73,7 @@ object ControlAbstraction {
     * @return
     */
   def filesContaining(query: String) =
-    filesMatching(_.contains(query)) // this is a closure because eof the free variable "query"
+    filesMatching(_.contains(query)) // this is a closure because of the free variable "query"
 
 
   /**
@@ -83,7 +83,7 @@ object ControlAbstraction {
     * @return
     */
   def filesRegex(query: String) =
-    filesMatching(_.matches(query)) // this is a closure because eof the free variable "query"
+    filesMatching(_.matches(query)) // this is a closure because of the free variable "query"
 
   // similarly
   /*def filesEnding(query: String) =

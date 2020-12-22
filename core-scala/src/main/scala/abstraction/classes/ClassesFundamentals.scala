@@ -7,8 +7,9 @@ object ClassesFundamentals extends App {
 
     /**
       *
-      * @param firstName //val will create an accessor method firstName()
-      * @param lastName  //var will create both accessor & mutator methods lastName() & lastName(String). Precisely, "lastName_=" run javap to see lastName_$eq
+      * @param firstName  val will create an accessor method firstName()
+      * @param lastName   var will create both accessor & mutator methods lastName() & lastName(String).
+      *                   - Precisely, "lastName_=" run javap to see lastName_$eq
       */
     class Employee(val firstName: String, //val will generate only getter
                    var lastName: String)

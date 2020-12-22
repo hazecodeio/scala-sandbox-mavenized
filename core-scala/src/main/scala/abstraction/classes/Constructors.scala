@@ -113,9 +113,9 @@ object Constructors extends App {
     }
 
 
-    val employee = Employee(lastName = "llll", firstName = "ffff")
+    val employee = Employee(lastName = "llll", firstName = "ffff")// this actually calls the constructor with the age argument
     val employee2 = employee.copy()
-    println(employee2) // this actually calls the constructor with the age argument
+    println(employee2)
     println(employee2.fullName)
     println(employee2.changeLastName("AnotherLastName"))
     println(employee2.copy(lastName = "AnotherLastName2"))//using named arg

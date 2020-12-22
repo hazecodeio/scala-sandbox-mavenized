@@ -6,7 +6,7 @@ object ParametrizedClasses extends App {
   println("################################### Parametrized Classes ###################################")
 
   case class Box[T](t: T) {
-    //    def coupleWith[U](u:U):Box[Couple[T, U]] = new Box(new Couple(t, u)) //we can remove the 'new' keyword since Box is a case clase
+    //    def coupleWith[U](u:U):Box[Couple[T, U]] = new Box(new Couple(t, u)) //we can remove the 'new' keyword since Box is a case class
     def coupleWith[U](u: U): Box[Couple[T, U]] = Box(Couple(t, u))
   }
 

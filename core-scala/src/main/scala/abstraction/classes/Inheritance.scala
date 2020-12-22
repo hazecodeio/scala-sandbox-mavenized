@@ -158,7 +158,7 @@ object Inheritance extends App {
         /*val state = Seq(department)
         state.map(_.hashCode()).foldLeft(0)((a, b) => 31 * a + b)*/
 
-        var result = 19 //var will be used only within this methos so there will be no side effect
+        var result = 19 //var will be used only within this method so there will be no side effect
         result = 31 * result + firstName.hashCode
         result = 31 * result + lastName.hashCode
         result = 31 * result + age.hashCode

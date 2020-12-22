@@ -9,9 +9,9 @@ class Complex(real: Double, imaginary: Double) {
 
   override def toString() = "" + re + (if (im < 0) "" else " + ") + im + "i"
 
-  def re = real //sama as -> def re() = real
+  def re = real //similar as -> def re() = real
 
-  def im = imaginary //sama as -> def im() = imaginary
+  def im = imaginary //similar as -> def im() = imaginary
 }
 
 object ComplexNumbers {
