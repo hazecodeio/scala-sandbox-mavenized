@@ -1,9 +1,26 @@
 package collections.sorting
 
+import scala.util.Try
+
 
 object SortingAndOrdering extends App {
 
+  val animals = Seq(
+    Animal("Babs", 12, Chicken),
+    Animal("Lady", 4, Chicken),
+    Animal("Babsie", 9, Cow),
+    Animal("Bessy", 12, Cow),
+    Animal("Lettie", 6, Cow),
+    Animal("Douglas", 12, Horse),
+    Animal("Cleo", 12, Dog),
+    Animal("Bonnie", 9, Dog),
+    Animal("Santiago", 12, Cat),
+    Animal("Athena", 3, Cat)
+  )
+
   sealed trait Species
+
+  case class Animal(name: String, age: Int, species: Species)
 
   /**
     * Notice the case objects, not case classes!!
@@ -22,22 +39,6 @@ object SortingAndOrdering extends App {
   case object Wolf extends Species
 
 
-  case class Animal(name: String, age: Int, species: Species)
-
-  val animals = Seq(
-    Animal("Babs", 12, Chicken),
-    Animal("Lady", 4, Chicken),
-    Animal("Babsie", 9, Cow),
-    Animal("Bessy", 12, Cow),
-    Animal("Lettie", 6, Cow),
-    Animal("Douglas", 12, Horse),
-    Animal("Cleo", 12, Dog),
-    Animal("Bonnie", 9, Dog),
-    Animal("Santiago", 12, Cat),
-    Animal("Athena", 3, Cat)
-  )
-
-
   println("############ SortedMethod ###############")
 
   /**
@@ -51,21 +52,39 @@ object SortingAndOrdering extends App {
 
     val vectorOfNums = Vector(3, 6, 1, 88, 3, 6, 4, 9, 6, 7, 200, 15, 133)
     println(vectorOfNums.sorted) // will maintain the container type
+    println
 
     println("--- Sorting Animals --")
     println("Scala doesn't know how to sort it yet ---> define an implicit Ordering[T] ")
+    println
 
-    /**
-      * Error:(49, 21) No implicit Ordering defined for collection.sorting.SortingAndOrdering.Animal.
-      * println(animals.sorted)
-      */
+    /*
+     * Error:(49, 21) No implicit Ordering defined for collection.sorting.SortingAndOrdering.Animal.
+     * println(animals.sorted)
+     */
     //    println(animals.sorted)
 
-    // in order for the previous line to work we need to define an ordering for Animal class
-    /**
-      * see [[SortWithMethod]]
-      */
 
+    // in order for the previous line to work we need to define an ordering for Animal class
+    /*
+     * see [[SortWithMethod]]
+     */
+
+    println("But actually, we can define an implicit Ordering and pass it in to sorted() since it actually expect one")
+    println("--- orderingByAgeViaBy ---")
+    object orderingByAgeViaBy{
+      implicit val orderingByAgeViaBy = Ordering.by[Animal, Int](a => a.age)
+      animals.sorted.foreach(println)
+    }
+    orderingByAgeViaBy
+    println
+
+    println("--- orderingByAgeViaFromLess ---")
+    object orderingByAgeViaFromLess{
+      implicit val orderingByAgeViaFromLess = Ordering.fromLessThan[Animal]((a1, a2) => a1.age < a2.age)
+      animals.sorted.foreach(println)
+    }
+    orderingByAgeViaFromLess
 
   }
 
@@ -79,7 +98,7 @@ object SortingAndOrdering extends App {
     * - override the natural ordering
     *
     * - Notice how it actually calls sorted() and Ordering.fromLessThan()
-    *     def sortWith(lt: (A, A) => Boolean): C = sorted(Ordering.fromLessThan(lt))
+    *   def sortWith(lt: (A, A) => Boolean): C = sorted(Ordering.fromLessThan(lt))
     */
   object SortWithMethod {
 
@@ -105,7 +124,7 @@ object SortingAndOrdering extends App {
 
   /**
     * - Notice how it actually calls sorted() and Ordering.fromLessThan()
-    *     def sortBy[B](f: A => B)(implicit ord: Ordering[B]): C = sorted(ord on f)
+    * def sortBy[B](f: A => B)(implicit ord: Ordering[B]): C = sorted(ord on f)
     */
   object SortByMethod {
 
@@ -137,41 +156,4 @@ object SortingAndOrdering extends App {
   SortByMethod
   println
 
-  println("############ DateTimeOrdering ###############")
-
-  /**
-    *
-    */
-  object DateTimeOrdering {
-
-    import java.time.LocalDateTime
-
-    val firstDate = LocalDateTime.now // now
-
-    val secondDate = LocalDateTime.now.plusDays(5) // after now
-
-    val thirdDate = LocalDateTime.now.minusDays(2) // before now
-
-    val seqOfDates = Seq(firstDate, secondDate, thirdDate)
-    println(seqOfDates)
-
-    println("-- DateOrdering (_ isAfter _) --")
-    implicit val dateOrdering_Dec = Ordering.fromLessThan[LocalDateTime](_ isAfter _) // equivalent to  "_ > _"
-    println(seqOfDates.sorted) // Again an implicit ordering must be defined before hand
-
-    println("-- DateOrdering (_ isBefore _) --")
-    // we can't have more than an implicit val that takes and emits the same type as the other implicits!!!
-    // hence commented and supplied explicitly
-    //    implicit val dateOrdering_Inc = Ordering.fromLessThan[LocalDateTime](_ isBefore _) // equivalent to  "_ > _"
-    println(seqOfDates.sorted(Ordering.fromLessThan[LocalDateTime](_ isBefore _))) // Again an implicit ordering must be defined before hand
-    println
-
-    println("----- via sortWith ------")
-    println(seqOfDates.sortWith(_ isAfter _))
-    println(seqOfDates.sortWith(_ isBefore _))
-
-  }
-
-  DateTimeOrdering
-  println
 }

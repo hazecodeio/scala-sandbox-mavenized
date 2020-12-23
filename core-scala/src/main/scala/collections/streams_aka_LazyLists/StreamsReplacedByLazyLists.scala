@@ -1,4 +1,4 @@
-package collections.streams
+package collections.streams_aka_LazyLists
 
 /**
   * - lazy collections
