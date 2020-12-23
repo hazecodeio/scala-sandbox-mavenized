@@ -7,7 +7,7 @@ object SmartStrings extends App {
 
   println("--------------- InterpolationWithPrintandStyling ------------------")
 
-  object InterpolationWithPrintandStyling {
+  object InterpolationWithPrintAndStyling {
     val name = "Husain"
     val age = 32
     val weight = 155.5
@@ -28,7 +28,7 @@ object SmartStrings extends App {
     printf("'%-20s'\n", "age 30")
   }
 
-  InterpolationWithPrintandStyling
+  InterpolationWithPrintAndStyling
   println
 
   println("--------------- MultilineString ------------------")

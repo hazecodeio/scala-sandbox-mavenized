@@ -71,6 +71,12 @@ object Implicitly_Retrieve extends App {
       override def compare(x: Animal, y: Animal): Int = nameOrdering.compare(x.name, y.name)
     }.reverse
 
+    // Via implicitly[]
+    /*implicit def anotherAnimalOrderingByName2 = new Ordering[Animal] {
+      val nameOrdering = implicitly[Ordering[String]]
+      override def compare(x: Animal, y: Animal): Int = nameOrdering.compare(x.name, y.name)
+    }.reverse*/
+
     animals.sorted.foreach(println)
 
   }

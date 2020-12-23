@@ -27,7 +27,8 @@ object GenericTypeResolution extends App {
   def inspectListOfT2[T: Manifest](in: List[T]) = {
     println(in.getClass) // return the type at runtime
     println(manifest[T].getClass) // for List[Int]: returns class scala.reflect.ManifestFactory$IntManifest
-    println(manifest[T].erasure) // returns the original type
+    println(manifest[T].erasure) // returns the original type <- Deprecated
+    println(manifest[T].runtimeClass) // returns the original type
   }
 
   inspectListOfT2(List(1))

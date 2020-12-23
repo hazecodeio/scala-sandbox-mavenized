@@ -1,5 +1,7 @@
 package collections.streams_aka_LazyLists
 
+import scala.util.Random
+
 /**
   * - lazy collections
   * - DELAYED EVALUATION: Avoid computing the tail of a sequence until it is needed for the evaluation result (which might be never)
@@ -14,8 +16,9 @@ object StreamsReplacedByLazyLists extends App {
 
   println("without Streams:")
   //If we only need the first 3 items then why the iteration till the last element
-  val withoutStreams: List[Unit] = (1 to 5).toList.map(_ => println("Hello")).take(3) // notice the type
-  withoutStreams.foreach(println) // map, take, and the rest are all terminal operations
+  val withoutStreams: List[String] = (1 to 5).toList.map(_ => "Hello").take(3) // notice the type
+  withoutStreams.mkString("[", " | " , "]").foreach(print) // map, take, and the rest are all terminal operations
+  println
 
   //  (1 to 5).map(_ => ()).foreach(println)
 
@@ -24,38 +27,43 @@ object StreamsReplacedByLazyLists extends App {
   // @deprecated("Use LazyList instead of Stream", "2.13.0")
   // val withStreams: Stream[Unit] = (1 to 5).toList.toStream.map(_ => println("Hello")).take(3) // notice the type
 
-  val withLazyList: LazyList[Unit] = (1 to 5).to(LazyList).map(_ => println("Hello")).take(3) // notice the type
-  withLazyList.foreach(println) // foreach is a terminal operation while map, take and some others are intermediate operations
+  val withLazyList: LazyList[String] = (1 to 5).to(LazyList).map(_ => "Hello").take(3) // notice the type
+  withLazyList.mkString("[", " | " , "]").foreach(print) // foreach is a terminal operation while map, take and some others are intermediate operations
+  println
 
   println("Using Stream CompanionObject")
-//  Stream(1, 2, 3, 4, 5).map(_ * 2).take(3).foreach(println)
-  LazyList(1, 2, 3, 4, 5).map(_ * 2).take(3).foreach(println)
+//  Stream(1, 2, 3, 4, 5).map(_ * 2).take(3).mkString("[", " | " , "]").foreach(print)
+  LazyList(1, 2, 3, 4, 5).map(_ * 2).take(3).mkString("[", " | " , "]").foreach(print)
   println
-//  Stream.apply(1, 2, 3, 4, 5).map(_ * 2).take(3).foreach(println)
-  LazyList.apply(1, 2, 3, 4, 5).map(_ * 2).take(3).foreach(println)
+//  Stream.apply(1, 2, 3, 4, 5).map(_ * 2).take(3).mkString("[", " | " , "]").foreach(print)
+  LazyList.apply(1, 2, 3, 4, 5).map(_ * 2).take(3).mkString("[", " | " , "]").foreach(print)
   println
 
   println("Continually")
 //  Stream.continually(5).take(3).foreach(println)
-  LazyList.continually(5).take(3).foreach(println)
+  LazyList.continually(5).take(3).mkString("[", " | " , "]").foreach(print)
   println
 
 //  Stream.continually(6).take(20).foreach(println)
-  LazyList.continually(6).take(20).foreach(println)
+  LazyList.continually(6).take(5).mkString("[", " | " , "]").foreach(print)
+  println
+
+  // Generate random numbers
+  LazyList.continually(Random.nextInt(10)).take(5).mkString("[", " ** " , "]").foreach(print)
   println
 
   println("Stream concat:")
-  LazyList.concat(List(1, 2, 3, 4), List(1, 2, 3, 4, 5, 6), List(8, 9)).take(5).foreach(println)
+  LazyList.concat(List(1, 2, 3, 4), List(1, 2, 3, 4, 5, 6), List(8, 9)).take(5).mkString("[", " | " , "]").foreach(print)
   println
 
-  LazyList.concat((1 to 5), (4 to 8)).foreach(println)
+  LazyList.concat((1 to 5), (4 to 8)).mkString("[", " | " , "]").foreach(print)
   println
 
-  LazyList.concat((1 to 5)).foreach(println)
+  LazyList.concat((1 to 5)).mkString("[", " | " , "]").foreach(print)
   println
 
   println("Stream Ranges:")
-  LazyList.range(1, 100, 3).take(10).foreach(println)
+  LazyList.range(1, 100, 3).take(10).mkString("[", " | " , "]").foreach(print)
   println
 
   println(LazyList.range(1, 100, 3).length)
@@ -75,7 +83,7 @@ object StreamsReplacedByLazyLists extends App {
   object StreamsUnderTheHood {
 
     /**
-      * @see [[scala.collection.Iterator.toStream]]
+      * @see [[scala.collection.Iterator.toStream]] <-- Deprecated
       *
       *      {{{
       *       def toStream: Stream[A] =

@@ -2,8 +2,8 @@ package functions
 
 /**
   * also called partially applied function. is this doable in Java8? yes:
-  * https://dzone.com/articles/partially-applied-functions-in-java
-  * https://www.pgrs.net/2015/04/23/partial-function-application-in-java-8/
+  *  - https://dzone.com/articles/partially-applied-functions-in-java
+  *  - https://www.pgrs.net/2015/04/23/partial-function-application-in-java-8/
   *
   * What are the applications of it?
   */

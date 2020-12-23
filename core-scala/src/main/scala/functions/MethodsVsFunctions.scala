@@ -5,7 +5,7 @@ object MethodsVsFunctions extends App {
 
   println("################################### Methods vs Functions ###################################")
 
-  object MethOrFun {
+  object MethOrFunc {
     /**
       * Function -> which is an object itself; that's why we can call apply() on it.
       * Functions are traits that we instantiate anonymously.
@@ -21,9 +21,9 @@ object MethodsVsFunctions extends App {
 
   }
 
-  println(MethOrFun.f.apply(4)) //a function aka an object too
-  println(MethOrFun.f(4)) //a function aka an object too
-  println(MethOrFun.g(4)) // a method not an object
+  println(MethOrFunc.f.apply(4)) //a function aka an object too
+  println(MethOrFunc.f(4)) //a function aka an object too
+  println(MethOrFunc.g(4)) // a method not an object
   println
 
 }

@@ -79,6 +79,23 @@ object SelfType extends App {
     //val a = new A  //***does not compile!!!***
     val obj = new A with B
     println((obj.aId + obj.bId))
+    println
+
+    println("----------------- MixIn SelfTypes -----------------")
+
+    trait C {
+      def cId = 2
+    }
+
+    trait AA {
+      self: B with C => // Notice how self is of type B mixed-in with C
+
+      def aId = 1
+    }
+
+    //val a = new A  //***does not compile!!!***
+    val obj2 = new AA with B with C
+    println((obj2.aId + obj2.bId + obj2.cId))
   }
   SelfTypeAndMixinTraits
   println

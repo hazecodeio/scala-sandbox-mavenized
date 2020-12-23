@@ -42,8 +42,12 @@ object Currying extends App {
       *   - Haskell lang was named after his first name and
       *   - Currying concept was named after his last name!
       *
+      * Note:
+      *   - Currying works on functions.
+      *   - Always convert a method to a functiona first (using "_") if a method is to be c urried then curry it
+      *
       * Currying breaks the function into parts so we can feed it in parts. I.e. a sequence of functions returning functions
-      *   - similar to nested functions
+      *   - similar to nested/chained functions
       *
       * g -> returns a function/lambda expression
       * currying three param function '(Int, Int, Int)' will convert it to 'Int => (Int => (Int => Int))'
@@ -96,6 +100,10 @@ object Currying extends App {
       *   - Call the curried one
       */
     def foo2(x: Int, y: Int, z: Int => Int) = z(x + y) // note the 3rd param is a function!
+    /*
+      scala> (foo2 _).curried
+      val res12: Int => (Int => ((Int => Int) => Int))
+     */
 
     //remember: '_' converts a method into a function
     val fo = foo _ // REPL: (Int, Int, Int) => Int <- converting to a regular function with 3 params

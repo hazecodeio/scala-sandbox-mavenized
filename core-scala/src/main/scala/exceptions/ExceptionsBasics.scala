@@ -20,7 +20,7 @@ object ExceptionsBasics extends App {
 
     }
 
-    println("################################### Exception handling ###################################")
+    println("----------------------------------- Exception handling -----------------------------------")
     try {
       new Employee("", "", -1)
     } catch {
@@ -28,11 +28,8 @@ object ExceptionsBasics extends App {
     } finally { //optional just as in Java
       println("continuing without issues")
     }
-
   }
 
   ThrowingException
   println
-
-
 }

@@ -88,3 +88,11 @@ object Wrap {
 
 }
 
+/*----------------------------------- Bounded Ranges Via Stream/lazyLis -----------------------------*/
+
+// creating stream ranges
+def streamRange(lo: Int, hi: Int): LazyList[Int] =
+  if (lo >= hi) LazyList.empty
+  else LazyList.cons(lo, streamRange(lo + 1, hi))// Recursive call. Note this is not a tail recursion
+
+streamRange(4, 10).mkString("[", " ** " , "]").foreach(print)

@@ -27,11 +27,11 @@ object FunctionsFundamentals extends App {
     *   - https://www.scala-lang.org/api/current/scala/Function1.html
     */
 
-  println("------------------------ FunctionExplicit ---------------------")
+  println("------------------------ FunctionWithTrait ---------------------")
 
-  object FunctionExplicit {
+  object FunctionWithTrait {
 
-    val f1: Function1[Int, Int] = new Function[Int, Int] {
+    val f1: Function1[Int, Int] = new Function[Int, Int] { // An alias as in: type Function[-A, +B] = Function1[A, B]
       def apply(x: Int): Int = x + 1
     }
 
@@ -56,22 +56,22 @@ object FunctionsFundamentals extends App {
 
   }
 
-  FunctionExplicit
+  FunctionWithTrait
 
   println
 
   /**
     * replace the return type with the lambda expression
     */
-  println("--------------------- FunctionImplicit_01 ----------------------------")
+  println("--------------------- FunctionWithLambda_01 ----------------------------")
 
-  object FunctionImplicit_01 {
+  object FunctionWithLambda_01 {
 
     val f0: () => Int = new Function0[Int] {
       override def apply(): Int = 1
     }
 
-    val f1: Int => Int = new Function[Int, Int] {
+    val f1: Int => Int = new Function[Int, Int] { // An alias as in: type Function[-A, +B] = Function1[A, B]
       def apply(x: Int): Int = x + 1
     }
 
@@ -94,7 +94,7 @@ object FunctionsFundamentals extends App {
 
   }
 
-  FunctionImplicit_01
+  FunctionWithLambda_01
 
   println
 
@@ -102,9 +102,9 @@ object FunctionsFundamentals extends App {
     * replace the abstract method implementation with the lambda expression too
     * return types are lambda expressions
     */
-  println("---------------------- FunctionImplicit_02 --------------------------")
+  println("---------------------- FunctionWithLambda_02 --------------------------")
 
-  object FunctionImplicit_02 {
+  object FunctionWithLambda_02 {
 
 
     val f1: Int => Int = (x: Int) => x + 1
@@ -124,16 +124,16 @@ object FunctionsFundamentals extends App {
 
   }
 
-  FunctionImplicit_02
+  FunctionWithLambda_02
 
   println
 
   /**
-    * remove the explicit var type because type inference will kick in
+    * remove the WithTrait var type because type inference will kick in
     */
-  println("----------------------- FunctionImplicit_03 -----------------------------")
+  println("----------------------- FunctionWithLambda_03 -----------------------------")
 
-  object FunctionImplicit_03 {
+  object FunctionWithLambda_03 {
 
 
     val f1 = (x: Int) => x + 1
@@ -153,7 +153,7 @@ object FunctionsFundamentals extends App {
 
   }
 
-  FunctionImplicit_03
+  FunctionWithLambda_03
 
   println("---------------------- RecapFunctions_0: zero param and one return type -----------------------")
 
@@ -206,8 +206,14 @@ object FunctionsFundamentals extends App {
     }
 
     List(f1_1, f1_2, f1_3, f1_4) foreach println
-    List(f1_1.apply(1), f1_2.apply(2), f1_3.apply(3), f1_4.apply(4)) foreach println
-    List(f1_1(1), f1_2(2), f1_3(3), f1_4(4)) foreach println
+    List(f1_1.apply(1), f1_2.apply(2), f1_3.apply(3), f1_4.apply(4)) mkString(" ** ") foreach print
+    println
+    List(f1_1(1), f1_2(2), f1_3(3), f1_4(4)) mkString(" ** ") foreach print
+    println
+
+    val fs = List(f1_1, f1_2, f1_3, f1_4)
+    (0 to fs.length-1).map(i => (i -> fs(i))).map(t => t._2(t._1+1)).mkString(" ** ").foreach(print)
+    println
 
   }
 

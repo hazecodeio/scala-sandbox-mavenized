@@ -27,13 +27,13 @@ object ParameterizedMethods extends App {
 
   println("---------------------- with parameterization --------------------")
 
-  def decideWithParametirization[T](b: Boolean, x: T, y: T) = if (b) x else y // Notice the type parameterization [T]
+  def decideWithParameterization[T](b: Boolean, x: T, y: T) = if (b) x else y // Notice the type parameterization [T]
 
-  println(decideWithParametirization(true, "A", "B"))
-  println(decideWithParametirization(false, 3, 10))
-  println(decideWithParametirization(true, 'C', 'D'))
+  println(decideWithParameterization(true, "A", "B"))
+  println(decideWithParameterization(false, 3, 10))
+  println(decideWithParameterization(true, 'C', 'D'))
 
-  println(getNextChar(decideWithParametirization(true, 'C', 'D'))) // Works fine
+  println(getNextChar(decideWithParameterization(true, 'F', 'D'))) // Works fine
   println
 
 }

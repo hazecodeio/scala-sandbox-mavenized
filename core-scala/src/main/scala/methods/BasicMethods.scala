@@ -136,7 +136,7 @@ object BasicMethods extends App {
   println
 
 
-  println("--------------------- Default and Named Argumnets together -------------------")
+  println("--------------------- Default and Named Arguments together -------------------")
 
   object MethodWithInference {
 

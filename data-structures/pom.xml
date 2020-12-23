@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.hsmak.datastructurs</groupId>
-    <artifactId>functional-data-structures</artifactId>
+    <artifactId>data-structures</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>

@@ -1,8 +1,0 @@
-= Tutorial
-HusAK
-:toc:
-:toclevels: 3
-
-= Links
-
-* https://docs.scala-lang.org/tour/variances.html[https://docs.scala-lang.org/tour/variances.html]

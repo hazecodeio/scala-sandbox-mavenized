@@ -60,7 +60,7 @@ object ByNameByValueByFunctionParameter extends App {
     * It's as same as ByFunction
     * It just provides easiness beside the laziness
     *
-    * Can be called by black directly since no need to prepend the '() =>'
+    * Can be called by block directly since no need to prepend the '() =>'
     * Good to catch exceptions and clean up resource as in try/catch blocks below.
     * Other benefits?
     */
