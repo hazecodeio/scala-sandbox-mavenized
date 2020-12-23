@@ -64,8 +64,8 @@ object FlatMapOp extends App {
     //Re-adding Key-Value pairs and their Hundreds
     //this will generate List[Map]
     println(m.map(t => Map(
-      t._1 -> t._2, //Key-Value
-      (t._1 * 100) -> (t._2 + " Hundred")))) //Key-Value
+      t._1 -> t._2, //Combining Key-Value as a new Key
+      (t._1 * 100) -> (t._2 + " Hundred")))) //Combining Key-Value as a new Value
 
     println(m.flatMap(t => Map(
       t._1 -> t._2, //Key-Value

@@ -98,7 +98,7 @@ object Vectors extends App {
     })
     println
 
-    val v6 = time("Patch: Insert at index 5000 and delete the remaining 10 elemens") {
+    val v6 = time("Patch: Insert at index 5000 and delete the remaining 10 elements") {
       v.patch(5000, Seq(), 10)
     } // patch: insert at an index and replace 5 elements
     println

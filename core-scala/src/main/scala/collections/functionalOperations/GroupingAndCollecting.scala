@@ -138,7 +138,7 @@ object GroupingAndCollecting extends App {
   UsingGroupBy
   println
 
-  // ToDo - groupMap()
+  println("-------------------------- UsingGroupMap -----------------------")
   object UsingGroupMap {
     val mapOfSpeciesAndTheirNames: Map[Species, Seq[String]] = animals.groupMap(_.species)(_.name)
     println(mapOfSpeciesAndTheirNames)
@@ -147,7 +147,6 @@ object GroupingAndCollecting extends App {
   UsingGroupMap
   println
 
-  // ToDo - groupMapReduce()
   // It is equivalent to `groupBy(key).mapValues(_.map(f).reduce(reduce))`, but more efficient.
   /**
     * perform a function on the list of values of that particular key
@@ -159,7 +158,7 @@ object GroupingAndCollecting extends App {
     val letterCounts = "this is actually a Scala Developer coming from Java"
       .split("")
       .filterNot(_ == " ")
-      .map(c => (c.toLowerCase -> 1))
+      .map(c => c.toLowerCase -> 1)
       .groupMapReduce(tuple => tuple._1)(tuple => tuple._2)((val1, val2) => val1 + val2)
     println(letterCounts)
   }

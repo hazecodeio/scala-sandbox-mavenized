@@ -49,8 +49,8 @@ object SortingAndOrdering extends App {
     val seqOfNums = Seq(3, 6, 1, 88, 3, 6, 4, 9, 6, 7, 200, 15, 133)
     println(seqOfNums.sorted) // will maintain the container type
 
-    val vectorOfnums = Vector(3, 6, 1, 88, 3, 6, 4, 9, 6, 7, 200, 15, 133)
-    println(vectorOfnums.sorted) // will maintain the container type
+    val vectorOfNums = Vector(3, 6, 1, 88, 3, 6, 4, 9, 6, 7, 200, 15, 133)
+    println(vectorOfNums.sorted) // will maintain the container type
 
     println("--- Sorting Animals --")
     println("Scala doesn't know how to sort it yet ---> define an implicit Ordering[T] ")

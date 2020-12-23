@@ -35,7 +35,7 @@ object Ranges extends App {
     println(r4)
     println
 
-    println("------ Range of Alphabetics --------")
+    println("------ Range of Alphabets --------")
     val r5 = 'a' to 'z'
     println(r5)
     println(r5.toList)
