@@ -62,7 +62,7 @@ object ParallelCollections extends App {
     println
 
     println(parSeq)
-    val seq = parSeq.seq// Note: toSeq will return ParSeq
+    val seq = parSeq.seq // Note: toSeq will return ParSeq
     println(seq)
 
   }

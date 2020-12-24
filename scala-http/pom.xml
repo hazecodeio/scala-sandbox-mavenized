@@ -15,10 +15,7 @@
     <name>${project.artifactId}</name>
 
     <dependencies>
-        <dependency>
-            <groupId>org.scala-lang</groupId>
-            <artifactId>scala-library</artifactId>
-        </dependency>
+
         <dependency>
             <groupId>org.scala-lang.modules</groupId>
             <artifactId>scala-xml_${scala.compat.version}</artifactId>
@@ -32,33 +29,13 @@
             <artifactId>play_${scala.compat.version}</artifactId>
         </dependency>
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.scalatest</groupId>
-            <artifactId>scalatest_${scala.compat.version}</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.specs2</groupId>
-            <artifactId>specs2-core_${scala.compat.version}</artifactId>
-            <version>${spec2.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.specs2</groupId>
-            <artifactId>specs2-junit_${scala.compat.version}</artifactId>
-            <version>${spec2.version}</version>
-        </dependency>
-
-        <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
-        <sourceDirectory>src/main/scala</sourceDirectory>
-        <testSourceDirectory>src/test/scala</testSourceDirectory>
         <plugins>
             <plugin>
                 <!-- see http://davidb.github.com/scala-maven-plugin -->
@@ -82,4 +59,5 @@
             </plugin>
         </plugins>
     </build>
+
 </project>

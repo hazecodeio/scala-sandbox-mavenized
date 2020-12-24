@@ -1,7 +1,7 @@
 package org.hsmak
 
 
-object RiskOfMutablility extends App {
+object RiskOfMutablity extends App {
 
   def elapsedTime[T](result: => T): Unit = {
     val start = System.currentTimeMillis()
