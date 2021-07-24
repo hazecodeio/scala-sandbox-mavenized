@@ -9,7 +9,7 @@ object FindProcWithTwoFutures extends App{
   import scala.sys.process._
 
 
-  val findProc = Process("find /home/hsmak -maxdepth 1 -name '*'").run() // Start asynchronously
+  val findProc = Process("find", Seq("/home/hsmak", "-maxdepth", "10", "-name", "*")).run() // Start asynchronously
   val findFut = Future{
     try {
       println("qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq")
