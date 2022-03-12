@@ -24,6 +24,8 @@
     </dependencies>
 
     <build>
+<!--        <sourceDirectory>src/main/scala</sourceDirectory>-->
+<!--        <testSourceDirectory>src/test/scala</testSourceDirectory>-->
         <plugins>
             <plugin>
                 <!-- see http://davidb.github.com/scala-maven-plugin -->
@@ -47,5 +49,4 @@
             </plugin>
         </plugins>
     </build>
-
 </project>
