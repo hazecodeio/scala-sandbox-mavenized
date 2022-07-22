@@ -1,10 +1,10 @@
-package org.hsmak.http
+package org.hsmak.scalajHttp
 
 import java.net.URL
 
-import org.springframework.core.io.ClassPathResource
-import play.api.libs.json._
-import scalaj.http._
+//import org.springframework.core.io.ClassPathResource
+import play.api.libs.json._ // ToDo - replace with STTP
+import scalaj.http._ // ToDo - replace with STTP
 
 import scala.xml.{PrettyPrinter, XML}
 
@@ -53,7 +53,7 @@ object HttpClientAsJSON extends App {
 
 object CSVUpload extends App {
 
-  val cpr = new ClassPathResource("./test.csv");
+  /*val cpr = new ClassPathResource("./test.csv");
   val inputStream = cpr.getInputStream();
 
   val ar = Stream.continually(inputStream.read).takeWhile(_ != -1).map(_.toByte).toArray
@@ -76,7 +76,7 @@ object CSVUpload extends App {
   val json = Json.parse(responseOne.body)
   val formatted = Json.prettyPrint(json)
 
-  println(formatted)
+  println(formatted)*/
 
 }
 

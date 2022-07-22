@@ -28,10 +28,20 @@
             <groupId>com.typesafe.play</groupId>
             <artifactId>play_${scala.compat.version}</artifactId>
         </dependency>
+
+        <!-- sttp - Scala Http -->
         <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-core</artifactId>
+            <groupId>com.softwaremill.sttp.client3</groupId>
+            <artifactId>core_${scala.compat.version}</artifactId>
+            <version>3.7.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.softwaremill.sttp.client3/circe -->
+        <dependency>
+            <groupId>com.softwaremill.sttp.client3</groupId>
+            <artifactId>circe_2.13</artifactId>
+            <version>3.7.1</version>
+        </dependency>
+
 
     </dependencies>
 
