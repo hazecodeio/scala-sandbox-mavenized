@@ -16,10 +16,10 @@ object RunnerOfGitHub extends App {
   val response = request.send(backend)
 
   // response.header(...): Option[String]
-  println(response.header("Content-Length"))
+//  println(response.header("Content-Length"))
 
   // response.body: by default read into an Either[String, String] to indicate failure or success
-  println(response.body)
+  println(response.body.getOrElse("{}"))
 }
 
 
