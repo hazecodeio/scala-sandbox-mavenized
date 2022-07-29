@@ -1,6 +1,11 @@
 package org.hsmak.sttpHttp
 
 
+/*
+ * Running scala-built jar from terminal, then piping the output to `jq`
+ *    > v=$(scala  -cp ./scala-http/target/scala-http-1.0-SNAPSHOT-jar-with-dependencies.jar org.hsmak.sttpHttp.RunnerOfGitHub)
+ *    > echo $v | jq
+ */
 object RunnerOfGitHub extends App {
 
   import sttp.client3._
@@ -16,7 +21,7 @@ object RunnerOfGitHub extends App {
   val response = request.send(backend)
 
   // response.header(...): Option[String]
-//  println(response.header("Content-Length"))
+  //  println(response.header("Content-Length"))
 
   // response.body: by default read into an Either[String, String] to indicate failure or success
   println(response.body.getOrElse("{}"))
@@ -27,15 +32,16 @@ object RunnerOfGitHubWithCirce extends App {
 
   // In addition to the usual values brought into scope by `sttp.client3._`,
   // the `quick` version also defines a default synchronous `backend`.
+
   import sttp.client3.quick._
   // Circe integration: `asJson` response description.
-  import sttp.client3.circe._
-
   import io.circe.generic.auto._
+  import sttp.client3.circe._
 
   // Case classes corresponding to the json returned by GitHub (just the
   // fields that interest us).
   case class GitHubResponse(total_count: Int, items: List[GitHubItem])
+
   case class GitHubItem(name: String, stargazers_count: Int)
 
   val query = "language:scala"
