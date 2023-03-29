@@ -10,7 +10,7 @@ object FindProcWithFuture extends App{
 
 
   val findProc = Process("find", Seq("/home/hsmak", "-maxdepth", "10", "-name", "*")).run() // Start asynchronously
-  val findFut = Future{blocking(findProc.exitValue)} // Wrap in Future
+  val findFut = Future{blocking(findProc.exitValue)} // Wrap in Future since exitValue() locks until this process exits and returns the exit code.
 
   val findFutureRes = try {
     Await.result(findFut, duration.Duration(3, TimeUnit.SECONDS))

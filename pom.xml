@@ -7,6 +7,13 @@
         <version>1.0</version>
     </parent>
 
+    <repositories>
+        <repository>
+            <id>github-repo</id>
+            <url>https://github.com/hsmak/maven-parent-poms/raw/main/_repo</url>
+        </repository>
+    </repositories>
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.hsmak</groupId>
