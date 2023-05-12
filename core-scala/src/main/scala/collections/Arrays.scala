@@ -12,6 +12,7 @@ object Arrays extends App {
 
     println("----------------Arrays operations------------")
     //same list operations can be done on arrays
+    println("Array      : " + a.mkString("[", ", ", "]"))
     println("head       : " + a.head)
     println("tail       : " + a.tail) //will print the reference value
     println("a.init     : " + a.init) //will print the reference value
