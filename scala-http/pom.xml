@@ -25,36 +25,36 @@
             <artifactId>scalaj-http_${scala.compat.version}</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.typesafe.play</groupId>
-            <artifactId>play_${scala.compat.version}</artifactId>
+            <groupId>org.playframework</groupId>
+            <artifactId>play_${play.major.release}</artifactId>
         </dependency>
 
         <!-- sttp - Scala Http -->
         <dependency>
             <groupId>com.softwaremill.sttp.client3</groupId>
             <artifactId>core_${scala.compat.version}</artifactId>
-            <version>3.7.1</version>
+            <version>3.9.5</version>
         </dependency>
         <!-- https://mvnrepository.com/artifact/com.softwaremill.sttp.client3/circe -->
         <dependency>
             <groupId>com.softwaremill.sttp.client3</groupId>
             <artifactId>circe_2.13</artifactId>
-            <version>3.7.1</version>
+            <version>3.9.5</version>
         </dependency>
         <dependency>
             <groupId>io.circe</groupId>
             <artifactId>circe-core_2.13</artifactId>
-            <version>0.14.2</version>
+            <version>0.14.6</version>
         </dependency>
         <dependency>
             <groupId>io.circe</groupId>
             <artifactId>circe-generic_2.13</artifactId>
-            <version>0.14.2</version>
+            <version>0.14.6</version>
         </dependency>
         <dependency>
             <groupId>io.circe</groupId>
             <artifactId>circe-parser_2.13</artifactId>
-            <version>0.14.2</version>
+            <version>0.14.6</version>
         </dependency>
 
 
@@ -69,6 +69,10 @@
                 <artifactId>scala-maven-plugin</artifactId>
                 <configuration>
                     <recompileMode>incremental</recompileMode>
+                    <!--[ERROR] : error while loading package, Missing dependency 'Add -Ytasty-reader to scalac options to parse the TASTy in .m2/repository/org/playframework/play_3/3.0.2/play_3-3.0.2.jar(play/package.tasty)', required by .m2/repository/org/playframework/play_3/3.0.2/play_3-3.0.2.jar(play/package.tasty)-->
+                    <args>
+                        <arg>-Ytasty-reader</arg>
+                    </args>
                 </configuration>
             </plugin>
             <plugin>
@@ -86,7 +90,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>3.7.1</version>
                 <configuration>
                     <archive>
                         <manifestEntries>

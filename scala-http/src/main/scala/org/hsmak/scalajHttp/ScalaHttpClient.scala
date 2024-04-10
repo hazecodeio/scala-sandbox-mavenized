@@ -42,12 +42,12 @@ object HttpClientAsJSON extends App {
   val request = Http(url.toString)
   val responseOne = request.params("action" -> "LIST", "wt" -> "json").asString
 
-  val json = Json.parse(responseOne.body)
-  val formatted = Json.prettyPrint(json)
+//  val json = Json.parse(responseOne.body)
+//  val formatted = Json.prettyPrint(json)
 
-  println(formatted)
+//  println(formatted)
 
-  println((json \ "collections").get)
+//  println((json \ "collections").get)
 
 }
 
@@ -91,10 +91,10 @@ object CollectionReload extends App {
   val request = Http(collections_url.toString)
   val responseOne = request.params("action" -> "RELOAD", "name" -> "gettingstarted", "wt" -> "json").asString
 
-  val json = Json.parse(responseOne.body)
-  val formatted = Json.prettyPrint(json)
-
-  println(formatted)
+//  val json = Json.parse(responseOne.body)
+//  val formatted = Json.prettyPrint(json)
+//
+//  println(formatted)
 
 }
 
@@ -109,9 +109,9 @@ object Delete extends App {
   val request = Http(url.toString)
   val responseOne = request.header("Content-type", "text/xml").params("wt" -> "json").postData("<delete><query>*:*</query></delete>").asString
 
-  val json = Json.parse(responseOne.body)
-  val formatted = Json.prettyPrint(json)
-
-  println(formatted)
+//  val json = Json.parse(responseOne.body)
+//  val formatted = Json.prettyPrint(json)
+//
+//  println(formatted)
 
 }
