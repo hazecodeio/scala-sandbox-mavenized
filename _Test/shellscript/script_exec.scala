@@ -4,7 +4,8 @@
 #export JAVA_OPTS="-Ddriver-memory=1g"
 
 #exec scala -classpath "./lib/*" "$0" "$@"
-exec scala "$0" "$@"
+
+exec scala3 shebang "$0" "$@"
 !#
 
 
@@ -35,7 +36,7 @@ exec scala "$0" "$@"
 
 object HelloWorld{
     def main(args: Array[String]): Unit ={
-        println("Hellow, World from sh!")
+        println("Hello, World from sh!")
         args.foreach(println(_))
     }
 }

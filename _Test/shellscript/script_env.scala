@@ -1,8 +1,8 @@
-#!/usr/bin/env scala
+#!/usr/bin/env scala3
 
 //running scala from a shell script
 
 object HelloWorld extends App{
-        println("Hellow, World from sh!")
+        println("Hello, World from sh!")
         args.foreach(println(_))
 }
