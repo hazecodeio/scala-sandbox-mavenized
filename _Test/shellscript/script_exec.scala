@@ -1,4 +1,9 @@
 #!/bin/sh
+#export SCALA_HOME=""
+#export PATH=""
+#export JAVA_OPTS="-Ddriver-memory=1g"
+
+#exec scala -classpath "./lib/*" "$0" "$@"
 exec scala "$0" "$@"
 !#
 

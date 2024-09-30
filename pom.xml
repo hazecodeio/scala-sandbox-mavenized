@@ -27,7 +27,8 @@
         <module>core-scala</module>
         <module>concurrency</module>
         <module>data-structures</module>
-        <module>scala-http</module>-->
+        <module>scala-http</module>
+        <module>utils</module>-->
     </modules>
 
     <name>${project.artifactId}</name>

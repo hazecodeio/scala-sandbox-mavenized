@@ -1,4 +1,4 @@
-package org.hsmak
+package io.queerfolxcode.utils
 
 object AppRunner extends App {
 

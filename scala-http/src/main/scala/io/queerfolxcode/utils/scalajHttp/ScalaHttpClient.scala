@@ -1,4 +1,4 @@
-package org.hsmak.scalajHttp
+package io.queerfolxcode.utils.scalajHttp
 
 import java.net.URL
 

@@ -1,9 +1,8 @@
-package org.hsmak.sttpHttp
-
+package io.queerfolxcode.utils.sttpHttp
 
 /*
  * Running scala-built jar from terminal, then piping the output to `jq`
- *    > v=$(scala  -cp ./scala-http/target/scala-http-1.0-SNAPSHOT-jar-with-dependencies.jar org.hsmak.sttpHttp.RunnerOfGitHub)
+ *    > v=$(scala  -cp ./scala-http/target/scala-http-1.0-SNAPSHOT-jar-with-dependencies.jar RunnerOfGitHub)
  *    > echo $v | jq
  */
 object RunnerOfGitHub extends App {
