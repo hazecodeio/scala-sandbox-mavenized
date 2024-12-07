@@ -1,4 +1,4 @@
-package org.hsmak;
+package org.haze;
 
 import java.util.ArrayList;
 import java.util.List;
