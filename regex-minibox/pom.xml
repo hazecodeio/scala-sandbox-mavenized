@@ -10,7 +10,7 @@
     <artifactId>regex-minibox</artifactId>
 
     <parent>
-        <artifactId>scala-sandbox</artifactId>
+        <artifactId>scala-sandbox-mavenized</artifactId>
         <groupId>org.haze</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>

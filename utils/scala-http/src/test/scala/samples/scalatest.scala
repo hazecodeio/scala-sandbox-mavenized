@@ -56,8 +56,6 @@ class StackSuite extends Assertions {
 Here's an example of a FunSuite with Matchers mixed in:
 */
 
-import org.junit.runner.RunWith
-
 //@RunWith(classOf[JUnitRunner])
 class ListSuite extends AnyFunSuite with Matchers {
 

@@ -3,8 +3,7 @@ package io.queerfolxcode.utils.scalajHttp
 import java.net.URL
 
 //import org.springframework.core.io.ClassPathResource
-import play.api.libs.json._ // ToDo - replace with STTP
-import scalaj.http._ // ToDo - replace with STTP
+import scalaj.http._
 
 import scala.xml.{PrettyPrinter, XML}
 
