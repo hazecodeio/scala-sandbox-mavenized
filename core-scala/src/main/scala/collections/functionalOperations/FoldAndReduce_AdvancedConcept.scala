@@ -12,7 +12,7 @@ package collections.functionalOperations
   *     - In this case. the Seed was the List of Ints needed transformations
   *
   */
-object AdvancedConceptsViaFoldAndReduce extends App {
+object FoldAndReduce_AdvancedConcept extends App {
 
   println("------------ StreamLambdasOntoInts: not testable, readable, and composable ----------------")
 
