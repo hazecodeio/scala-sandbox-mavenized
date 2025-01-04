@@ -6,7 +6,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <parent>
-        <artifactId>scala_2.13-pom</artifactId>
+        <artifactId>scala2_2.13-pom</artifactId>
         <groupId>org.haze</groupId>
         <version>1.0</version>
         <relativePath/>
