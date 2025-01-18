@@ -1,4 +1,4 @@
-package org.hsmak
+package org.haze
 
 object CakePattern extends App {
 

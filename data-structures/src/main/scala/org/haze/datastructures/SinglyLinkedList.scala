@@ -1,4 +1,4 @@
-package org.hsmak.datastructures
+package org.haze.datastructures
 
 /**
   * This is how a List is represented internally by Scala

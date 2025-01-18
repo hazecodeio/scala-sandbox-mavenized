@@ -1,4 +1,4 @@
-package org.hsmak
+package org.haze
 
 
 object RiskOfMutablity extends App {

@@ -1,4 +1,4 @@
-package org.hsmak
+package org.haze
 
 import scala.collection.mutable.ArrayBuffer
 import scala.io.StdIn

@@ -1,4 +1,4 @@
-package org.hsmak
+package org.haze
 
 /**
   * Lazy vals are instantiation involves locking mechanism

@@ -1,4 +1,4 @@
-package org.hsmak
+package org.haze
 
 //ToDo - To be revised
 object ThreadInstantiation {

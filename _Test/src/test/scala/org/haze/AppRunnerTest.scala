@@ -1,4 +1,4 @@
-package org.hsmak
+package org.haze
 
 import org.junit.Assert._
 import org.junit._

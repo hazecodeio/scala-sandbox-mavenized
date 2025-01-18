@@ -1,4 +1,4 @@
-package org.hsmak.datastructures.sorting
+package org.haze.datastructures.sorting
 
 object InsertionSort extends App {
 

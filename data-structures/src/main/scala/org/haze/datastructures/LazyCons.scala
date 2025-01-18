@@ -1,4 +1,4 @@
-package org.hsmak.datastructures
+package org.haze.datastructures
 
 sealed trait LazyCons[+A]
 
