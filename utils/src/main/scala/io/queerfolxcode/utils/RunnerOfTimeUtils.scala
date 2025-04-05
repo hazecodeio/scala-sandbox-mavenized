@@ -7,6 +7,19 @@ import scala.util.{Failure, Success, Try}
 
 object RunnerOfTimeUtils extends App {
 
+    //    println(parseDateTimeToEpoch("2021-11-04T11:15:00"))
+    //    println(parseEpochToDateTime("1635483600000"))
+
+
+    val parseEpochToDateTime = (s: String) => {
+        val i = Instant.ofEpochMilli(s.toLong)
+        LocalDateTime.ofInstant(i, ZoneOffset.ofHours(-6))
+    }
+
+    val parseDateTimeToEpoch = (s: String) => {
+        LocalDateTime.parse(s).toInstant(ZoneOffset.ofHours(-6)).toEpochMilli
+    }
+
     while (true) {
         print(
             """Choose from the menu:
@@ -38,17 +51,5 @@ object RunnerOfTimeUtils extends App {
         println()
         println(s"Outcome ------------------------> $r")
         println()
-    }
-    //    println(parseDateTimeToEpoch("2021-11-04T11:15:00"))
-    //    println(parseEpochToDateTime("1635483600000"))
-
-
-    val parseEpochToDateTime = (s: String) => {
-        val i = Instant.ofEpochMilli(s.toLong)
-        LocalDateTime.ofInstant(i, ZoneOffset.ofHours(-6))
-    }
-
-    val parseDateTimeToEpoch = (s: String) => {
-        LocalDateTime.parse(s).toInstant(ZoneOffset.ofHours(-6)).toEpochMilli
     }
 }
