@@ -8,8 +8,9 @@ object FindProcWithFuture extends App{
   import ExecutionContext.Implicits.global
   import scala.sys.process._
 
+  val userHomeDir = System.getProperty("user.home")
 
-  val findProc = Process("find", Seq("/home/hsmak", "-maxdepth", "10", "-name", "*")).run() // Start asynchronously
+  val findProc = Process("find", Seq(userHomeDir, "-maxdepth", "10", "-name", "*")).run() // Start asynchronously
   val findFut = Future{blocking(findProc.exitValue)} // Wrap in Future since exitValue() locks until this process exits and returns the exit code.
 
   val findFutureRes = try {
