@@ -6,6 +6,6 @@ package abstraction.objects
  *     - unapply()
  *     - unapplySeq()
  */
-object CompanionWithUnapply extends App{
+object CompanionWithUnapply extends App {
 
 }

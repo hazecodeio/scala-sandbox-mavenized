@@ -4,5 +4,7 @@ HusAK
 :toclevels: 3
 
 == Basic Traits
+
 == Stacking Traits (Linearization)
+
 == TBD

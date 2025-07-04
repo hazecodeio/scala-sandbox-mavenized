@@ -7,17 +7,17 @@ package abstraction.examples
  */
 class Complex(real: Double, imaginary: Double) {
 
-  override def toString() = "" + re + (if (im < 0) "" else " + ") + im + "i"
+    override def toString() = "" + re + (if (im < 0) "" else " + ") + im + "i"
 
-  def re = real //similar as -> def re() = real
+    def re = real //similar as -> def re() = real
 
-  def im = imaginary //similar as -> def im() = imaginary
+    def im = imaginary //similar as -> def im() = imaginary
 }
 
 object ComplexNumbers {
-  def main(args: Array[String]) {
-    val c = new Complex(1.2, 3.4)
-    println("imaginary part: " + c.im)
-    println(c)
-  }
+    def main(args: Array[String]) {
+        val c = new Complex(1.2, 3.4)
+        println("imaginary part: " + c.im)
+        println(c)
+    }
 }

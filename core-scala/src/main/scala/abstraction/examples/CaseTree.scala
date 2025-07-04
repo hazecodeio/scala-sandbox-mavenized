@@ -22,45 +22,45 @@ case class Const(v: Int) extends Expression // An Algebraic Constant
 
 class TestTree {
 
-  // ToDo - custom "type" is really a lambda function that takes a param and emit the expected type.
-  //  So, the magic apply() method is already there.
-  //the type Environment can be used as an alias of the type of functions from String to Int
-  type Environment = String => Int
+    // ToDo - custom "type" is really a lambda function that takes a param and emit the expected type.
+    //  So, the magic apply() method is already there.
+    //the type Environment can be used as an alias of the type of functions from String to Int
+    type Environment = String => Int
 
-  def evalSum(t: Expression, env: Environment): Int = t match {
-    case Term(l, r) => evalSum(l, env) + evalSum(r, env) // Recursive calls
-    case Var(n) => env(n) // calling apply() of Environment
-    case Const(v) => v
-  }
-
-  /*
-   * To explore pattern matching further, let us define another operation on arithmetic expressions: symbolic derivation.
-   * The reader might remember the following rules regarding this operation:
-   *    - the derivative of a sum is the sum of the derivatives,
-   *    - the derivative of some variable v is one if v is the variable relative to which the derivation takes place, and zero otherwise,
-   *    - the derivative of a constant is zero.
-   */
-  def derive(t: Expression, v: String): Expression = t match {
-    case Term(l, r) => Term(derive(l, v), derive(r, v))
-    case Var(n) if (v == n) => Const(1)
-    case _ => Const(0)
-  }
-
-  def testApp {
-    val exp: Expression = Term(Term(Var("x"), Var("x")), Term(Const(7), Var("y")))
-    val env: Environment = {
-      case "x" => 5
-      case "y" => 7
+    def evalSum(t: Expression, env: Environment): Int = t match {
+        case Term(l, r) => evalSum(l, env) + evalSum(r, env) // Recursive calls
+        case Var(n) => env(n) // calling apply() of Environment
+        case Const(v) => v
     }
-    println("Expression: " + exp)
-    println("Evaluation with x=5, y=7: " + evalSum(exp, env))
-    println("Derivative relative to x:\n " + derive(exp, "x"))
-    println("Derivative relative to y:\n " + derive(exp, "y"))
-  }
+
+    /*
+     * To explore pattern matching further, let us define another operation on arithmetic expressions: symbolic derivation.
+     * The reader might remember the following rules regarding this operation:
+     *    - the derivative of a sum is the sum of the derivatives,
+     *    - the derivative of some variable v is one if v is the variable relative to which the derivation takes place, and zero otherwise,
+     *    - the derivative of a constant is zero.
+     */
+    def derive(t: Expression, v: String): Expression = t match {
+        case Term(l, r) => Term(derive(l, v), derive(r, v))
+        case Var(n) if (v == n) => Const(1)
+        case _ => Const(0)
+    }
+
+    def testApp {
+        val exp: Expression = Term(Term(Var("x"), Var("x")), Term(Const(7), Var("y")))
+        val env: Environment = {
+            case "x" => 5
+            case "y" => 7
+        }
+        println("Expression: " + exp)
+        println("Evaluation with x=5, y=7: " + evalSum(exp, env))
+        println("Derivative relative to x:\n " + derive(exp, "x"))
+        println("Derivative relative to y:\n " + derive(exp, "y"))
+    }
 }
 
 
 object test extends App {
-  val t = new TestTree
-  t.testApp
+    val t = new TestTree
+    t.testApp
 }

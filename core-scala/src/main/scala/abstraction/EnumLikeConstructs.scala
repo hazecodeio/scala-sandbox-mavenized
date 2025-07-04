@@ -2,44 +2,44 @@ package abstraction
 
 object EnumLikeConstructs extends App {
 
-  sealed trait NoteName
+    sealed trait NoteName
 
-  case object A extends NoteName
+    case object A extends NoteName
 
-  case object B extends NoteName
+    case object B extends NoteName
 
-  case object C extends NoteName
+    case object C extends NoteName
 
-  case object D extends NoteName
+    case object D extends NoteName
 
-  case object E extends NoteName
+    case object E extends NoteName
 
-  case object F extends NoteName
+    case object F extends NoteName
 
-  case object G extends NoteName
+    case object G extends NoteName
 
-  sealed trait Symbol
+    sealed trait Symbol
 
-  case class Note(name: NoteName, duration: String, octave: Int) extends Symbol
-
-
-  ////////////////something that works like a Java enum//////////////////
-
-  object Margin extends Enumeration {
-    type Margin = Value
-    val TOP, BOTTOM, LEFT, RIGHT = Value
-  }
+    case class Note(name: NoteName, duration: String, octave: Int) extends Symbol
 
 
-  import Margin._
+    ////////////////something that works like a Java enum//////////////////
 
-  // use an enumeration value in a test
-  var currentMargin = TOP
+    object Margin extends Enumeration {
+        type Margin = Value
+        val TOP, BOTTOM, LEFT, RIGHT = Value
+    }
 
-  // later in the code ...
-  if (currentMargin == TOP) println("working on Top")
 
-  // print all the enumeration values
-  Margin.values foreach println
+    import Margin._
+
+    // use an enumeration value in a test
+    var currentMargin = TOP
+
+    // later in the code ...
+    if (currentMargin == TOP) println("working on Top")
+
+    // print all the enumeration values
+    Margin.values foreach println
 
 }
