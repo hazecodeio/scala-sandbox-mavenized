@@ -1,6 +1,6 @@
-package io.queerfolxcode.utils
+package io.queerfolxcode.regex
 
-object AppRunner extends App {
+object RegExRunner extends App {
 
 
   val versionsStr_FilteredByDigits = _DATA.versionsStr
