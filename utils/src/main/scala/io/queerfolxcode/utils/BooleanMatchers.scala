@@ -16,9 +16,13 @@ object BooleanMatchers extends App {
 
         // find() is simpler and does short-circuiting
         // find() is equivalent to = MatchAny
+        /*val matchAny = (str: String,
+                        fltr: Seq[String],
+                        op: (String, String) => Boolean) => fltr.find(nxt => true && op(str, nxt)).nonEmpty*/
+        // exists()
         val matchAny = (str: String,
                         fltr: Seq[String],
-                        op: (String, String) => Boolean) => fltr.find(nxt => true && op(str, nxt)).nonEmpty
+                        op: (String, String) => Boolean) => fltr.exists(nxt => true && op(str, nxt))
 
         val str = "i want to be here 90DS"
 
