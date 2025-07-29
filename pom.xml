@@ -24,12 +24,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <!--<module>_Test</module>
+        <module>_Test</module>
         <module>core-scala</module>
         <module>concurrency</module>
         <module>data-structures</module>
-        <module>scala-http</module>
-        <module>utils</module>-->
+        <module>utils</module>
+        <!--<module>scala-http</module>-->
     </modules>
 
     <name>${project.artifactId}</name>

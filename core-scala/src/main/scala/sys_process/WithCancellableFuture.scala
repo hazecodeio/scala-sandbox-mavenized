@@ -23,8 +23,13 @@ object WithCancellableFuture extends App {
         var i = 0
         while (i < 5) { // analogous to a busy loop?
             if (cancel.isCompleted) throw new CancellationException
-            Thread.sleep(500)
-            println(s"$i: working")
+
+            /**
+             * ToDo - enhance cancellation with wait() so
+             *  cancellation is immediate and
+             *  not blocked by Thread.sleep()*/
+            Thread.sleep(1000)
+            println(s"$i: working") // ToDo - replace with lamda function that can be passed by a method param
             i += 1
         }
         "resulting value"

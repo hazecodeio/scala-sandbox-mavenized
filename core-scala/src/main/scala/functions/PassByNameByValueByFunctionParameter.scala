@@ -10,40 +10,40 @@ package functions
  * ByFunction  -> Lazy
  * ByName      -> Lazy
  */
-object ByNameByValueByFunctionParameter extends App {
+object PassByNameByValueByFunctionParameter extends App {
 
-    println("--------------- ByValueParm - Eager Evaluation ---------------")
+    println("--------------- PassByValueParm - Eager Evaluation ---------------")
 
-    object ByValueParam {
-        def byValue(x: Int)(y: Int) = {
+    object PassByValueParam {
+        def passByValue(x: Int)(y: Int) = {
             // '(y:Int)' will be evaluated first, then the below block will be executed
             println("By Value: ")
             x + y
         }
 
-        val a = byValue(3) {
+        val a = passByValue(3) {
             //Eager evaluation of '(y:Int)'
             println("In call")
             19
         }
     }
 
-    ByValueParam
+    PassByValueParam
     println
 
 
-    println("-------------- ByFunctionParm ---------------")
+    println("-------------- PassByFunctionParm ---------------")
 
-    object ByFunctionParam {
+    object PassByFunctionParam {
 
         //The 2nd param is a regular lambda expression
-        def byFunction(x: Int)(y: () => Int) = {
+        def passByFunction(x: Int)(y: () => Int) = {
             println("By Function: ")
             x + y()
         }
 
 
-        val b = byFunction(3)(() => {
+        val b = passByFunction(3)(() => {
             //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then the below will be executed
             println("In call")
             19
@@ -51,10 +51,10 @@ object ByNameByValueByFunctionParameter extends App {
 
     }
 
-    ByFunctionParam
+    PassByFunctionParam
     println
 
-    println("--------------- ByNameParam ---------------")
+    println("--------------- PassByNameParam ---------------")
 
     /**
      * It's as same as ByFunction
@@ -64,15 +64,15 @@ object ByNameByValueByFunctionParameter extends App {
      * Good to catch exceptions and clean up resource as in try/catch blocks below.
      * Other benefits?
      */
-    object ByNameParam {
+    object PassByNameParam {
 
         // ByName param. Notice there is no () in the lambda expression
-        def byName(x: Int)(y: => Int) = {
+        def passByName(x: Int)(y: => Int) = {
             println("By Name: ")
             x + y
         }
 
-        val c = byName(3) {
+        val c = passByName(3) {
             //Lazy evaluation -> evaluate when it's called <- the body of the called function needs to be instantiated first then the below will be executed
             println("In call")
             19
@@ -114,7 +114,7 @@ object ByNameByValueByFunctionParameter extends App {
 
     }
 
-    ByNameParam
+    PassByNameParam
     println
 
 }
