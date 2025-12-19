@@ -1,6 +1,6 @@
 package io.queerfolxcode.utils
 
-import java.time.{Instant, LocalDateTime, ZoneOffset}
+import java.time.{Instant, LocalDate, LocalDateTime, ZoneOffset}
 import scala.io.StdIn
 import scala.util.control.Breaks.break
 import scala.util.{Failure, Success, Try}
@@ -51,5 +51,25 @@ object RunnerOfTimeUtils extends App {
         println()
         println(s"Outcome ------------------------> $r")
         println()
+    }
+
+    val rangeOfPairedStartEndDatesBackward = (stepLength: Int, steps: Int) => {
+        val date = LocalDate.now
+        LazyList.
+            continually(stepLength).
+            take(steps).
+            scanLeft {
+                (date, date.minusDays(stepLength))
+            } { (total, nxt) => (total._2.minusDays(1), total._2.minusDays(nxt)) }.toList
+    }
+
+    val rangeOfPairedStartEndDatesForward = (stepLength: Int, steps: Int) => {
+        val date = LocalDate.now
+        LazyList.
+            continually(stepLength).
+            take(steps).
+            scanLeft {
+                (date, date.plusDays(stepLength))
+            } { (total, nxt) => (total._2.plusDays(1), total._2.plusDays(nxt)) }.toList
     }
 }
